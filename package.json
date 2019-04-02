@@ -1,0 +1,9 @@
+{
+  "name": "socket-server-chess",
+  "version": "0.1.0",
+  "description": "a web socket-based chess app",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
