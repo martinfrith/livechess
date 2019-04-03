@@ -1,13 +1,36 @@
 var express = require('express');
+var path = require('path');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var mustacheExpress = require('mustache-express');
 
 console.log(__dirname + '/static/')
-app.use(express.static(__dirname + '/static/'));
+//app.use(express.static(__dirname + '/static/'));
+app.use(express.static(path.join(__dirname, 'static')));
+
+app.engine('html', mustacheExpress());
+app.set('view engine', 'html');
+app.set('views', __dirname + '/static');
 
 app.get('/', function (req, res) { //host client @ base url
   res.render('index.html')
+});
+
+app.get('/games', function (req, res) { 
+  res.render('games.html', { gameid: req.params.gameid })
+});
+
+app.get('/live/:gameid', function (req, res) { 
+  res.render('live.html', { gameid: req.params.gameid })
+});
+
+app.get('/:gameid', function (req, res) {
+  res.render('game.html', { gameid: req.params.gameid })
+});
+
+app.get('*', function (req, res) { 
+  res.render('404.html')
 });
 
 io.on('connection', function(socket){ //join room on connect

@@ -1,0 +1,8 @@
+@font-face{
+	font-family:Gotham;
+	src:url('/fonts/gotham/GothamRnd-Medium.otf') format("opentype");
+}
+@font-face{
+	font-family:Gotham;
+	font-weight:bold;src:url('/fonts/gotham/GothamRnd-Bold.otf') format("opentype");
+}

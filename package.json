@@ -4,9 +4,10 @@
   "description": "a web socket-based chess app",
   "scripts": {
     "start": "node app.js"
-  },  
+  },
   "dependencies": {
     "express": "^4.16.4",
+    "mustache-express": "^1.2.8",
     "socket.io": "^2.2.0"
   }
 }

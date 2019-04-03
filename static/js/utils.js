@@ -1,7 +1,15 @@
-//get URL parameter by name, see: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-function getParameterByName(name) {
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-	results = regex.exec(location.search);
-	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+$(document).ready(function() {
+
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
+
+  });
+
+  $('#create').click(function() {
+  	location.href = '/live/r' + Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)
+  })
+});
