@@ -6,6 +6,18 @@ $(document).ready(function() {
     statusEl = $('#status'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn');
+    firstEl = $('#first');
+    nextEl = $('#next');
+    prevEl = $('#prev');
+    lastEl = $('#last');
+
+    prevEl.click(function(){
+      board.position(game.back())
+    })
+
+    nextEl.click(function(){
+      board.position(game.next())
+    })
 
   var updateStatus = function() {
     var status = '';
@@ -34,11 +46,11 @@ $(document).ready(function() {
 
     // game still on
     else {
-      status = moveColor + ' para mover.';
+      status = moveColor + ' por mover.';
 
       // check?
       if (game.in_check() === true) {
-        status += ', ' + moveColor + ' están em jaque.';
+        status += ', ' + moveColor + ' están en jaque.';
       }
     }
     statusEl.html(status);

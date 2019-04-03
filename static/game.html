@@ -17,15 +17,20 @@
     <script> var data = {{{data}}}</script>
     <script src="/js/utils.js"></script>
     <script src="/js/game.js"></script>
-
   </head>
   <body>
-    <div class="column">
-      <div id="board"></div>
-    </div>
-    <div class="column">
-      <p>Estado: <span id="status"></span></p>
-      <p>PGN: <span id="pgn"></span></p>
+    <div class="columns">
+      <div class="column">
+        <div id="board"></div>
+      </div>
+      <div class="column">
+        <button id="first"><<</button>
+        <button id="prev"><</button>
+        <button id="next">></button>
+        <button id="last">>></button>
+        <p>Estado: <span id="status"></span></p>
+        <p>PGN: <span id="pgn"></span></p>
+      </div>
     </div>
   </body>
 </html>

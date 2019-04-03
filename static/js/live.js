@@ -76,11 +76,11 @@ $(document).ready(function() {
 
     // game still on
     else {
-      status = moveColor + ' para mover.';
+      status = moveColor + ' por mover.';
 
       // check?
       if (game.in_check() === true) {
-        status += ', ' + moveColor + ' están em jaque.';
+        status += ', ' + moveColor + ' están en jaque.';
       }
     }
     statusEl.html(status);
