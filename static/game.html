@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>{{gameid}}</title>
+    <title>{{data.id}}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -11,19 +11,21 @@
     <script src="/js/libs/jquery-1.10.1.min.js"></script>
     <script src="/js/libs/chess.js"></script>
     <script src="/js/libs/chessboard.js"></script>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/bulma.css" />
     <link rel="stylesheet" href="/css/chessboard.css" />
     <!--custom-->
-    <link rel="stylesheet" href="/fonts/gotham.css" />    
-    <script> var gameid = '{{gameid}}'</script>
+    <script> var data = {{{data}}}</script>
     <script src="/js/utils.js"></script>
     <script src="/js/game.js"></script>
 
   </head>
   <body>
-    <div id="board"></div>
-    <p>Status: <span id="status"></span></p>
-    <p>FEN: <span id="fen"></span></p>
-    <p>PGN: <span id="pgn"></span></p>
+    <div class="column">
+      <div id="board"></div>
+    </div>
+    <div class="column">
+      <p>Estado: <span id="status"></span></p>
+      <p>PGN: <span id="pgn"></span></p>
+    </div>
   </body>
 </html>

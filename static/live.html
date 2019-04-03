@@ -11,20 +11,27 @@
     <script src="/js/libs/jquery-1.10.1.min.js"></script>
     <script src="/js/libs/chess.js"></script>
     <script src="/js/libs/chessboard.js"></script>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/bulma.css" />
     <link rel="stylesheet" href="/css/chessboard.css" />
     <!--custom-->
-    <link rel="stylesheet" href="/fonts/gotham.css" />    
-    <script> var gameid = '{{gameid}}'</script>
+    <script> var data = {{{data}}}</script>
     <script src="/js/utils.js"></script>
     <script src="/js/live.js"></script>
   </head>
   <body>
-    <div id="board"></div>
-    <button id="undo">Undo</button>
-    <p>Status: <span id="status"></span></p>
-    <p>FEN: <span id="fen"></span></p>
-    <p>PGN: <span id="pgn"></span></p>
-    <p><a href=""></a></p>
+    <div class="columns">
+      <div class="column">
+        <div id="board"></div>
+      </div>
+      <div class="column">
+        <button id="undo">Atrás</button>
+        <button id="wquit">Abandonan blancas</button>
+        <button id="bquit">Abandonan negras</button>
+        <button id="draw">Tablas</button>
+        <p>Estado: <span id="status"></span></p>
+        <!--p>FEN: <span id="fen"></span></p-->
+        <p>PGN: <span id="pgn"></span></p>
+      </div>
+    </div>
   </body>
 </html>

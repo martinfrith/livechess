@@ -1,13 +1,12 @@
 $(document).ready(function() {
   var socket = io();  
-
   var board,
+    synced = false,
     game = new Chess(),
     statusEl = $('#status'),
     undoEl = $('#undo'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn');
-
 
     undoEl.click(function(){
       socket.emit('undo')
@@ -36,6 +35,10 @@ $(document).ready(function() {
       if (move === null) {
         return 'snapback';
       }
+      moveObj.room = data.id;
+      moveObj.fen = game.fen();
+      moveObj.pgn = game.pgn();
+      moveObj.turn = game.turn();
       socket.emit('move',  moveObj);
       updateStatus();
   };
@@ -48,46 +51,60 @@ $(document).ready(function() {
 
   var updateStatus = function() {
     var status = '';
+    var moveColor = 'Blancas';
+    var turn = game.turn()
+    var pgn = game.pgn()
 
-    var moveColor = 'White';
-    if (game.turn() === 'b') {
-      moveColor = 'Black';
+    if(!synced && data.turn){
+      turn = data.turn
+      pgn = data.pgn
+    } 
+
+    if (turn === 'b') {
+      moveColor = 'Negras';
     }
 
     // checkmate?
     if (game.in_checkmate() === true) {
-      status = 'Game over, ' + moveColor + ' is in checkmate.';
+      status = 'Juego finalizado. ' + moveColor + ' en jaquemate.';
     }
 
     // draw?
     else if (game.in_draw() === true) {
-      status = 'Game over, drawn position';
+      status = 'Juego finalizado, tablas.';
     }
 
     // game still on
     else {
-      status = moveColor + ' to move';
+      status = moveColor + ' para mover.';
 
       // check?
       if (game.in_check() === true) {
-        status += ', ' + moveColor + ' is in check';
+        status += ', ' + moveColor + ' están em jaque.';
       }
     }
     statusEl.html(status);
-    fenEl.html(game.fen());
-    pgnEl.html(game.pgn());
+    //fenEl.html(game.fen());
+    pgnEl.html(pgn);
+
+    synced = true
   };
+
+  var pos = 'start';
+  if(data && data.fen){
+    pos = data.fen
+  }
 
   var cfg = {
     draggable: true,
-    position: 'start',
+    position: pos,
     onDragStart: onDragStart,
     onDrop: onDrop,
     onSnapEnd: onSnapEnd
   };
 
   //initiated socket client
-  socket.emit('join',gameid);  //join room as defined by query parameter in URL bar
+  socket.emit('join',data.id);  //join room as defined by query parameter in URL bar
 
   socket.on('undo', function(){ //remote undo by peer
     game.undo()
