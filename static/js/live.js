@@ -4,9 +4,14 @@ $(document).ready(function() {
   var board,
     game = new Chess(),
     statusEl = $('#status'),
+    undoEl = $('#undo'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn');
 
+
+    undoEl.click(function(){
+      socket.emit('undo')
+    })
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var onDragStart = function(source, piece, position, orientation) {
@@ -81,10 +86,14 @@ $(document).ready(function() {
     onSnapEnd: onSnapEnd
   };
 
-  console.log('gameid')
-  console.log(gameid)
   //initiated socket client
   socket.emit('join',gameid);  //join room as defined by query parameter in URL bar
+
+  socket.on('undo', function(){ //remote undo by peer
+    game.undo()
+    updateStatus();
+    board.position(game.fen());
+  })
 
   socket.on('move', function(moveObj){ //remote move by peer
     console.log('peer move: ' + JSON.stringify(moveObj));

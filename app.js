@@ -42,6 +42,10 @@ io.on('connection', function(socket){ //join room on connect
     console.log('user moved: ' + JSON.stringify(move));
     io.emit('move', move);
   });
+  socket.on('undo', function() { //undo emitter
+    console.log('user undo:');
+    io.emit('undo');
+  });
 });
 
 var server = http.listen(3000, function () { //run http and web socket server
