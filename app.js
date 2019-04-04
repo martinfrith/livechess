@@ -3,30 +3,30 @@ var path = require('path');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var mustacheExpress = require('mustache-express');
 var mongodb = require('mongodb');
-
+var expressLayouts = require('express-ejs-layouts')
 // Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname, details set in .env
 var uri = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
 
-//app.use(express.static(__dirname + '/static/'));
+app.set('views', path.join(__dirname, 'static'))
 app.use(express.static(path.join(__dirname, 'static')));
-app.engine('html', mustacheExpress());
-app.set('view engine', 'html');
-app.set('views', __dirname + '/static');
+app.set('view engine', 'ejs')
+//app.set('layout extractScripts', true)
+//app.set('layout extractStyles', true)
+app.use(expressLayouts);
 
 mongodb.MongoClient.connect(uri, function(err, database) {
   const db = database.db('livechess')
 
   app.get('/', function (req, res) { //host client @ base url
-    res.render('index.html')
+    res.render('index')
   });
 
   app.get('/games', function (req, res) { 
-    db.collection('games').find().then(function(docs){
-      res.render('games.html', 
+    db.collection('games').find({}).toArray(function(err,docs){
+      res.render('games', 
       { 
-        data: JSON.stringify(docs.value) 
+        data: docs
       })
     })
   });
@@ -41,8 +41,7 @@ mongodb.MongoClient.connect(uri, function(err, database) {
         id:req.params.gameid
       }
     },{ upsert: true, 'new': true, returnOriginal:false }).then(function(doc){
-      console.log(doc)
-      res.render('live.html', { data: JSON.stringify(doc.value) })
+      res.render('live', { data: doc.value })
     })
   });
 
@@ -52,13 +51,12 @@ mongodb.MongoClient.connect(uri, function(err, database) {
       id:req.params.gameid
     }, function(err, doc) {
       if (err) throw err;
-      console.log(doc)
-      res.render('game.html', { data: JSON.stringify(doc) })
+      res.render('game', { data: doc })
     })
   });
 
   app.get('*', function (req, res) { 
-    res.render('404.html')
+    res.render('404')
   });
 
   io.on('connection', function(socket){ //join room on connect

@@ -1,0 +1,28 @@
+<%- contentFor('css') %>
+
+  <link rel="stylesheet" href="/css/chessboard.css" />
+
+<%- contentFor('js') %>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/libs/chess.js"></script>
+  <script src="/js/libs/chessboard.js"></script>
+  <script> var data = <%- JSON.stringify(data) %></script>
+  <script src="/js/live.js"></script>
+
+<%- contentFor('content') %>
+
+  <div class="columns">
+    <div class="column">
+      <div id="board"></div>
+    </div>
+    <div class="column">
+      <button id="undo">Atrás</button>
+      <button id="wquit">Abandonan blancas</button>
+      <button id="bquit">Abandonan negras</button>
+      <button id="draw">Tablas</button>
+      <p>Estado: <span id="status"></span></p>
+      <!--p>FEN: <span id="fen"></span></p-->
+      <p>PGN: <span id="pgn"></span></p>
+    </div>
+  </div>

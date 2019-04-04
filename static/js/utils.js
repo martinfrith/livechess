@@ -10,6 +10,6 @@ $(document).ready(function() {
   });
 
   $('#create').click(function() {
-  	location.href = '/live/r' + Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)
+  	location.href = '/live/x' + Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)
   })
 });

@@ -3,6 +3,7 @@ $(document).ready(function() {
 
   var board,
     game = new Chess(),
+    boards = [],
     statusEl = $('#status'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn');
@@ -41,11 +42,6 @@ $(document).ready(function() {
     pgnEl.html(game.pgn());
   };
 
-  var cfg = {
-    draggable: true,
-    position: 'start'
-  };
-
   socket.on('move', function(moveObj){ //remote move by peer
     console.log('peer move: ' + JSON.stringify(moveObj));
      var move = game.move(moveObj);
@@ -57,8 +53,26 @@ $(document).ready(function() {
     board.position(game.fen());
 	});
 
-  board = ChessBoard('board', cfg);
+  $(data).each(function(i,game){
 
-  updateStatus();
+    console.log(game)
+    console.log(i)
+
+    var pos = 'start'
+
+    if(game.fen){
+      pos = game.fen
+    }
+
+    var cfg = {
+      draggable: false,
+      position: pos
+    };
+
+    $('#boards').append('<a class="column is-3"  href="/'+game.id+'"><div id="'+game.id+'"></div></a>')
+    boards[i] = ChessBoard(game.id, cfg);  
+  })  
+
+  //updateStatus();
 	
 });

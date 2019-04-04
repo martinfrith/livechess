@@ -63,6 +63,7 @@ $(document).ready(function() {
     pos = data.fen
   }
 
+  console.log(data)
   var cfg = {
     draggable: false,
     position: pos

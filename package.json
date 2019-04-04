@@ -6,9 +6,10 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.0",
     "mongodb": "^3.2.2",
-    "mustache-express": "^1.2.8",
     "socket.io": "^2.2.0"
   }
 }

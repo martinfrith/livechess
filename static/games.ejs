@@ -1,0 +1,16 @@
+<%- contentFor('css') %>
+
+	<link rel="stylesheet" href="/css/chessboard.css" />
+
+<%- contentFor('js') %>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/chess.js"></script>
+    <script src="/js/libs/chessboard.js"></script>
+	<script> var data = <%- JSON.stringify(data) %></script>
+	<script src="/js/games.js"></script>
+
+<%- contentFor('content') %>
+
+    <div id="boards" class="columns is-multiline">
+    </div>
