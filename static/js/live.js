@@ -126,5 +126,7 @@ $(document).ready(function() {
   board = ChessBoard('board', cfg);
 
   updateStatus();
+
+  $('#gameurl').val(location.href.replace('/live',''))
     
 });

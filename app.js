@@ -18,8 +18,16 @@ app.use(expressLayouts);
 mongodb.MongoClient.connect(uri, function(err, database) {
   const db = database.db('livechess')
 
-  app.get('/', function (req, res) { //host client @ base url
+  app.get('/', function (req, res) {
     res.render('index')
+  });
+
+  app.get('/about', function (req, res) {
+    res.render('about')
+  });
+
+  app.get('/contact', function (req, res) {
+    res.render('contact')
   });
 
   app.get('/games', function (req, res) { 
