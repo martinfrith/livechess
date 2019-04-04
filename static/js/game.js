@@ -59,15 +59,17 @@ $(document).ready(function() {
   };
 
   var pos = 'start';
+
   if(data.fen){
     pos = data.fen
   }
 
-  console.log(data)
   var cfg = {
     draggable: false,
     position: pos
   };
+
+  game.load_pgn(data.pgn)
  
   socket.emit('join', data.id);  //join room as defined by query parameter in URL bar
 
