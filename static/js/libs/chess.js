@@ -1652,14 +1652,12 @@ window['Chess'] = window['Chess'] || function(fen) {
     last: function(){
       var moves = this.history();
       var tmp = new Chess();
-      var previous = moves.length-future.length-1;
-      for(var i=0;i<previous;i++) {
+      for(var i=0;i< moves.length;i++) {
         tmp.move(moves[i]);
       }
       var previous_fen = tmp.fen();
-      tmp.move(moves[previous]);
-      future.push(tmp.fen());
-      return future.pop();
+      future = []
+      return previous_fen;
     },
     back: function() {
       var moves = this.history();
