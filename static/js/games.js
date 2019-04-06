@@ -53,15 +53,16 @@ $(document).ready(function() {
     board.position(game.fen());
 	});
 
-  $(data).each(function(i,game){
-
-    console.log(game)
-    console.log(i)
+  $(data).each(function(i,match){
 
     var pos = 'start'
 
-    if(game.fen){
-      pos = game.fen
+    if(match.fen){
+      pos = match.fen
+    } 
+
+    if(match.pgn){
+      game.load_pgn(match.pgn)
     }
 
     var cfg = {
@@ -69,8 +70,11 @@ $(document).ready(function() {
       position: pos
     };
 
-    $('#boards').append('<a class="column is-3"  href="/'+game.id+'"><div id="'+game.id+'"></div></a>')
-    boards[i] = ChessBoard(game.id, cfg);  
+    $('#boards').append('<a class="column is-3"  href="/'+match.id+'"><p><small>'+match.black+'&nbsp;</small><small class="has-text-info">'+match.blackelo+'</small></p><div id="'+match.id+'"></div><p class="has-text-right"><small>'+match.white+'&nbsp;</small><small class="has-text-info">'+match.whiteelo+'&nbsp;</small></p></a>')
+    boards[i] = ChessBoard(match.id, cfg);  
+    if(match.pgn && pos == 'start'){
+      boards[i].position(game.last())
+    }    
   })  
 
   //updateStatus();

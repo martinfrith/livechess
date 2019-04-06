@@ -8,15 +8,23 @@ $(document).ready(function() {
     pgnEl = $('#pgn');
     firstEl = $('#first');
     nextEl = $('#next');
-    prevEl = $('#prev');
+    backEl = $('#back');
     lastEl = $('#last');
 
-    prevEl.click(function(){
+    backEl.click(function(){
       board.position(game.back())
     })
 
     nextEl.click(function(){
       board.position(game.next())
+    })
+
+    firstEl.click(function(){
+      board.position(game.first())
+    })
+
+    lastEl.click(function(){
+      board.position(game.last())
     })
 
   var updateStatus = function() {
@@ -73,6 +81,12 @@ $(document).ready(function() {
     game.load_pgn(data.pgn)
   }
  
+  if(data.pgn && pos == 'start'){
+    setTimeout(function(){
+      lastEl.click()
+    },500)
+  } 
+  
   socket.emit('join', data.id);  //join room as defined by query parameter in URL bar
 
   socket.on('undo', function(){ //remote undo by peer
@@ -92,10 +106,34 @@ $(document).ready(function() {
     board.position(game.fen());
   });
 
-
-
   board = ChessBoard('board', cfg);
-
   updateStatus();
-  
+
+  if(data.white){
+    $('#white').text(data.white)
+  } 
+  if(data.black){
+    $('#black').text(data.black)
+  } 
+  if(data.whiteelo){
+    $('#whiteelo').text(data.whiteelo)
+  } 
+  if(data.blackelo){
+    $('#blackelo').text(data.blackelo)
+  } 
+  if(data.event){
+    $('#event').text(data.event)
+  } 
+  if(data.date){
+    $('#date').text(data.date)
+  } 
+  if(data.site){
+    $('#site').text(data.site)
+  } 
+  if(data.eco){
+    $('#eco').text(data.eco)
+  } 
+  if(data.result){
+    $('#result').text(data.result)
+  }   
 });

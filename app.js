@@ -30,6 +30,14 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     res.render('contact')
   });
 
+  app.get('/search', function (req, res) {
+    res.render('search')
+  });
+
+  app.get('/loadpgn', function (req, res) {
+    res.render('loadpgn')
+  })
+
   app.get('/games', function (req, res) { 
     db.collection('games').find({}).toArray(function(err,docs){
       res.render('games', 
@@ -46,7 +54,15 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     },
     {
       "$set": {
-        id:req.params.gameid
+        id:req.params.gameid,
+        white:'',
+        whiteelo:'',
+        black:'',
+        blackelo:'',
+        event:'',
+        site:'',
+        eco:'',
+        result:''
       }
     },{ upsert: true, 'new': true, returnOriginal:false }).then(function(doc){
       res.render('live', { data: doc.value })
@@ -61,6 +77,15 @@ mongodb.MongoClient.connect(uri, function(err, database) {
       if (err) throw err;
       res.render('game', { data: doc })
     })
+  });
+
+  app.get('/import', function (req, res) {
+    if(req.files){
+      req.files.forEach(function(file){
+        if(file && file.size > 0){
+        }        
+      })
+    }
   });
 
   app.get('*', function (req, res) { 

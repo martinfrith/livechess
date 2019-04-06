@@ -1638,6 +1638,29 @@ window['Chess'] = window['Chess'] || function(fen) {
 
       return move_history;
     },
+    first: function(){
+      var moves = this.history();
+      var tmp = new Chess();
+      future = []
+      for(var i=0;i<moves.length;i++) {
+        tmp.move(moves[i]);
+        future.push(tmp.fen());
+      }
+      future.reverse()
+      return 'start';
+    }, 
+    last: function(){
+      var moves = this.history();
+      var tmp = new Chess();
+      var previous = moves.length-future.length-1;
+      for(var i=0;i<previous;i++) {
+        tmp.move(moves[i]);
+      }
+      var previous_fen = tmp.fen();
+      tmp.move(moves[previous]);
+      future.push(tmp.fen());
+      return future.pop();
+    },
     back: function() {
       var moves = this.history();
       var tmp = new Chess();
@@ -1650,10 +1673,9 @@ window['Chess'] = window['Chess'] || function(fen) {
       future.push(tmp.fen());
       return previous_fen;
     },
-
     next: function() {
       return future.pop();
-    }
+    }    
   };
 };
 

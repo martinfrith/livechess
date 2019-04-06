@@ -1,0 +1,23 @@
+<%- contentFor('css') %>
+<%- contentFor('js') %>
+<%- contentFor('content') %>
+
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            LiveChess
+          </h1>
+          <h2 class="subtitle">
+            Importar de chess-bd
+          </h2>
+          <div class="content">
+            <form method="POST" action="/submit-form">
+              <input type="file" name="document" />
+              <input type="submit" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
