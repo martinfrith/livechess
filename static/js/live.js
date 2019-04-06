@@ -1,12 +1,45 @@
 $(document).ready(function() {
+
+  $(window).on('hashchange', function(){
+    if(location.hash.indexOf('info') > -1) {
+      $('.panel > .inner-panel > .columns > .column').hide()
+      $('.panel, .panel-info').show()
+    }
+    if(location.hash.indexOf('action') > -1) {
+      $('.panel > .inner-panel > .columns > .column').hide()
+      $('.panel, .panel-action').show()
+    }
+    if(location.hash===''){
+      $('.panel').hide() 
+    }
+  }).trigger('hashchange')
+
   var socket = io();  
   var board,
     synced = false,
     game = new Chess(),
     statusEl = $('#status'),
+    loadpgnEl = $('#loadpgn'),
     undoEl = $('#undo'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn');
+
+    loadpgnEl.submit(function(){
+      $('#updatebtn').prop('disabled',true)
+      $('#updatebtn').addClass('is-loading')
+      var data = {};
+      $(this).serializeArray().map(function(x){data[x.name] = x.value;});       
+      $.ajax({
+        url:'/loadpgn',
+        method:'POST',  
+        data: data,
+        success:function(res){
+          $('#updatebtn').prop('disabled',false)
+          $('#updatebtn').removeClass('is-loading')
+        }
+      })      
+      return false
+    })
 
     undoEl.click(function(){
       socket.emit('undo')
@@ -128,5 +161,15 @@ $(document).ready(function() {
   updateStatus();
 
   $('#gameurl').val(location.href.replace('/live',''))
-    
+  $('input[name="gameid"]').val(data.id)
+  $('input[name="event"]').val(data.event)
+  $('input[name="site"]').val(data.site)
+  $('input[name="date"]').val(data.date)
+  $('input[name="white"]').val(data.white)
+  $('input[name="black"]').val(data.black)
+  $('input[name="eco"]').val(data.eco)
+  $('input[name="whiteelo"]').val(data.whiteelo)
+  $('input[name="blackelo"]').val(data.blackelo)
+  $('input[name="pgn"]').val(data.pgn)
+  $('input[name="result"]').val(data.result)
 });

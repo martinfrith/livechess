@@ -5,14 +5,15 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mongodb = require('mongodb');
 var expressLayouts = require('express-ejs-layouts')
-// Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname, details set in .env
 var uri = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({ type: 'application/json' }))
 
 app.set('views', path.join(__dirname, 'static'))
 app.use(express.static(path.join(__dirname, 'static')));
 app.set('view engine', 'ejs')
-//app.set('layout extractScripts', true)
-//app.set('layout extractStyles', true)
 app.use(expressLayouts);
 
 mongodb.MongoClient.connect(uri, function(err, database) {
@@ -54,15 +55,7 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     },
     {
       "$set": {
-        id:req.params.gameid,
-        white:'',
-        whiteelo:'',
-        black:'',
-        blackelo:'',
-        event:'',
-        site:'',
-        eco:'',
-        result:''
+        id:req.params.gameid
       }
     },{ upsert: true, 'new': true, returnOriginal:false }).then(function(doc){
       res.render('live', { data: doc.value })
@@ -87,6 +80,19 @@ mongodb.MongoClient.connect(uri, function(err, database) {
       })
     }
   });
+
+  app.post('/loadpgn', function (req, res) {
+    if(!req.body.gameid) return false
+    db.collection('games').findOneAndUpdate(
+    {
+      id: req.body.gameid
+    },
+    {
+      "$set": req.body
+    },{ upsert: true, 'new': true, returnOriginal:false }).then(function(doc){
+      return res.json({ success: 1 })
+    })    
+  })
 
   app.get('*', function (req, res) { 
     res.render('404')

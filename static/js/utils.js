@@ -1,3 +1,7 @@
+var generate_id = function (){
+	return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)
+}
+
 $(document).ready(function() {
 
   // Check for click events on the navbar burger icon
@@ -10,6 +14,11 @@ $(document).ready(function() {
   });
 
   $('#create').click(function() {
-  	location.href = '/live/x' + Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)
+  	location.href = '/live/x' + generate_id() + '#info'
   })
+});
+
+$.ajaxSetup({
+	cache: false,
+	headers: { contentType: "application/json" }
 });
