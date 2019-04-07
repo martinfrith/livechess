@@ -133,6 +133,10 @@ $(document).ready(function() {
     pos = data.fen
   }
 
+  if(data.pgn){
+    game.load_pgn(data.pgn)
+  }
+
   var cfg = {
     draggable: true,
     position: pos,
