@@ -165,7 +165,7 @@ $(document).ready(function() {
 
   updateStatus();
 
-  $('#gameurl').val(location.href.replace('/live',''))
+  $('#gameurl').val(location.href.replace('live/',''))
   $('input[name="gameid"]').val(data.id)
   $('input[name="event"]').val(data.event)
   $('input[name="site"]').val(data.site)
