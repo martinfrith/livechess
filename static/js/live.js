@@ -170,6 +170,6 @@ $(document).ready(function() {
   $('input[name="eco"]').val(data.eco)
   $('input[name="whiteelo"]').val(data.whiteelo)
   $('input[name="blackelo"]').val(data.blackelo)
-  $('input[name="pgn"]').val(data.pgn)
+  $('textarea[name="pgn"]').val(data.pgn)
   $('input[name="result"]').val(data.result)
 });
