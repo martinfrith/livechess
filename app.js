@@ -77,7 +77,7 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     if(!req.body.room) return false
     db.collection('games').findOneAndUpdate(
     {
-      id: req.body.room
+      room: req.body.room
     },
     {
       "$set": req.body
