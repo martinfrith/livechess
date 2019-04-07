@@ -7,9 +7,6 @@
 	max-height: 8rem;
 }
 
-#board {
-	width: 75%;
-}
 
 @media screen and (max-width: 769px), print {
   .hero {
