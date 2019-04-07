@@ -68,6 +68,7 @@ mongodb.MongoClient.connect(uri, function(err, database) {
       id:req.params.gameid
     }, function(err, doc) {
       if (err) throw err;
+      if (!doc) return res.render('404')
       res.render('game', { data: doc })
     })
   });
