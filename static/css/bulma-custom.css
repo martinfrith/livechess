@@ -3,6 +3,9 @@
 	max-width: 780px;
 }
 
+.hero .is-2 img {
+	max-height: 8rem;
+}
 
 @media screen and (max-width: 769px), print {
   .hero {
