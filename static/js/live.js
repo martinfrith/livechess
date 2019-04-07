@@ -146,7 +146,7 @@ $(document).ready(function() {
   };
 
   //initiated socket client
-  socket.emit('join',data.id);  //join room as defined by query parameter in URL bar
+  socket.emit('join',data.room);  //join room as defined by query parameter in URL bar
 
   socket.on('undo', function(){ //remote undo by peer
     game.undo()
@@ -169,16 +169,19 @@ $(document).ready(function() {
 
   updateStatus();
 
-  $('#gameurl').val(location.href.replace('live/',''))
-  $('input[name="gameid"]').val(data.id)
-  $('input[name="event"]').val(data.event)
-  $('input[name="site"]').val(data.site)
-  $('input[name="date"]').val(data.date)
-  $('input[name="white"]').val(data.white)
-  $('input[name="black"]').val(data.black)
-  $('input[name="eco"]').val(data.eco)
-  $('input[name="whiteelo"]').val(data.whiteelo)
-  $('input[name="blackelo"]').val(data.blackelo)
-  $('textarea[name="pgn"]').val(data.pgn)
-  $('input[name="result"]').val(data.result)
+  // populate forms
+  ['room','event','site','date','white','black','eco','whiteelo','blackelo','round','result'].forEach(function(entry) {
+    if(data[entry]){
+      $('input[name="'+entry+'"]').val(data[entry])
+    }
+  });
+
+  ['pgn'].forEach(function(entry) {
+    if(data[entry]){
+      $('textarea[name="'+entry+'"]').val(data[entry])
+    }
+  });
+
+  $('input[name="gameurl"]').val(location.href.replace('live/',''))
+
 });

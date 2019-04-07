@@ -48,24 +48,24 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     })
   });
 
-  app.get('/live/:gameid', function (req, res) { 
+  app.get('/live/:room', function (req, res) { 
     db.collection('games').findOneAndUpdate(
     {
-      id:req.params.gameid
+      room:req.params.room
     },
     {
       "$set": {
-        id:req.params.gameid
+        room:req.params.room
       }
     },{ upsert: true, 'new': true, returnOriginal:false }).then(function(doc){
       res.render('live', { data: doc.value })
     })
   });
 
-  app.get('/:gameid', function (req, res) {
+  app.get('/:room', function (req, res) {
     db.collection('games').findOne(
     {
-      id:req.params.gameid
+      room:req.params.room
     }, function(err, doc) {
       if (err) throw err;
       if (!doc) return res.render('404')
@@ -73,20 +73,11 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     })
   });
 
-  app.get('/import', function (req, res) {
-    if(req.files){
-      req.files.forEach(function(file){
-        if(file && file.size > 0){
-        }        
-      })
-    }
-  });
-
   app.post('/loadpgn', function (req, res) {
-    if(!req.body.gameid) return false
+    if(!req.body.room) return false
     db.collection('games').findOneAndUpdate(
     {
-      id: req.body.gameid
+      id: req.body.room
     },
     {
       "$set": req.body
@@ -108,14 +99,10 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     socket.on('move', function(move) { //move object emitter
       return db.collection('games').findOneAndUpdate(
       {
-        id:move.room
+        room:move.room
       },
       {
-        "$set": {
-          fen:move.fen,
-          pgn:move.pgn,
-          turn:move.turn
-        }
+        "$set": move
       },{ new: true }).then(function(doc){
         console.log('user moved: ' + JSON.stringify(move));
         io.emit('move', move);

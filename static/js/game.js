@@ -11,7 +11,7 @@ $(document).ready(function() {
     backEl = $('#back');
     lastEl = $('#last');
     flipEl = $('#flip');
-    
+
     backEl.click(function(){
       board.position(game.back())
     })
@@ -91,7 +91,7 @@ $(document).ready(function() {
     },500)
   } 
   
-  socket.emit('join', data.id);  //join room as defined by query parameter in URL bar
+  socket.emit('join', data.room);  //join room as defined by query parameter in URL bar
 
   socket.on('undo', function(){ //remote undo by peer
     game.undo()
@@ -113,31 +113,10 @@ $(document).ready(function() {
   board = ChessBoard('board', cfg);
   updateStatus();
 
-  if(data.white){
-    $('#white').text(data.white)
-  } 
-  if(data.black){
-    $('#black').text(data.black)
-  } 
-  if(data.whiteelo){
-    $('#whiteelo').text(data.whiteelo)
-  } 
-  if(data.blackelo){
-    $('#blackelo').text(data.blackelo)
-  } 
-  if(data.event){
-    $('#event').text(data.event)
-  } 
-  if(data.date){
-    $('#date').text(data.date)
-  } 
-  if(data.site){
-    $('#site').text(data.site)
-  } 
-  if(data.eco){
-    $('#eco').text(data.eco)
-  } 
-  if(data.result){
-    $('#result').text(data.result)
-  }   
+  ['white','black','whiteelo','blackelo','event','date','site','eco','result'].forEach(function(entry) {
+    if(data[entry]){
+      $('#' + this).text(data[entry])  
+    }
+  })
+
 });

@@ -70,8 +70,8 @@ $(document).ready(function() {
       position: pos
     };
 
-    $('#boards').append('<a class="column is-3 has-text-grey"  href="/'+match.id+'"><p><small>'+match.black+'&nbsp;</small><small class="has-text-grey">'+match.blackelo+'</small></p><div id="'+match.id+'"></div><p class="has-text-right"><small>'+match.white+'&nbsp;</small><small class="has-text-grey">'+match.whiteelo+'&nbsp;</small></p></a>')
-    boards[i] = ChessBoard(match.id, cfg);  
+    $('#boards').append('<a class="column is-3 has-text-grey"  href="/'+match.room+'"><p><small>'+match.black+'&nbsp;</small><small class="has-text-grey">'+match.blackelo+'</small></p><div id="'+match.room+'"></div><p class="has-text-right"><small>'+match.white+'&nbsp;</small><small class="has-text-grey">'+match.whiteelo+'&nbsp;</small></p></a>')
+    boards[i] = ChessBoard(match.room, cfg);  
     if(match.pgn && pos == 'start'){
       boards[i].position(game.last())
     }    
