@@ -30,7 +30,12 @@ $(document).ready(function() {
 
     flipEl.click(function(){
       board.flip()
+      var head = $('.boardhead').html(),
+      foot = $('.boardfoot').html()
+      $('.boardhead').html(foot)
+      $('.boardfoot').html(head)
     })   
+
   var updateStatus = function() {
     var status = '';
     var moveColor = 'Blancas';
@@ -115,8 +120,7 @@ $(document).ready(function() {
 
   ['white','black','whiteelo','blackelo','event','date','site','eco','result'].forEach(function(entry) {
     if(data[entry]){
-      $('#' + this).text(data[entry])  
+      $('#' + entry).text(data[entry])  
     }
   })
-
 });
