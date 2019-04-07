@@ -32,7 +32,10 @@
   </div>
 
   <div class="columns">
-    <div class="column">
+    <div class="column board-container">
+      <div class="game-status">
+        <p><span class="fa fa-info-circle"></span> <span id="status"></span></p>
+      </div>    
       <div id="board"></div>
     </div>
     <div class="column panel">
@@ -165,7 +168,7 @@
               <a class="button" id="bquit">Abandona N</a>
               <a class="button" id="draw">Tablas</a>
             </div>
-            <p><span id="status"></span></p>
+
             <!--p>FEN: <span id="fen"></span></p-->
             <p><span id="pgn"></span></p>
             <hr>
