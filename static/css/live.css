@@ -35,3 +35,9 @@
 	background: white;
 	padding: 1rem;	
 }
+
+@media screen and (max-width: 769px), print {
+	#board {
+		width: 100%;
+	}
+}
