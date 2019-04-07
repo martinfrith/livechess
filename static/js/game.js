@@ -10,7 +10,8 @@ $(document).ready(function() {
     nextEl = $('#next');
     backEl = $('#back');
     lastEl = $('#last');
-
+    flipEl = $('#flip');
+    
     backEl.click(function(){
       board.position(game.back())
     })
@@ -27,6 +28,9 @@ $(document).ready(function() {
       board.position(game.last())
     })
 
+    flipEl.click(function(){
+      board.flip()
+    })   
   var updateStatus = function() {
     var status = '';
     var moveColor = 'Blancas';

@@ -23,6 +23,7 @@ $(document).ready(function() {
     undoEl = $('#undo'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn');
+    flipEl = $('#flip');
 
     loadpgnEl.submit(function(){
       $('#updatebtn').prop('disabled',true)
@@ -44,6 +45,10 @@ $(document).ready(function() {
     undoEl.click(function(){
       socket.emit('undo')
     })
+
+    flipEl.click(function(){
+      board.flip()
+    })    
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var onDragStart = function(source, piece, position, orientation) {
