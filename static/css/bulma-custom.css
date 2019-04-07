@@ -2,3 +2,12 @@
 	padding: 1rem;
 	max-width: 780px;
 }
+
+
+@media screen and (max-width: 769px), print {
+  .hero {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-top: -2.5rem;
+  }
+}
