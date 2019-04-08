@@ -103,7 +103,7 @@ $(document).ready(function() {
   socket.on('data', function(dataObj){ //remote move by peer
     $('#updatebtn').prop('disabled',false).removeClass('is-loading')
   })
-  
+
   socket.on('move', function(moveObj){ //remote move by peer
     console.log('peer move: ' + JSON.stringify(moveObj));
     var move = game.move(moveObj);
@@ -192,7 +192,7 @@ $(document).ready(function() {
         }).trigger('hashchange')
 
         $('.spinner-container').fadeOut('fast', function(){
-          $('.spinner-content').fadeTo('fast',1)
+          $('.spinner-content').fadeTo('slow',1)
         })
       })
     }

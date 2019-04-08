@@ -143,10 +143,9 @@ $(document).ready(function() {
         }     
       })  
 
-
       $('.spinner-container').fadeOut('fast', function(){
-        $('.spinner-content').fadeTo('fast',1)
-      })      
+        $('.spinner-content').fadeTo('slow',1)
+      })
     }
   })
 

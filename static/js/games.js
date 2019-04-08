@@ -61,7 +61,7 @@ $(document).ready(function() {
       if(!res){
         $('#boards').html($.templates("#empty").render()).promise().done(function (){
           $('.spinner-container').fadeOut('fast', function(){
-            $('.spinner-content').fadeTo('fast',1)
+            $('.spinner-content').fadeTo('slow',1)
           })
         })
 
