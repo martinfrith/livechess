@@ -19,7 +19,7 @@ $(document).ready(function() {
     if(!synced && data.turn){
       turn = data.turn
       pgn = data.pgn
-    } */
+    } */ 
 
     if (turn === 'b') {
       moveColor = 'Negras';
