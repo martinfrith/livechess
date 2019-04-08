@@ -45,8 +45,7 @@ $(document).ready(function() {
       }
     }
     statusEl.html(status);
-    //fenEl.html(game.fen());
-    console.log(pgn)
+    fenEl.html(game.fen());
     pgnEl.html(pgn);
   };
   

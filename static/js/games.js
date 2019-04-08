@@ -69,9 +69,7 @@ $(document).ready(function() {
       }
 
       // inject html boards
-      console.log("1")
       $('#boards').html($.templates("#match").render(res)).promise().done(function (){
-        console.log("2")
         // check for last moves on every game
         $(res).each(function(i,match){
 
