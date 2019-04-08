@@ -7,11 +7,15 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/libs/chess.js"></script>
   <script src="/js/libs/chessboard.js"></script>
-  <script> var data = <%- JSON.stringify(data) %></script>
   <script src="/js/game.js"></script>
 
 <%- contentFor('content') %>
 
+  <svg class="spinner-container" viewBox="0 0 44 44">
+      <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
+  </svg>
+  
+  <div class="spinner-content">
     <div class="columns">
       <div class="column">
         <p class="boardhead">
@@ -41,3 +45,4 @@
         <p>Resultado <span class="has-text-grey" id="result"></span></p>
       </div>
     </div>
+  </div>

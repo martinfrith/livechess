@@ -40,12 +40,11 @@ mongodb.MongoClient.connect(uri, function(err, database) {
   })
 
   app.get('/games', function (req, res) { 
-    db.collection('games').find({}).toArray(function(err,docs){
-      res.render('games', 
-      { 
-        data: docs
-      })
-    })
+    res.render('games')
+  });
+
+  app.get('/:room', function (req, res) {
+    res.render('game')
   });
 
   app.get('/live/:room', function (req, res) { 
@@ -57,24 +56,23 @@ mongodb.MongoClient.connect(uri, function(err, database) {
       "$set": {
         room:req.params.room
       }
-    },{ upsert: true, 'new': true, returnOriginal:false }).then(function(doc){
-      res.render('live', { data: doc.value })
+    },{ 
+      upsert: true, 
+      'new': true, 
+      returnOriginal:false 
+    }).then(function(doc){
+      res.render('live')
     })
   });
 
-  app.get('/:room', function (req, res) {
-    db.collection('games').findOne(
-    {
-      room:req.params.room
-    }, function(err, doc) {
-      if (err) throw err;
-      if (!doc) return res.render('404')
-      res.render('game', { data: doc })
-    })
-  });
+  app.post('/games', function (req, res) { 
+    db.collection('games').find(req.body).toArray(function(err,docs){
+      return res.json(docs)
+    })   
+  })
 
   app.post('/loadpgn', function (req, res) {
-    if(!req.body.room) return false
+    if(!req.body.room) return res.json({ error: 1, cause: 'No room provided' })
     db.collection('games').findOneAndUpdate(
     {
       room: req.body.room
@@ -97,6 +95,7 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     });
 
     socket.on('move', function(move) { //move object emitter
+      console.log(move)
       return db.collection('games').findOneAndUpdate(
       {
         room:move.room

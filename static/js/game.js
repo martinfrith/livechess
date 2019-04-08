@@ -1,6 +1,8 @@
 $(document).ready(function() {
   var socket = io();  
   var board,
+    room = location.pathname.replace('/',''),
+    data = {},
     synced = false,
     game = new Chess(),
     statusEl = $('#status'),
@@ -75,28 +77,8 @@ $(document).ready(function() {
     pgnEl.html(pgn);
   };
 
-  var pos = 'start';
-
-  if(data.fen){
-    pos = data.fen
-  }
-
-  var cfg = {
-    draggable: false,
-    position: pos
-  };
-
-  if(data.pgn){
-    game.load_pgn(data.pgn)
-  }
- 
-  if(data.pgn && pos == 'start'){
-    setTimeout(function(){
-      lastEl.click()
-    },500)
-  } 
   
-  socket.emit('join', data.room);  //join room as defined by query parameter in URL bar
+  socket.emit('join', room);  //join room as defined by query parameter in URL bar
 
   socket.on('undo', function(){ //remote undo by peer
     game.undo()
@@ -115,12 +97,49 @@ $(document).ready(function() {
     board.position(game.fen());
   });
 
-  board = ChessBoard('board', cfg);
-  updateStatus();
 
   ['white','black','whiteelo','blackelo','event','date','site','eco','result'].forEach(function(entry) {
     if(data[entry]){
       $('#' + entry).text(data[entry])  
     }
   })
+
+  $.ajax({
+    url:'/games',
+    method:'POST',
+    data: {room:room},
+    success:function(res){
+
+      data = res[0];
+
+      var pos = 'start';
+
+      if(data.fen){
+        pos = data.fen
+      }
+
+      var cfg = {
+        draggable: false,
+        position: pos
+      };
+
+      if(data.pgn){
+        game.load_pgn(data.pgn)
+      }
+
+      board = ChessBoard('board', cfg);
+      updateStatus();
+
+      if(data.pgn && pos == 'start'){
+        setTimeout(function(){
+          lastEl.click()
+        },500)
+      }       
+
+      $('.spinner-container').fadeOut('fast', function(){
+        $('.spinner-content').fadeTo('fast',1)
+      })      
+    }
+  })
+
 });

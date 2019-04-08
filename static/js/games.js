@@ -53,30 +53,38 @@ $(document).ready(function() {
     board.position(game.fen());
 	});
 
-  $(data).each(function(i,match){
 
-    var pos = 'start'
+  $.ajax({
+    url:'/games',
+    method:'POST',
+    success:function(res){
+      $(res).each(function(i,match){
 
-    if(match.fen){
-      pos = match.fen
-    } 
+        var pos = 'start'
 
-    if(match.pgn){
-      game.load_pgn(match.pgn)
+        if(match.fen){
+          pos = match.fen
+        } 
+
+        if(match.pgn){
+          game.load_pgn(match.pgn)
+        }
+
+        var cfg = {
+          draggable: false,
+          position: pos
+        };
+
+        $('#boards').append('<a class="column is-3 has-text-grey"  href="/'+match.room+'"><p><small>'+match.black+'&nbsp;</small><small class="has-text-grey">'+match.blackelo+'</small></p><div id="'+match.room+'"></div><p class="has-text-right"><small>'+match.white+'&nbsp;</small><small class="has-text-grey">'+match.whiteelo+'&nbsp;</small></p></a>')
+        boards[i] = ChessBoard(match.room, cfg);  
+        if(match.pgn && pos == 'start'){
+          boards[i].position(game.last())
+        }    
+      }) 
+
+      $('.spinner-container').fadeOut('fast', function(){
+        $('.spinner-content').fadeTo('fast',1)
+      })
     }
-
-    var cfg = {
-      draggable: false,
-      position: pos
-    };
-
-    $('#boards').append('<a class="column is-3 has-text-grey"  href="/'+match.room+'"><p><small>'+match.black+'&nbsp;</small><small class="has-text-grey">'+match.blackelo+'</small></p><div id="'+match.room+'"></div><p class="has-text-right"><small>'+match.white+'&nbsp;</small><small class="has-text-grey">'+match.whiteelo+'&nbsp;</small></p></a>')
-    boards[i] = ChessBoard(match.room, cfg);  
-    if(match.pgn && pos == 'start'){
-      boards[i].position(game.last())
-    }    
-  })  
-
-  //updateStatus();
-	
+  })	
 });

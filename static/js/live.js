@@ -16,6 +16,8 @@ $(document).ready(function() {
 
   var socket = io();  
   var board,
+    room = location.pathname.replace('/live/',''),
+    data = {},  
     synced = false,
     game = new Chess(),
     statusEl = $('#status'),
@@ -73,7 +75,7 @@ $(document).ready(function() {
       if (move === null) {
         return 'snapback';
       }
-      moveObj.room = data.id;
+      moveObj.room = room;
       moveObj.fen = game.fen();
       moveObj.pgn = game.pgn();
       moveObj.turn = game.turn();
@@ -128,25 +130,9 @@ $(document).ready(function() {
     synced = true
   };
 
-  var pos = 'start';
-  if(data && data.fen){
-    pos = data.fen
-  }
-
-  if(data.pgn){
-    game.load_pgn(data.pgn)
-  }
-
-  var cfg = {
-    draggable: true,
-    position: pos,
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onSnapEnd: onSnapEnd
-  };
 
   //initiated socket client
-  socket.emit('join',data.room);  //join room as defined by query parameter in URL bar
+  socket.emit('join',room);  //join room as defined by query parameter in URL bar
 
   socket.on('undo', function(){ //remote undo by peer
     game.undo()
@@ -156,7 +142,7 @@ $(document).ready(function() {
 
   socket.on('move', function(moveObj){ //remote move by peer
     console.log('peer move: ' + JSON.stringify(moveObj));
-     var move = game.move(moveObj);
+    var move = game.move(moveObj);
     // illegal move
     if (move === null) {
       return;
@@ -165,23 +151,53 @@ $(document).ready(function() {
     board.position(game.fen());
   });
 
-  board = ChessBoard('board', cfg);
+  $.ajax({
+    url:'/games',
+    method:'POST',
+    data: {room:room},
+    success:function(res){
 
-  updateStatus();
+      data = res[0];
 
-  // populate forms
-  ['room','event','site','date','white','black','eco','whiteelo','blackelo','round','result'].forEach(function(entry) {
-    if(data[entry]){
-      $('input[name="'+entry+'"]').val(data[entry])
+      var pos = 'start';
+      if(data && data.fen){
+        pos = data.fen
+      }
+
+      if(data.pgn){
+        game.load_pgn(data.pgn)
+      }
+
+      var cfg = {
+        draggable: true,
+        position: pos,
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd
+      };
+
+      board = ChessBoard('board', cfg);
+
+      updateStatus(); 
+
+      // populate forms
+      ['room','event','site','date','white','black','eco','whiteelo','blackelo','round','result'].forEach(function(entry) {
+        if(data[entry]){
+          $('input[name="'+entry+'"]').val(data[entry])
+        }
+      });
+
+      ['pgn'].forEach(function(entry) {
+        if(data[entry]){
+          $('textarea[name="'+entry+'"]').val(data[entry])
+        }
+      });
+
+      $('input[name="gameurl"]').val(location.href.replace('live/',''))
+
+      $('.spinner-container').fadeOut('fast', function(){
+        $('.spinner-content').fadeTo('fast',1)
+      })
     }
-  });
-
-  ['pgn'].forEach(function(entry) {
-    if(data[entry]){
-      $('textarea[name="'+entry+'"]').val(data[entry])
-    }
-  });
-
-  $('input[name="gameurl"]').val(location.href.replace('live/',''))
-
-});
+  })
+})
