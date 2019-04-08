@@ -53,37 +53,52 @@ $(document).ready(function() {
     board.position(game.fen());
 	});
 
-
   $.ajax({
     url:'/games',
     method:'POST',
     success:function(res){
-      $(res).each(function(i,match){
 
-        var pos = 'start'
+      if(!res){
+        $('#boards').html($.templates("#empty").render()).promise().done(function (){
+          $('.spinner-container').fadeOut('fast', function(){
+            $('.spinner-content').fadeTo('fast',1)
+          })
+        })
 
-        if(match.fen){
-          pos = match.fen
-        } 
+        return false
+      }
 
-        if(match.pgn){
-          game.load_pgn(match.pgn)
-        }
+      // inject html boards
+      console.log("1")
+      $('#boards').html($.templates("#match").render(res)).promise().done(function (){
+        console.log("2")
+        // check for last moves on every game
+        $(res).each(function(i,match){
 
-        var cfg = {
-          draggable: false,
-          position: pos
-        };
+          var pos = 'start'
 
-        $('#boards').append('<a class="column is-3 has-text-grey"  href="/'+match.room+'"><p><small>'+match.black+'&nbsp;</small><small class="has-text-grey">'+match.blackelo+'</small></p><div id="'+match.room+'"></div><p class="has-text-right"><small>'+match.white+'&nbsp;</small><small class="has-text-grey">'+match.whiteelo+'&nbsp;</small></p></a>')
-        boards[i] = ChessBoard(match.room, cfg);  
-        if(match.pgn && pos == 'start'){
-          boards[i].position(game.last())
-        }    
-      }) 
+          if(match.fen){
+            pos = match.fen
+          } 
 
-      $('.spinner-container').fadeOut('fast', function(){
-        $('.spinner-content').fadeTo('fast',1)
+          if(match.pgn){
+            game.load_pgn(match.pgn)
+          }
+
+          var cfg = {
+            draggable: false,
+            position: pos
+          };
+
+          boards[i] = ChessBoard(match.room, cfg);  
+          if(match.pgn && pos == 'start'){
+            boards[i].position(game.last())
+          }    
+        }) 
+
+        $('.spinner-container').fadeOut('fast', function(){
+          $('.spinner-content').fadeTo('fast',1)
+        })
       })
     }
   })	

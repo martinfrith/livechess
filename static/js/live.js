@@ -1,18 +1,5 @@
 $(document).ready(function() {
 
-  $(window).on('hashchange', function(){
-    if(location.hash.indexOf('info') > -1) {
-      $('.panel > .inner-panel > .columns > .column').hide()
-      $('.panel, .panel-info').show()
-    }
-    if(location.hash.indexOf('action') > -1) {
-      $('.panel > .inner-panel > .columns > .column').hide()
-      $('.panel, .panel-action').show()
-    }
-    if(location.hash===''){
-      $('.panel').hide() 
-    }
-  }).trigger('hashchange')
 
   var socket = io();  
   var board,
@@ -21,36 +8,9 @@ $(document).ready(function() {
     synced = false,
     game = new Chess(),
     statusEl = $('#status'),
-    loadpgnEl = $('#loadpgn'),
-    undoEl = $('#undo'),
     fenEl = $('#fen'),
-    pgnEl = $('#pgn');
-    flipEl = $('#flip');
+    pgnEl = $('#pgn')
 
-    loadpgnEl.submit(function(){
-      $('#updatebtn').prop('disabled',true)
-      $('#updatebtn').addClass('is-loading')
-      var data = {};
-      $(this).serializeArray().map(function(x){data[x.name] = x.value;});       
-      $.ajax({
-        url:'/loadpgn',
-        method:'POST',  
-        data: data,
-        success:function(res){
-          $('#updatebtn').prop('disabled',false)
-          $('#updatebtn').removeClass('is-loading')
-        }
-      })      
-      return false
-    })
-
-    undoEl.click(function(){
-      socket.emit('undo')
-    })
-
-    flipEl.click(function(){
-      board.flip()
-    })    
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var onDragStart = function(source, piece, position, orientation) {
@@ -140,6 +100,10 @@ $(document).ready(function() {
     board.position(game.fen());
   })
 
+  socket.on('data', function(dataObj){ //remote move by peer
+    $('#updatebtn').prop('disabled',false).removeClass('is-loading')
+  })
+  
   socket.on('move', function(moveObj){ //remote move by peer
     console.log('peer move: ' + JSON.stringify(moveObj));
     var move = game.move(moveObj);
@@ -156,47 +120,80 @@ $(document).ready(function() {
     method:'POST',
     data: {room:room},
     success:function(res){
+      const match = res[0]
+      data = match;
+      data.watch_url = location.href.replace('live/','')
 
-      data = res[0];
+      $('.panel').html($.templates("#match").render(match)).promise().done(function (){
 
-      var pos = 'start';
-      if(data && data.fen){
-        pos = data.fen
-      }
-
-      if(data.pgn){
-        game.load_pgn(data.pgn)
-      }
-
-      var cfg = {
-        draggable: true,
-        position: pos,
-        onDragStart: onDragStart,
-        onDrop: onDrop,
-        onSnapEnd: onSnapEnd
-      };
-
-      board = ChessBoard('board', cfg);
-
-      updateStatus(); 
-
-      // populate forms
-      ['room','event','site','date','white','black','eco','whiteelo','blackelo','round','result'].forEach(function(entry) {
-        if(data[entry]){
-          $('input[name="'+entry+'"]').val(data[entry])
+        var pos = 'start';
+        if(data && data.fen){
+          pos = data.fen
         }
-      });
 
-      ['pgn'].forEach(function(entry) {
-        if(data[entry]){
-          $('textarea[name="'+entry+'"]').val(data[entry])
+        if(data.pgn){
+          game.load_pgn(data.pgn)
         }
-      });
 
-      $('input[name="gameurl"]').val(location.href.replace('live/',''))
+        var cfg = {
+          draggable: true,
+          position: pos,
+          onDragStart: onDragStart,
+          onDrop: onDrop,
+          onSnapEnd: onSnapEnd
+        };
 
-      $('.spinner-container').fadeOut('fast', function(){
-        $('.spinner-content').fadeTo('fast',1)
+        board = ChessBoard('board', cfg);
+
+        updateStatus(); 
+
+        var loadpgnEl = $('#loadpgn'),
+        undoEl = $('#undo'),
+        flipEl = $('#flip')
+
+        loadpgnEl.submit(function(){
+          $('#updatebtn').prop('disabled',true).addClass('is-loading')
+          var data = {};
+          $(this).serializeArray().map(function(x){data[x.name] = x.value;});       
+          socket.emit('data',  data);
+          /*
+          $.ajax({
+            url:'/loadpgn',
+            method:'POST',  
+            data: data,
+            success:function(res){
+              $('#updatebtn').prop('disabled',false).removeClass('is-loading')
+            }
+          })*/      
+          return false
+        })
+
+        undoEl.click(function(){
+          socket.emit('undo')
+        })
+
+        flipEl.click(function(){
+          board.flip()
+        })    
+
+
+        $(window).on('hashchange', function(){
+          if(location.hash.indexOf('info') > -1) {
+            $('.panel > .inner-panel > .columns > .column').hide()
+            $('.panel, .panel-info').show()
+          }
+          if(location.hash.indexOf('action') > -1) {
+            $('.panel > .inner-panel > .columns > .column').hide()
+            $('.panel, .panel-action').show()
+          }
+          if(location.hash===''){
+            $('.panel').hide() 
+          }
+        }).trigger('hashchange')
+
+        $('.spinner-container').fadeOut('fast', function(){
+          $('.spinner-content').fadeTo('fast',1)
+        })
       })
     }
   })

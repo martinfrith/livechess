@@ -17,7 +17,7 @@ app.set('view engine', 'ejs')
 app.use(expressLayouts);
 
 mongodb.MongoClient.connect(uri, function(err, database) {
-  const db = database.db('livechess')
+  const db = database.db(process.env.DB)
 
   app.get('/', function (req, res) {
     res.render('index')
@@ -95,7 +95,6 @@ mongodb.MongoClient.connect(uri, function(err, database) {
     });
 
     socket.on('move', function(move) { //move object emitter
-      console.log(move)
       return db.collection('games').findOneAndUpdate(
       {
         room:move.room
@@ -105,6 +104,19 @@ mongodb.MongoClient.connect(uri, function(err, database) {
       },{ new: true }).then(function(doc){
         console.log('user moved: ' + JSON.stringify(move));
         io.emit('move', move);
+      })
+    });
+
+    socket.on('data', function(data) { //move object emitter
+      return db.collection('games').findOneAndUpdate(
+      {
+        room:data.room
+      },
+      {
+        "$set": data
+      },{ new: true }).then(function(doc){
+        console.log('data updated: ' + JSON.stringify(data));
+        io.emit('data', data);
       })
     });
 

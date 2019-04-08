@@ -14,10 +14,12 @@ $(document).ready(function() {
   });
 
   $('#create').click(function() {
+    $(this).prop('disabled',true).addClass('is-loading')
   	location.href = '/live/x' + generate_id() + '#info'
   })
 });
 
+$.views.settings.delimiters("[[", "]]");
 $.ajaxSetup({
 	cache: false,
 	headers: { contentType: "application/json" }
