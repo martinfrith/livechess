@@ -70,7 +70,7 @@ $(document).ready(function() {
 
   socket.on('data', function(dataObj){ //remote move by peer
     console.log('data updated: ' + JSON.stringify(dataObj));
-    $('.matchdata').html($.templates("#matchdata").render(dataObj));
+    $('.gameinfo').html($.templates("#gameinfo").render(dataObj));
     ['white','black','whiteelo','blackelo'].forEach(function(entry){
       if(dataObj[entry]){
         $('#'+entry).text(dataObj[entry]);
@@ -86,7 +86,7 @@ $(document).ready(function() {
       const match = res[0]
       data = match;
       $('.spinner-content').html($.templates("#match").render(match)).promise().done(function (){
-        $('.matchdata').html($.templates("#matchdata").render(match))
+        $('.gameinfo').html($.templates("#gameinfo").render(match))
         var pos = 'start';
 
         if(data.fen){
@@ -112,7 +112,12 @@ $(document).ready(function() {
             nextEl = $('#next'),
             backEl = $('#back'),
             lastEl = $('#last'),
-            flipEl = $('#flip')
+            flipEl = $('#flip'),
+            nightmodeEl = $('#nightmode')
+
+            nightmodeEl.click(function(){
+              switchnightmode()
+            })
 
             backEl.click(function(){
               board.position(game.back())

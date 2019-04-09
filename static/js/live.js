@@ -125,14 +125,11 @@ $(document).ready(function() {
       data.watch_url = location.href.replace('live/','')
 
       $('.panel').html($.templates("#match").render(match)).promise().done(function (){
-
+        
         var pos = 'start';
-        if(data && data.fen){
-          pos = data.fen
-        }
 
-        if(data.pgn){
-          game.load_pgn(data.pgn)
+        if(data.fen){
+          pos = data.fen
         }
 
         var cfg = {
@@ -143,7 +140,12 @@ $(document).ready(function() {
           onSnapEnd: onSnapEnd
         };
 
+        if(data.pgn){
+          game.load_pgn(data.pgn)
+        }
+
         board = ChessBoard('board', cfg);
+        board.position(game.last())
 
         updateStatus(); 
 
@@ -156,15 +158,6 @@ $(document).ready(function() {
           var data = {};
           $(this).serializeArray().map(function(x){data[x.name] = x.value;});       
           socket.emit('data',  data);
-          /*
-          $.ajax({
-            url:'/loadpgn',
-            method:'POST',  
-            data: data,
-            success:function(res){
-              $('#updatebtn').prop('disabled',false).removeClass('is-loading')
-            }
-          })*/      
           return false
         })
 
@@ -175,7 +168,6 @@ $(document).ready(function() {
         flipEl.click(function(){
           board.flip()
         })    
-
 
         $(window).on('hashchange', function(){
           if(location.hash.indexOf('info') > -1) {

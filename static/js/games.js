@@ -53,6 +53,8 @@ $(document).ready(function() {
     board.position(game.fen());
 	});
 
+  var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+
   $.ajax({
     url:'/games',
     method:'POST',
