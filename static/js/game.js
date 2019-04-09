@@ -1,5 +1,9 @@
+$(document).on('click','#nightmode',function(){
+  switchnightmode()
+})
+
 $(document).ready(function() {
-  var socket = io();  
+  var socket = io()  
   var board,
     room = location.pathname.replace('/',''),
     data = {},
@@ -112,12 +116,7 @@ $(document).ready(function() {
           nextEl = $('#next'),
           backEl = $('#back'),
           lastEl = $('#last'),
-          flipEl = $('#flip'),
-          nightmodeEl = $('#nightmode')
-
-          nightmodeEl.click(function(){
-            switchnightmode()
-          })
+          flipEl = $('#flip')
 
           backEl.click(function(){
             board.position(game.back())
@@ -144,7 +143,7 @@ $(document).ready(function() {
           })   
 
           lastEl.click()
-        },500)
+        },777)
       })  
 
       $('.spinner-container').fadeOut('fast', function(){
@@ -152,4 +151,4 @@ $(document).ready(function() {
       })
     }
   })
-});
+})
