@@ -22,15 +22,28 @@
   <script id="match" type="text/x-jsrender">
     <div class="columns">
       <div class="column">
+        [[if black && black.length]]
         <p class="boardhead">
           <span id="black">[[:black]]</span>
           <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
         </p>
+        [[else]]
+        <p class="has-text-right">
+          <span id="white">[[:event]]</span>
+        </p>
+        [[/if]]
         <div id="board"></div>
+        [[if white && white.length]]
         <p class="has-text-right boardfoot">
           <span id="white">[[:white]]</span>
           <span class="has-text-info" id="whiteelo">[[:whiteelo]]</span>
         </p>
+        [[else]]
+        <p class="has-text-right">
+          <span id="white">[[:date]] [[:site]]</span>
+        </p>
+        [[/if]]
+
       </div>
       <div class="column">
         <div>

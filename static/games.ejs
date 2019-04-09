@@ -25,13 +25,22 @@
 	<script id="match" type="text/x-jsrender">
 		<a class="column is-3 is-tablet has-text-grey" href="/[[:room]]">
 			<p>
+		    [[if black && black.length]]
 				<small>[[:black]]&nbsp;</small>
 				<small class="has-text-grey">[[:blackelo]]</small>
+	        [[else]]
+				<small>[[:event]]&nbsp;</small>
+				<small class="has-text-grey">[[:blackelo]]</small>
+	        [[/if]]
 			</p>
 			<div id="[[:room]]"></div>
 			<p class="has-text-right">
+		    [[if white && white.length]]
 				<small>[[:white]]&nbsp;</small>
 				<small class="has-text-grey">[[:whiteelo]]&nbsp;</small>
+	        [[else]]
+				<small>[[:site]]&nbsp;[[:date]]</small>
+	        [[/if]]
 			</p>
 		</a>
 	</script>
