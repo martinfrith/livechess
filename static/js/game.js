@@ -102,50 +102,49 @@ $(document).ready(function() {
           game.load_pgn(data.pgn)
         }
 
-        board = ChessBoard('board', cfg);
-        updateStatus();
+        board = ChessBoard('board', cfg)
 
-        if(data.pgn && pos == 'start'){
-          setTimeout(function(){
+        updateStatus()
 
-            var firstEl = $('#first'),
-            nextEl = $('#next'),
-            backEl = $('#back'),
-            lastEl = $('#last'),
-            flipEl = $('#flip'),
-            nightmodeEl = $('#nightmode')
+        setTimeout(function(){
 
-            nightmodeEl.click(function(){
-              switchnightmode()
-            })
+          var firstEl = $('#first'),
+          nextEl = $('#next'),
+          backEl = $('#back'),
+          lastEl = $('#last'),
+          flipEl = $('#flip'),
+          nightmodeEl = $('#nightmode')
 
-            backEl.click(function(){
-              board.position(game.back())
-            })
+          nightmodeEl.click(function(){
+            switchnightmode()
+          })
 
-            nextEl.click(function(){
-              board.position(game.next())
-            })
+          backEl.click(function(){
+            board.position(game.back())
+          })
 
-            firstEl.click(function(){
-              board.position(game.first())
-            })
+          nextEl.click(function(){
+            board.position(game.next())
+          })
 
-            lastEl.click(function(){
-              board.position(game.last())
-            })
+          firstEl.click(function(){
+            board.position(game.first())
+          })
 
-            flipEl.click(function(){
-              board.flip()
-              var head = $('.boardhead').html(),
-              foot = $('.boardfoot').html()
-              $('.boardhead').html(foot)
-              $('.boardfoot').html(head)
-            })   
+          lastEl.click(function(){
+            board.position(game.last())
+          })
 
-            lastEl.click()
-          },500)
-        }     
+          flipEl.click(function(){
+            board.flip()
+            var head = $('.boardhead').html(),
+            foot = $('.boardfoot').html()
+            $('.boardhead').html(foot)
+            $('.boardfoot').html(head)
+          })   
+
+          lastEl.click()
+        },500)
       })  
 
       $('.spinner-container').fadeOut('fast', function(){
@@ -153,5 +152,4 @@ $(document).ready(function() {
       })
     }
   })
-
 });

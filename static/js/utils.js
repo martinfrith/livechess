@@ -2,8 +2,9 @@ var nightmode = localStorage.getItem("nightmode")||"no"
 function ts(){ return new Date().getTime() }
 function ralfnum(){ return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)}
 function switchnightmode(){
+  var nightmode = localStorage.getItem("nightmode")
   var targets = 'html, body, .navbar, .navbar-menu, .navbar-burger, .navbar-item, .navbar-link'
-  if (localStorage.getItem("nightmode") == 'no'){
+  if (!nightmode || nightmode === 'no'){
     $(targets).css({"background": "#333","color": "#f8f8f8"});
     localStorage.setItem("nightmode", "yes");
   } else {

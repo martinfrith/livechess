@@ -8,6 +8,12 @@ $(document).ready(function() {
     fenEl = $('#fen'),
     pgnEl = $('#pgn');
 
+  $(window).resize(function(){
+    boards.forEach(function(board){
+      board.resize()  
+    })    
+  })
+
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var updateStatus = function() {
