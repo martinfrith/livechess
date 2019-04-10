@@ -6,8 +6,6 @@ var io = require('socket.io')(http);
 var mongodb = require('mongodb');
 var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
-var mongourl = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
-
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
 
@@ -16,9 +14,9 @@ app.use(express.static(path.join(__dirname, 'static')));
 app.set('view engine', 'ejs')
 app.use(expressLayouts);
 
-console.log(mongourl)
+console.log(process.env.MONGO_URL)
 
-mongodb.MongoClient.connect(mongourl, {useNewUrlParser: true }, function(err, database) {
+mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, function(err, database) {
   if(err) throw err
 
   const db = database.db(process.env.DB)
