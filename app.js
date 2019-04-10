@@ -19,7 +19,7 @@ console.log(process.env.MONGO_URL)
 mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, function(err, database) {
   if(err) throw err
 
-  const db = database.db(process.env.DB)
+  const db = database.db(process.env.MONGO_URL.split('/').reverse()[0])
 
   app.get('/', function (req, res) {
     res.render('index')
@@ -128,7 +128,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     });
   });
 
-  var server = http.listen(3000, function () { //run http and web socket server
+  var server = http.listen(process.env.PORT, function () { //run http and web socket server
     var host = server.address().address;
     var port = server.address().port;
     console.log('Server listening at address ' + host + ', port ' + port);
