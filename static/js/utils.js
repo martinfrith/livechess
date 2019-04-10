@@ -1,4 +1,4 @@
-var theme = 'html, body, .navbar, .navbar-menu, .navbar-burger, .navbar-item, .navbar-link',
+var theme = 'html, body, h1, h2, h3, h4, h5, h6, p, .navbar, .navbar-menu, .navbar-burger, .navbar-item, .navbar-link',
 ts = function(){ return new Date().getTime() },
 ralfnum = function (){ return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)},
 switchNightmode = function (){

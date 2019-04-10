@@ -90,7 +90,6 @@ $(document).ready(function() {
     }
 
     playAudio()
-
     statusEl.html(status);
     //fenEl.html(game.fen());
     pgnEl.html(pgn);
@@ -117,13 +116,13 @@ $(document).ready(function() {
     removeHighlights();
     boardEl.find('.square-' + moveObj.from).addClass('highlight-last');
     boardEl.find('.square-' + moveObj.to).addClass('highlight-last');
+    updateStatus();
 
     // illegal move
     if (move === null) {
       return;
     }
 
-    updateStatus();
     board.position(game.fen());
   });
 
@@ -135,6 +134,7 @@ $(document).ready(function() {
       const match = res[0]
       data = match;
       data.watch_url = location.href.replace('live/','')
+      data.live_url = location.href
 
       $('.panel').html($.templates("#match").render(match)).promise().done(function (){
         
