@@ -16,7 +16,7 @@ Existe la posibilidad de extender la aplicación a multi-idioma pero es necesari
 Si estas interesado en participar de este proyecto puedes <a href="mailto:overlemonsoft@gmail.com?Subject=Hola, Quiero colaborar con el proyecto LiveChess">solicitarlo aquí</a>.
 
 ## Equipo de desarrollo
-- 👨🏻‍ ‍Martin Frith (desarrollador)
+- 👨🏻‍ ‍Martín Frith (programador)
 - ‍👨🏻‍ ‍Cristhian Daher (tester)
 
 ## Agradecimientos
