@@ -6,7 +6,6 @@
 ### Tablero virtual para transmisión en vivo de torneos de ajedrez. Base de datos de partidas.
 
 ## Disclaimer
-
 Este proyecto es puramente educacional, no recibe ningún tipo de financiación y no persigue ánimos de lucro.
 
 Este proyecto fue creado y es mantenido por un solo desarrollador y es totalmente ad honorem. Actualmente tiene un solo idioma, castellano porque pretende llegar a los nuevos entusiastas del ajedrez en Argentina y países hermanos de habla castellana. 
@@ -20,10 +19,9 @@ Si estas interesado en participar de este proyecto puedes <a href="mailto:overle
 - ‍👨🏻‍ ‍Cristhian Daher (tester)
 
 ## Agradecimientos
-Un especial agradecimiento a <a href="https://github.com/jhlywa">Jeff Hlywa</a> de <a href="https://github.com/jhlywa/chess.js">chess.js</a> y a <a href="https://github.com/oakmac">Chris Oakman</a> de <a href="https://github.com/oakmac/chessboardjs">chessboard.js</a>, como así también a todo su equipo de desarrollo por su contribución al render y al motor de juego. 
+Un especial agradecimiento a [Jeff Hlywa](https://github.com/jhlywa) de [chess.js](https://github.com/jhlywa/chess.js) y a [Chris Oakman](https://github.com/oakmac) de [chessboard.js](https://github.com/oakmac/chessboardjs), como así también a todo su equipo de desarrollo por su contribución al render y al motor de juego. 
 
 ## ChangeLog
-
 - 2.4.19 Inicio del proyecto — Visualización de partidas online.
 - 4.4.19 Versión 0.1 — Capa de datos persistente. Posibilidad de guardar partidas.</li>
 - 6.4.19 Versión 0.2 — Detalle completo de partidas
