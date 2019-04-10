@@ -15,6 +15,10 @@ Existe la posibilidad de extender la aplicación a multi-idioma pero es necesari
 
 Si estas interesado en participar de este proyecto puedes <a href="mailto:overlemonsoft@gmail.com?Subject=Hola, Quiero colaborar con el proyecto LiveChess">solicitarlo aquí</a>.
 
+## Equipo de desarrollo
+- 👨🏻‍ ‍Martin Frith (desarrollador)
+- ‍👨🏻‍ ‍Cristhian Daher (tester)
+
 ## Agradecimientos
 Un especial agradecimiento a <a href="https://github.com/jhlywa">Jeff Hlywa</a> de <a href="https://github.com/jhlywa/chess.js">chess.js</a> y a <a href="https://github.com/oakmac">Chris Oakman</a> de <a href="https://github.com/oakmac/chessboardjs">chessboard.js</a>, como así también a todo su equipo de desarrollo por su contribución al render y al motor de juego. 
 
@@ -22,4 +26,6 @@ Un especial agradecimiento a <a href="https://github.com/jhlywa">Jeff Hlywa</a> 
 
 - 2.4.19 Inicio del proyecto — Visualización de partidas online.
 - 4.4.19 Versión 0.1 — Capa de datos persistente. Posibilidad de guardar partidas.</li>
-- 6.4.19 Versión 0.2 — Detalles de la partidas. Posibilidad de importar datos de chessdb. Formulario de búsqueda por jugador o evento.
+- 6.4.19 Versión 0.2 — Detalle completo de partidas
+- 9.4.19 Versión 0.3 — Modo nocturno. Noticación sonora de movimiento. Resaltar última jugada.
+- 16.4.19 Versión 0.4 — Formulario de búsqueda por jugador o evento.
