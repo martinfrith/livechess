@@ -17,7 +17,7 @@ app.set('view engine', 'ejs')
 app.use(expressLayouts);
 
 mongodb.MongoClient.connect(uri, {useNewUrlParser: true }, function(err, database) {
-  if(err) throw err
+  if(err) console.log(err)
 
   const db = database.db(process.env.DB)
 
