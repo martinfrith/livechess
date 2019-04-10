@@ -14,7 +14,14 @@ $(document).ready(function() {
   var removeHighlights = function() {
     boardEl.find('.square-55d63')
       .removeClass('highlight-last');
-  };
+  }
+
+  var addHightlights = function(){
+    removeHighlights();
+    boardEl.find('.square-' + data.from).addClass('highlight-last');
+    boardEl.find('.square-' + data.to).addClass('highlight-last');   
+  }
+
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var onDragStart = function(source, piece, position, orientation) {
@@ -113,10 +120,8 @@ $(document).ready(function() {
     console.log('peer move: ' + JSON.stringify(moveObj));
     var move = game.move(moveObj);
     // mark last move
-    removeHighlights();
-    boardEl.find('.square-' + moveObj.from).addClass('highlight-last');
-    boardEl.find('.square-' + moveObj.to).addClass('highlight-last');
-    updateStatus();
+    addHightlights()
+    updateStatus()
 
     // illegal move
     if (move === null) {
@@ -161,10 +166,7 @@ $(document).ready(function() {
         board.position(game.last())
 
         if(data.from){
-          // mark last move
-          removeHighlights();
-          boardEl.find('.square-' + data.from).addClass('highlight-last');
-          boardEl.find('.square-' + data.to).addClass('highlight-last');          
+          addHightlights()
         }
 
         var loadpgnEl = $('#loadpgn'),
@@ -185,6 +187,7 @@ $(document).ready(function() {
 
         flipEl.click(function(){
           board.flip()
+          addHightlights()
         })    
 
         $(window).on('hashchange', function(){

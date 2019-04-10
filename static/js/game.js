@@ -14,7 +14,13 @@ $(document).ready(function() {
   var removeHighlights = function() {
     boardEl.find('.square-55d63')
       .removeClass('highlight-last');
-  };
+  }
+
+  var addHightlights = function(){
+    removeHighlights();
+    boardEl.find('.square-' + data.from).addClass('highlight-last');
+    boardEl.find('.square-' + data.to).addClass('highlight-last');   
+  }
 
   var updateStatus = function() {
     var status = '',
@@ -74,9 +80,7 @@ $(document).ready(function() {
     boardEl = $('#board')
     // illegal move
     // mark last move
-    removeHighlights();
-    boardEl.find('.square-' + moveObj.from).addClass('highlight-last');
-    boardEl.find('.square-' + moveObj.to).addClass('highlight-last');
+    addHightlights()
 
     if (move === null) {
       return;
@@ -126,9 +130,7 @@ $(document).ready(function() {
 
         if(data.from){
           // mark last move
-          removeHighlights();
-          boardEl.find('.square-' + data.from).addClass('highlight-last');
-          boardEl.find('.square-' + data.to).addClass('highlight-last');          
+          addHightlights()
         }
 
         setTimeout(function(){
@@ -160,6 +162,7 @@ $(document).ready(function() {
 
           flipEl.click(function(){
             board.flip()
+            addHightlights()
             var head = $('.boardhead').html(),
             foot = $('.boardfoot').html()
             $('.boardhead').html(foot)
