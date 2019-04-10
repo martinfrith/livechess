@@ -133,7 +133,7 @@ $(document).ready(function() {
     success:function(res){
       const match = res[0]
       data = match;
-      data.watch_url = location.href.replace('live/','')
+      data.watch_url = location.href.replace('live/','').split('#')[0]
       data.live_url = location.href.split('#')[0]
 
       $('.panel').html($.templates("#match").render(match)).promise().done(function (){
