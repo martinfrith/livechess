@@ -14,7 +14,7 @@ Existe la posibilidad de extender la aplicación a multi-idioma pero es necesari
 
 Si estas interesado en participar de este proyecto puedes [solicitarlo aquí](mailto:overlemonsoft@gmail.com?Subject=Hola, Quiero colaborar con el proyecto LiveChess).
 
-## Equipo de desarrollo
+## Equipo
 - 👨🏻‍ ‍Martín Frith (programador)
 - ‍👨🏻‍ ‍Cristhian Daher (tester)
 
@@ -25,5 +25,5 @@ Un especial agradecimiento a [Jeff Hlywa](https://github.com/jhlywa) de [chess.j
 - 2.4.19 Inicio del proyecto — Visualización de partidas online.
 - 4.4.19 Versión 0.1 — Capa de datos persistente. Posibilidad de guardar partidas.
 - 6.4.19 Versión 0.2 — Detalle completo de partidas
-- 9.4.19 Versión 0.3 — Modo nocturno. Noticación sonora de movimiento. Resaltar última jugada.
+- 9.4.19 Versión 0.3 — Modo nocturno. Noticación sonora de movimiento. Resaltar último movimiento.
 - 16.4.19 Versión 0.4 — Formulario de búsqueda por jugador o evento.

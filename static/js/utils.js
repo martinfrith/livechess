@@ -1,4 +1,4 @@
-var theme1 = 'html, body, .navbar, .navbar-burger, .navbar-menu, .navbar-item, .navbar-link',
+var theme1 = 'html, body, .navbar, .navbar-dropdown, .navbar-burger, .navbar-menu, .navbar-item, .navbar-link',
 theme2 = 'h1, h2, h3, h4, h5, h6, p',
 ts = function(){ return new Date().getTime() },
 ralfnum = function (){ return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)},
