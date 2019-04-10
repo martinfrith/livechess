@@ -6,15 +6,13 @@ var io = require('socket.io')(http);
 var mongodb = require('mongodb');
 var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
-
 app.set('views', path.join(__dirname, 'static'))
 app.use(express.static(path.join(__dirname, 'static')));
 app.set('view engine', 'ejs')
 app.use(expressLayouts);
-
-console.log(process.env.MONGO_URL)
 
 mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, function(err, database) {
   if(err) throw err

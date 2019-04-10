@@ -134,7 +134,7 @@ $(document).ready(function() {
       const match = res[0]
       data = match;
       data.watch_url = location.href.replace('live/','')
-      data.live_url = location.href
+      data.live_url = location.href.split('#')[0]
 
       $('.panel').html($.templates("#match").render(match)).promise().done(function (){
         
