@@ -1,13 +1,16 @@
-var theme = 'html, body, h1, h2, h3, h4, h5, h6, p, .navbar, .navbar-menu, .navbar-burger, .navbar-item, .navbar-link',
+var theme1 = 'html, body, .navbar, .navbar-burger, .navbar-menu, .navbar-item, .navbar-link',
+theme2 = 'h1, h2, h3, h4, h5, h6, p',
 ts = function(){ return new Date().getTime() },
 ralfnum = function (){ return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)},
 switchNightmode = function (){
   var nightmode = localStorage.getItem("nightmode")
   if (!nightmode || nightmode === 'no'){
-    $(theme).css({"background": "#333","color": "#f8f8f8"});
+    $(theme1).css({"background": "black","color": "#f8f8f8"});
+    $(theme2).css({"color": "#f8f8f8"});
     localStorage.setItem("nightmode", "yes");
   } else {
-    $(theme).css({"background": "white","color": "#4a4a4a"});
+    $(theme1).css({"background": "white","color": "#4a4a4a"});
+    $(theme2).css({"color": "#4a4a4a"});
     localStorage.setItem("nightmode", "no");
   }
 }, 
@@ -35,7 +38,8 @@ $(document).ready(function() {
 
   if(nightmode){
     if(nightmode === 'yes'){
-      $(theme).css({"background": "#333","color": "#f8f8f8"});
+      $(theme1).css({"background": "black","color": "#f8f8f8"});
+      $(theme2).css({"color": "#f8f8f8"});
     }
   }
 });
