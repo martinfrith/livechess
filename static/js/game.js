@@ -1,14 +1,20 @@
 $(document).on('click','#nightmode',function(){
-  switchnightmode()
+  switchNightmode()
 })
 
 $(document).ready(function() {
   var socket = io()  
   var board,
+    boardEl = $('#board'),
     room = location.pathname.replace('/',''),
     data = {},
     synced = false,
     game = new Chess()
+
+  var removeHighlights = function() {
+    boardEl.find('.square-55d63')
+      .removeClass('highlight-last');
+  };
 
   var updateStatus = function() {
     var status = '',
@@ -48,6 +54,7 @@ $(document).ready(function() {
         status += ', ' + moveColor + ' están en jaque.';
       }
     }
+    playAudio()
     statusEl.html(status);
     fenEl.html(game.fen());
     pgnEl.html(pgn);
@@ -63,8 +70,14 @@ $(document).ready(function() {
 
   socket.on('move', function(moveObj){ //remote move by peer
     console.log('peer move: ' + JSON.stringify(moveObj));
-     var move = game.move(moveObj);
+    var move = game.move(moveObj),
+    boardEl = $('#board')
     // illegal move
+    // mark last move
+    removeHighlights();
+    boardEl.find('.square-' + moveObj.from).addClass('highlight-last');
+    boardEl.find('.square-' + moveObj.to).addClass('highlight-last');
+
     if (move === null) {
       return;
     }
@@ -91,7 +104,9 @@ $(document).ready(function() {
       data = match;
       $('.spinner-content').html($.templates("#match").render(match)).promise().done(function (){
         $('.gameinfo').html($.templates("#gameinfo").render(match))
-        var pos = 'start';
+        var pos = 'start'
+
+        boardEl = $('#board')
 
         if(data.fen){
           pos = data.fen
@@ -104,11 +119,17 @@ $(document).ready(function() {
 
         if(data.pgn){
           game.load_pgn(data.pgn)
+          updateStatus()
         }
 
         board = ChessBoard('board', cfg)
 
-        updateStatus()
+        if(data.from){
+          // mark last move
+          removeHighlights();
+          boardEl.find('.square-' + data.from).addClass('highlight-last');
+          boardEl.find('.square-' + data.to).addClass('highlight-last');          
+        }
 
         setTimeout(function(){
 
@@ -143,7 +164,7 @@ $(document).ready(function() {
           })   
 
           lastEl.click()
-        },777)
+        },750)
       })  
 
       $('.spinner-container').fadeOut('fast', function(){

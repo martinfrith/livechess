@@ -1,7 +1,7 @@
-var theme = 'html, body, .navbar, .navbar-menu, .navbar-burger, .navbar-item, .navbar-link'
-function ts(){ return new Date().getTime() }
-function ralfnum(){ return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)}
-function switchnightmode(){
+var theme = 'html, body, .navbar, .navbar-menu, .navbar-burger, .navbar-item, .navbar-link',
+ts = function(){ return new Date().getTime() },
+ralfnum = function (){ return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5)},
+switchNightmode = function (){
   var nightmode = localStorage.getItem("nightmode")
   if (!nightmode || nightmode === 'no'){
     $(theme).css({"background": "#333","color": "#f8f8f8"});
@@ -10,6 +10,11 @@ function switchnightmode(){
     $(theme).css({"background": "white","color": "#4a4a4a"});
     localStorage.setItem("nightmode", "no");
   }
+}, 
+playAudio = function(audio) {
+  if(audio===undefined) audio = "move";
+  var audio = new Audio('/audio/' + audio + '.ogg');
+  audio.play();
 }
 
 $(document).ready(function() {
