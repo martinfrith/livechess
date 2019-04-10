@@ -141,14 +141,17 @@ $(document).ready(function() {
 
           backEl.click(function(){
             board.position(game.back())
+            removeHighlights()
           })
 
           nextEl.click(function(){
             board.position(game.next())
+            removeHighlights()
           })
 
           firstEl.click(function(){
             board.position(game.first())
+            removeHighlights()
           })
 
           lastEl.click(function(){
@@ -163,7 +166,7 @@ $(document).ready(function() {
             $('.boardfoot').html(head)
           })   
 
-          lastEl.click()
+          board.position(game.last())
         },750)
       })  
 
