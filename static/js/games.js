@@ -31,8 +31,10 @@ $(document).ready(function() {
       success:function(res){
 
         $('#searchbtn').prop('disabled',false).removeClass('is-loading')
-
+        $('#gamecount').html('')
+        
         if(!res.length){
+
           $('#boards').html($.templates("#empty").render()).promise().done(function (){
             $('.spinner-container').fadeOut('fast', function(){
               $('.spinner-content').fadeTo('slow',1)
