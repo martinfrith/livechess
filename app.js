@@ -40,6 +40,10 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     res.render('loadpgn')
   })
 
+  app.get('/start', function (req, res) {
+    res.render('start')
+  });
+
   app.get('/online', function (req, res) { 
     res.render('online')
   });

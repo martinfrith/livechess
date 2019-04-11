@@ -173,7 +173,9 @@ $(document).ready(function() {
         
         var loadpgnEl = $('#loadpgn'),
         undoEl = $('#undo'),
-        flipEl = $('#flip')
+        flipEl = $('#flip'),
+        broadcastEl = $('#broadcast'),
+        updateclosebtnEl = $('#updateclosebtn')
 
         loadpgnEl.submit(function(){
           $('#updatebtn').prop('disabled',true).addClass('is-loading')
@@ -182,6 +184,21 @@ $(document).ready(function() {
           data.broadcast = $('input[name="broadcast"]').is(':checked')?'true':'false'
           socket.emit('data',  data);
           return false
+        })
+
+        updateclosebtnEl.click(function(){
+          var data = {};
+          $("#loadpgn").serializeArray().map(function(x){data[x.name] = x.value;});       
+          data.broadcast = $('input[name="broadcast"]').is(':checked')?'true':'false'
+          socket.emit('data',  data)
+          location.hash = ''
+        })
+
+        broadcastEl.click(function(){
+          var data = {};
+          data.room = room
+          data.broadcast = $('input[name="broadcast"]').is(':checked')?'true':'false'
+          socket.emit('data',data)
         })
 
         undoEl.click(function(){

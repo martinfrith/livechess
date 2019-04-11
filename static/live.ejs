@@ -53,6 +53,13 @@
         <div class="column panel-info">
           <div class="container">
             <div class="columns is-tablet">
+              <div class="column is-10">
+                <div class="switch">
+                  <input name="broadcast" id="broadcast" class="cmn-toggle cmn-toggle-round" type="checkbox" value="1"[[if broadcast == 'true']] checked[[/if]]>
+                  <label for="broadcast"></label> 
+                </div>
+                <span class="has-text-grey is-size-7 has-text-weight-bold">Transmitir EN VIVO</span>
+              </div>
               <div class="column field">
                 <a href="#">
                   <div class="pull-right">
@@ -163,19 +170,24 @@
                     <input name="live_url" class="input" type="text" placeholder="8th World Championship" value="[[:live_url]]">
                   </div>
                 </div>
-                <div class="column field">
+                <!--div class="column field">
                   <label class="label">Emitir en vivo</label>
                   <div class="control">
                     <input name="broadcast" class="checkbox" type="checkbox" value="1"[[if broadcast]] checked[[/if]]>
                   </div>
-                </div>                
+                </div-->                
               </div>
               <div class="field is-grouped">
                 <div class="control">
                   <button type="submit" class="button is-link" id="updatebtn">Actualizar</button>
                 </div>
+
                 <div class="control">
-                  <a href="#" class="button is-text">Cancelar</a>
+                    <button type="button" class="button is-text" id="updateclosebtn">Actualizar y cerrar</button>
+                  </a>
+                </div>
+                <div class="control">
+                  <button onclick="location.hash=''" class="button is-text">Cerrar</button>
                 </div>
               </div>
               <div class="group-control">&nbsp;</div>
