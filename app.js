@@ -93,13 +93,13 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     if(req.body.query){
       db.collection('games').find({        
         "$or": [{
-            "event": req.body.query
+            "event": {'$regex' : req.body.query, '$options' : 'i'}
         }, {
-            "site": req.body.query
+            "site": {'$regex' : req.body.query, '$options' : 'i'}
         }, {
-            "white": req.body.query
+            "white": {'$regex' : req.body.query, '$options' : 'i'}
         }, {
-            "black": req.body.query
+            "black": {'$regex' : req.body.query, '$options' : 'i'}
         }]
       }).toArray(function(err,docs){
         return res.json(docs)
