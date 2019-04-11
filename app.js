@@ -3,6 +3,7 @@ var path = require('path');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var moment = require('moment');
 var mongodb = require('mongodb');
 var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
@@ -39,6 +40,10 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     res.render('loadpgn')
   })
 
+  app.get('/online', function (req, res) { 
+    res.render('online')
+  });
+
   app.get('/games', function (req, res) { 
     res.render('games')
   });
@@ -71,6 +76,39 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     })   
   })
 
+  app.post('/online', function (req, res) { 
+    var then = moment().utc().subtract(2, 'hours').format()
+    db.collection('games').find({"updatedAt" : { $gte: then }, broadcast : 'true'}).toArray(function(err,docs){
+      return res.json(docs)
+    })   
+  })
+
+  app.post('/gamecount', function (req, res) { 
+    db.collection('games').find(req.body).toArray(function(err,docs){
+      return res.json(docs.length)
+    })   
+  })
+
+  app.post('/search', function (req, res) { 
+    if(req.body.query){
+      db.collection('games').find({        
+        "$or": [{
+            "event": req.body.query
+        }, {
+            "site": req.body.query
+        }, {
+            "white": req.body.query
+        }, {
+            "black": req.body.query
+        }]
+      }).toArray(function(err,docs){
+        return res.json(docs)
+      })   
+    } else {
+      return res.json([])
+    }
+  })
+
   app.post('/loadpgn', function (req, res) {
     if(!req.body.room) return res.json({ error: 1, cause: 'No room provided' })
     db.collection('games').findOneAndUpdate(
@@ -91,12 +129,14 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     });
 
     socket.on('move', function(move) { //move object emitter
+      var moveObj = move
+      moveObj.updatedAt = moment().utc().format()
       return db.collection('games').findOneAndUpdate(
       {
-        room:move.room
+        room:moveObj.room
       },
       {
-        "$set": move
+        "$set": moveObj
       },{ new: true }).then(function(doc){
         console.log('user moved: ' + JSON.stringify(move));
         io.emit('move', move);

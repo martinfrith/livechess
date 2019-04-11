@@ -20,6 +20,11 @@ playAudio = function(audio) {
   audio.play();
 }
 
+$(document).on('click','#create',function() {
+  $(this).prop('disabled',true).addClass('is-loading')
+  location.href = '/live/' + ralfnum() + '#info'
+})
+
 $(document).ready(function() {
   // Check for click events on the navbar burger icon
 
@@ -30,11 +35,6 @@ $(document).ready(function() {
       $(".navbar-burger").toggleClass("is-active");
       $(".navbar-menu").toggleClass("is-active");
   });
-
-  $('#create').click(function() {
-    $(this).prop('disabled',true).addClass('is-loading')
-  	location.href = '/live/' + ralfnum() + '#info'
-  })
 
   if(nightmode){
     if(nightmode === 'yes'){

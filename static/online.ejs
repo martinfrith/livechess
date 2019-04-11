@@ -7,7 +7,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/chess.js"></script>
     <script src="/js/libs/chessboard.js"></script>
-	<script src="/js/games.js"></script>
+	<script src="/js/online.js"></script>
 
 <%- contentFor('content') %>
 
@@ -15,27 +15,11 @@
 	    <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
 	</svg>
 
-	<div class="container">
-		<form id="search">
-			<div class="field has-addons">
-				<div class="control">
-					<input class="input is-rounded" name="query" type="text" placeholder="Encuentra una partida">					
-				</div>
-				<div class="control">
-					<button type="submit" class="button is-info is-rounded">
-				  		Buscar
-					</button>
-				</div>
-			</div>
-		</form>
-		<span class="has-text-success" id="gamecount"></span>
-	</div>
-
     <div id="boards" class="columns is-multiline">
     </div>
 
 	<script id="empty" type="text/x-jsrender">
-		<p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en este momento. <a href="#" id="create">Crea tu partida!</a></p>
+		<p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en vivo en este momento. <a href="#" id="create">Crea tu partida en vivo!</a></p>
 	</script>
 
 	<script id="match" type="text/x-jsrender">

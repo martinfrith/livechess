@@ -14,6 +14,69 @@ $(document).ready(function() {
     })    
   })
 
+  var searchEl = $('#search')
+  searchEl.submit(function(){
+    $('#searchbtn').prop('disabled',true).addClass('is-loading')
+    var data = {};
+    $(this).serializeArray().map(function(x){data[x.name] = x.value;});       
+    findGames(data.query)    
+    return false
+  })
+
+  var findGames = function(query){
+    $.ajax({
+      url:'/search',
+      method:'POST',
+      data: {query:query},
+      success:function(res){
+
+        if(!res.length){
+          $('#boards').html($.templates("#empty").render()).promise().done(function (){
+            $('.spinner-container').fadeOut('fast', function(){
+              $('.spinner-content').fadeTo('slow',1)
+            })
+          })
+
+          return false
+        }
+
+        var s = res.length > 1 ? 's':''
+        $('#gamecount').html(res.length + " partida" + s + " encontrada" + s)
+
+        // inject html boards
+        $('#boards').html($.templates("#match").render(res)).promise().done(function (){
+          // check for last moves on every game
+          $(res).each(function(i,match){
+
+            var pos = 'start'
+
+            if(match.fen){
+              pos = match.fen
+            } 
+
+            if(match.pgn){
+              game.load_pgn(match.pgn)
+            }
+
+            var cfg = {
+              draggable: false,
+              position: pos
+            };
+
+            boards[i] = ChessBoard(match.room, cfg);  
+            
+            if(match.pgn && pos == 'start'){
+              boards[i].position(game.last())
+            }    
+          }) 
+
+          $('.spinner-container').fadeOut('fast', function(){
+            $('.spinner-content').fadeTo('fast',1)
+          })
+        })
+      }
+    })  
+  }
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var updateStatus = function() {
@@ -59,54 +122,19 @@ $(document).ready(function() {
     board.position(game.fen());
 	});
 
-  var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-
-  $.ajax({
-    url:'/games',
-    method:'POST',
-    success:function(res){
-
-      if(!res){
-        $('#boards').html($.templates("#empty").render()).promise().done(function (){
-          $('.spinner-container').fadeOut('fast', function(){
-            $('.spinner-content').fadeTo('slow',1)
-          })
-        })
-
-        return false
-      }
-
-      // inject html boards
-      $('#boards').html($.templates("#match").render(res)).promise().done(function (){
-        // check for last moves on every game
-        $(res).each(function(i,match){
-
-          var pos = 'start'
-
-          if(match.fen){
-            pos = match.fen
-          } 
-
-          if(match.pgn){
-            game.load_pgn(match.pgn)
-          }
-
-          var cfg = {
-            draggable: false,
-            position: pos
-          };
-
-          boards[i] = ChessBoard(match.room, cfg);  
-          
-          if(match.pgn && pos == 'start'){
-            boards[i].position(game.last())
-          }    
-        }) 
-
+  var query = $('input[name="query"]').val().trim()
+  if(query!==''){
+    findGames(query)
+  } else {
+    $.ajax({
+      url:'/gamecount',
+      method:'POST',
+      success:function(res){
+        $('#gamecount').html("Total " + res + " partidas.")
         $('.spinner-container').fadeOut('fast', function(){
           $('.spinner-content').fadeTo('fast',1)
         })
-      })
-    }
-  })	
+      }
+    })	
+  }
 });

@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="/css/bulma-custom.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
     <%- css %>
-    <script src="/js/libs/jquery-1.10.1.min.js"></script>
-    <script src="/js/libs/jsrender.min.js"></script>
-    <script src="/js/utils.js"></script>
-    <%- js %>
   </head>
   <body>
 
@@ -32,6 +28,10 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
+          <a href="/online" class="navbar-item">
+            En vivo
+          </a>
+
           <a href="/games" class="navbar-item">
             Partidas
           </a>
@@ -75,5 +75,10 @@
       <%- content %>    
     </section>
 
+    <script src="/js/libs/jquery-1.10.1.min.js"></script>
+    <script src="/js/libs/jsrender.min.js"></script>
+    <script src="/js/libs/moment-with-locales.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <%- js %>
   </body>
 </html>

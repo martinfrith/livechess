@@ -6,7 +6,7 @@ $(document).ready(function() {
     room = location.pathname.replace('/live/',''),
     data = {},  
     game = new Chess(),
-    lastMove = null,
+    loaded = false,
     statusEl = $('#status'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn')
@@ -57,7 +57,7 @@ $(document).ready(function() {
       moveObj.turn = game.turn();
       moveObj.from = source;
       moveObj.to = target;
-      socket.emit('move',  moveObj);
+      socket.emit('move', moveObj);
       updateStatus(moveObj);
   };
 
@@ -97,13 +97,17 @@ $(document).ready(function() {
       }
     }
 
-    playAudio()
+    if(loaded){
+      playAudio()
+    }
     statusEl.html(status);
     //fenEl.html(game.fen());
     pgnEl.html(pgn);
 
     // mark last move
     addHightlights(move)
+
+    loaded = true
 
   };
 
@@ -121,8 +125,8 @@ $(document).ready(function() {
   })
 
   socket.on('move', function(moveObj){
-    console.log('peer move: ' + JSON.stringify(moveObj));
-    var move = game.move(moveObj);
+    console.log('peer move: ' + JSON.stringify(moveObj))
+    var move = game.move(moveObj)
 
     // illegal move
     if (move === null) {
@@ -130,7 +134,7 @@ $(document).ready(function() {
     }
 
     updateStatus(move)
-    board.position(game.fen());
+    board.position(game.fen())
   });
 
   $.ajax({
@@ -139,13 +143,13 @@ $(document).ready(function() {
     data: {room:room},
     success:function(res){
       const match = res[0]
-      data = match;
+      data = match
       data.watch_url = location.href.replace('live/','').split('#')[0]
       data.live_url = location.href.split('#')[0]
 
       $('.panel').html($.templates("#match").render(match)).promise().done(function (){
         
-        var pos = 'start';
+        var pos = 'start'
 
         if(data.fen){
           pos = data.fen
@@ -175,6 +179,7 @@ $(document).ready(function() {
           $('#updatebtn').prop('disabled',true).addClass('is-loading')
           var data = {};
           $(this).serializeArray().map(function(x){data[x.name] = x.value;});       
+          data.broadcast = $('input[name="broadcast"]').is(':checked')?'true':'false'
           socket.emit('data',  data);
           return false
         })
