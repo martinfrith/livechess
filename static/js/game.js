@@ -2,6 +2,22 @@ $(document).on('click','#nightmode',function(){
   switchNightmode()
 })
 
+$(document).keydown(function(e) {
+  if(e.keyCode == 37){
+    $('#back').click()
+  } else if(e.keyCode == 38){
+    $('#last').click()
+  } else if(e.keyCode == 39){
+    $('#next').click()
+  } else if(e.keyCode == 40){
+    $('#first').click()
+  } else if(e.keyCode == 70){
+    $('#flip').click()
+  } else if(e.keyCode == 78){
+    $('#nightmode').click()
+  }
+});
+
 $(document).ready(function() {
   var socket = io()  
   var board,
