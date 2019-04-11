@@ -32,7 +32,7 @@ $(document).ready(function() {
 
         $('#searchbtn').prop('disabled',false).removeClass('is-loading')
         $('#gamecount').html('')
-        
+
         if(!res.length){
 
           $('#boards').html($.templates("#empty").render()).promise().done(function (){
@@ -126,8 +126,9 @@ $(document).ready(function() {
     board.position(game.fen());
 	});
 
-  var query = $('input[name="query"]').val().trim()
+  var query = $('input[name="query"]').val().trim()||location.hash.replace('#','')
   if(query!==''){
+    $('input[name="query"]').val(query)
     findGames(query)
   } else {
     $.ajax({
