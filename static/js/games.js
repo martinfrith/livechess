@@ -97,6 +97,7 @@ $(document).ready(function() {
           };
 
           boards[i] = ChessBoard(match.room, cfg);  
+          
           if(match.pgn && pos == 'start'){
             boards[i].position(game.last())
           }    

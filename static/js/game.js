@@ -16,13 +16,15 @@ $(document).ready(function() {
       .removeClass('highlight-last');
   }
 
-  var addHightlights = function(){
+  var addHightlights = function(move){
     removeHighlights();
-    boardEl.find('.square-' + data.from).addClass('highlight-last');
-    boardEl.find('.square-' + data.to).addClass('highlight-last');   
+    if(move){
+      boardEl.find('.square-' + move.from).addClass('highlight-last');
+      boardEl.find('.square-' + move.to).addClass('highlight-last');   
+    }
   }
 
-  var updateStatus = function() {
+  var updateStatus = function(move) {
     var status = '',
     moveColor = 'Blancas',
     turn = game.turn(),
@@ -30,12 +32,6 @@ $(document).ready(function() {
     statusEl = $('#status'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn')    
-
-    /*
-    if(!synced && data.turn){
-      turn = data.turn
-      pgn = data.pgn
-    } */ 
 
     if (turn === 'b') {
       moveColor = 'Negras';
@@ -64,6 +60,8 @@ $(document).ready(function() {
     statusEl.html(status);
     fenEl.html(game.fen());
     pgnEl.html(pgn);
+    // mark last move
+    addHightlights(move)    
   };
   
   socket.emit('join', room);  //join room as defined by query parameter in URL bar
@@ -76,16 +74,12 @@ $(document).ready(function() {
 
   socket.on('move', function(moveObj){ //remote move by peer
     console.log('peer move: ' + JSON.stringify(moveObj));
-    var move = game.move(moveObj),
-    boardEl = $('#board')
-    // illegal move
-    // mark last move
-    addHightlights()
-
+    var move = game.move(moveObj)
     if (move === null) {
       return;
     }
-    updateStatus();
+    updateStatus(move);
+    lastMove = move;
     board.position(game.fen());
   });
 
@@ -123,15 +117,11 @@ $(document).ready(function() {
 
         if(data.pgn){
           game.load_pgn(data.pgn)
-          updateStatus()
         }
 
         board = ChessBoard('board', cfg)
-
-        if(data.from){
-          // mark last move
-          addHightlights()
-        }
+        board.position(game.last())
+        updateStatus(data);
 
         setTimeout(function(){
 
@@ -169,7 +159,6 @@ $(document).ready(function() {
             $('.boardfoot').html(head)
           })   
 
-          board.position(game.last())
         },750)
       })  
 

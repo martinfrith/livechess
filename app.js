@@ -84,10 +84,6 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     })    
   })
 
-  app.get('*', function (req, res) { 
-    res.render('404')
-  });
-
   io.on('connection', function(socket){ //join room on connect
     socket.on('join', function(room) {
       socket.join(room);
@@ -121,7 +117,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     });
 
     socket.on('undo', function() { //undo emitter
-      console.log('user undo:');
+      console.log('user undo');
       io.emit('undo');
     });
   });
@@ -129,6 +125,11 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
   var server = http.listen(process.env.PORT, function () { //run http and web socket server
     var host = server.address().address;
     var port = server.address().port;
+
+    app.get('*', function (req, res) { 
+      res.render('404')
+    });
+
     console.log('Server listening at address ' + host + ', port ' + port);
   });
 });

@@ -5,8 +5,8 @@ $(document).ready(function() {
     boardEl = $('#board'),
     room = location.pathname.replace('/live/',''),
     data = {},  
-    synced = false,
     game = new Chess(),
+    lastMove = null,
     statusEl = $('#status'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn')
@@ -16,10 +16,13 @@ $(document).ready(function() {
       .removeClass('highlight-last');
   }
 
-  var addHightlights = function(){
+  var addHightlights = function(move){
     removeHighlights();
-    boardEl.find('.square-' + data.from).addClass('highlight-last');
-    boardEl.find('.square-' + data.to).addClass('highlight-last');   
+    if(move){
+      console.log("addHightlights: " + move.from + ' - ' + move.to)
+      boardEl.find('.square-' + move.from).addClass('highlight-last');
+      boardEl.find('.square-' + move.to).addClass('highlight-last');   
+    }
   }
 
   // do not pick up pieces if the game is over
@@ -39,6 +42,7 @@ $(document).ready(function() {
         to: target,
         promotion: 'q' // NOTE: always promote to a queen for example simplicity
       });
+
       console.log('own move: ' + JSON.stringify(moveObj));
       // see if the move is legal
       var move = game.move(moveObj);
@@ -46,6 +50,7 @@ $(document).ready(function() {
       if (move === null) {
         return 'snapback';
       }
+
       moveObj.room = room;
       moveObj.fen = game.fen();
       moveObj.pgn = game.pgn();
@@ -53,6 +58,7 @@ $(document).ready(function() {
       moveObj.from = source;
       moveObj.to = target;
       socket.emit('move',  moveObj);
+      updateStatus(moveObj);
   };
 
   // update the board position after the piece snap 
@@ -61,16 +67,11 @@ $(document).ready(function() {
     board.position(game.fen());
   };
 
-  var updateStatus = function() {
+  var updateStatus = function(move) {
     var status = '';
     var moveColor = 'Blancas';
     var turn = game.turn()
     var pgn = game.pgn()
-
-    if(!synced && data.turn){
-      turn = data.turn
-      pgn = data.pgn
-    } 
 
     if (turn === 'b') {
       moveColor = 'Negras';
@@ -100,34 +101,35 @@ $(document).ready(function() {
     statusEl.html(status);
     //fenEl.html(game.fen());
     pgnEl.html(pgn);
-    synced = true
+
+    // mark last move
+    addHightlights(move)
+
   };
 
   //initiated socket client
   socket.emit('join',room);  //join room as defined by query parameter in URL bar
 
-  socket.on('undo', function(){ //remote undo by peer
+  socket.on('undo', function(){ 
     game.undo()
     updateStatus();
     board.position(game.fen());
   })
 
-  socket.on('data', function(dataObj){ //remote move by peer
+  socket.on('data', function(dataObj){
     $('#updatebtn').prop('disabled',false).removeClass('is-loading')
   })
 
-  socket.on('move', function(moveObj){ //remote move by peer
+  socket.on('move', function(moveObj){
     console.log('peer move: ' + JSON.stringify(moveObj));
     var move = game.move(moveObj);
-    // mark last move
-    addHightlights()
-    updateStatus()
 
     // illegal move
     if (move === null) {
       return;
     }
 
+    updateStatus(move)
     board.position(game.fen());
   });
 
@@ -159,16 +161,12 @@ $(document).ready(function() {
 
         if(data.pgn){
           game.load_pgn(data.pgn)
-          updateStatus();
         }
 
         board = ChessBoard('board', cfg);
         board.position(game.last())
-
-        if(data.from){
-          addHightlights()
-        }
-
+        updateStatus(data);
+        
         var loadpgnEl = $('#loadpgn'),
         undoEl = $('#undo'),
         flipEl = $('#flip')
@@ -187,7 +185,6 @@ $(document).ready(function() {
 
         flipEl.click(function(){
           board.flip()
-          addHightlights()
         })    
 
         $(window).on('hashchange', function(){
