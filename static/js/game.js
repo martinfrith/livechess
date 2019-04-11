@@ -95,7 +95,6 @@ $(document).ready(function() {
       return;
     }
     updateStatus(move);
-    lastMove = move;
     board.position(game.fen());
   });
 
