@@ -30,6 +30,8 @@ $(document).ready(function() {
       data: {query:query},
       success:function(res){
 
+        $('#searchbtn').prop('disabled',false).removeClass('is-loading')
+
         if(!res.length){
           $('#boards').html($.templates("#empty").render()).promise().done(function (){
             $('.spinner-container').fadeOut('fast', function(){

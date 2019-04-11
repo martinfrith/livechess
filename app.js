@@ -77,7 +77,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
   })
 
   app.post('/online', function (req, res) { 
-    var then = moment().utc().subtract(2, 'hours').format()
+    var then = moment().utc().subtract(30, 'minutes').format()
     db.collection('games').find({"updatedAt" : { $gte: then }, broadcast : 'true'}).toArray(function(err,docs){
       return res.json(docs)
     })   

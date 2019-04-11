@@ -15,21 +15,20 @@
 	    <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
 	</svg>
 
-	<div class="container">
-		<form id="search">
-			<div class="field has-addons">
-				<div class="control">
-					<input class="input is-rounded" name="query" type="text" placeholder="Encuentra una partida">					
-				</div>
-				<div class="control">
-					<button type="submit" class="button is-info is-rounded">
-				  		Buscar
-					</button>
-				</div>
+	<form id="search">
+		<div class="field has-addons">
+			<div class="control">
+				<input class="input is-rounded" name="query" type="text" placeholder="Encuentra una partida">					
 			</div>
-		</form>
-		<span class="has-text-success" id="gamecount"></span>
-	</div>
+			<div class="control">
+				<button type="submit" id="searchbtn" class="button is-info is-rounded">
+			  		Buscar
+				</button>
+			</div>
+		</div>
+	</form>
+	
+	<span class="has-text-success" id="gamecount"></span>
 
     <div id="boards" class="columns is-multiline">
     </div>

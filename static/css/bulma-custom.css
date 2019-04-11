@@ -26,6 +26,10 @@ body, input {
 	animation: dash 1.5s ease-in-out infinite;
 }
 
+#search .has-addons{
+  justify-content: center;
+}
+
 #gamecount {
   padding: 0.5rem;
   position: fixed;
