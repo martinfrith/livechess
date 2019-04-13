@@ -7327,7 +7327,7 @@ a.navbar-item:hover, a.navbar-item.is-active,
   }
   a.navbar-item.is-active:not(:hover),
   .navbar-link.is-active:not(:hover) {
-    background-color: transparent;
+    /*background-color: transparent;*/
   }
   .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
     background-color: #fafafa;

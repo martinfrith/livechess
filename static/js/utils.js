@@ -73,6 +73,10 @@ $(document).ready(function() {
       $(".navbar-menu").toggleClass("is-active");
   });
 
+  console.log($('a[href="' + location.pathname + '"]').length)
+
+  $('a[href="' + location.pathname + '"]').addClass('is-active')
+
   if(nightmode){
     if(nightmode === 'yes'){
       $(theme1).css({"background": "black","color": "#f8f8f8"});

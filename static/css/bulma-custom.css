@@ -26,17 +26,6 @@ body {
 	animation: dash 1.5s ease-in-out infinite;
 }
 
-#search .has-addons{
-  justify-content: center;
-}
-
-#gamecount {
-  padding: 0.5rem;
-  position: fixed;
-  bottom: 0;
-  left:0;
-}
-
 @keyframes rotate {
   100% { transform: rotate(360deg); }
 }
@@ -92,6 +81,20 @@ body > .container {
 
 .hero .is-2 img {
 	max-height: 8rem;
+}
+
+.navbar {
+  background-color: whitesmoke;
+}
+#search .has-addons{
+  justify-content: center;
+}
+
+#gamecount {
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  left:0;
 }
 
 #nightmode-indicator {
