@@ -63,13 +63,19 @@ body {
 }
 
 body > .notification {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0;
-  margin-bottom: 0!important;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;  
+  margin-bottom: 0 !important;
 }
 
 body > .container {
   padding-top: 3.25rem;
-  padding-bottom: 1rem;
+  padding-bottom: 3.25rem;
 }
 
 .content {
