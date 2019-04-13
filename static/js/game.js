@@ -19,6 +19,8 @@ $(document).keydown(function(e) {
 });
 
 $(document).ready(function() {
+  notification({status:'success',message:'thankyou_for_browsing'})
+
   var socket = io()  
   var board,
     boardEl = $('#board'),
@@ -111,8 +113,9 @@ $(document).ready(function() {
   $.ajax({
     url:'/games',
     method:'POST',
-    data: {room:room},
+    data: {room:room,filter:'pgn'},
     success:function(res){
+      if(!res.length) return location.href="/game-unknown"
       const match = res[0]
       data = match;
       $('.spinner-content').html($.templates("#match").render(match)).promise().done(function (){

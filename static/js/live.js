@@ -3,7 +3,8 @@ $(document).ready(function() {
   var socket = io();  
   var board,
     boardEl = $('#board'),
-    room = location.pathname.replace('/live/',''),
+    room = location.pathname.replace('/live/','').split('/')[1],
+    secret_room = location.pathname.replace('/live/','').split('/')[0],
     data = {},  
     game = new Chess(),
     loaded = false,
@@ -19,7 +20,6 @@ $(document).ready(function() {
   var addHightlights = function(move){
     removeHighlights();
     if(move){
-      console.log("addHightlights: " + move.from + ' - ' + move.to)
       boardEl.find('.square-' + move.from).addClass('highlight-last');
       boardEl.find('.square-' + move.to).addClass('highlight-last');   
     }
@@ -51,6 +51,7 @@ $(document).ready(function() {
         return 'snapback';
       }
 
+      moveObj.secret_room = secret_room;
       moveObj.room = room;
       moveObj.fen = game.fen();
       moveObj.pgn = game.pgn();
@@ -144,7 +145,7 @@ $(document).ready(function() {
     success:function(res){
       const match = res[0]
       data = match
-      data.watch_url = location.href.replace('live/','').split('#')[0]
+      data.watch_url = [window.location.protocol,'',window.location.host,room].join('/')
       data.live_url = location.href.split('#')[0]
 
       $('.panel').html($.templates("#match").render(match)).promise().done(function (){
@@ -196,7 +197,7 @@ $(document).ready(function() {
 
         broadcastEl.click(function(){
           var data = {};
-          data.room = room
+          data.room = data.room
           data.broadcast = $('input[name="broadcast"]').is(':checked')?'true':'false'
           socket.emit('data',data)
         })

@@ -73,11 +73,20 @@ body {
   }
 }
 
+body > .notification {
+  border-radius: 0;
+  margin-bottom: 0!important;
+}
+
 .spinner-content {
 	opacity: 0;
 }
 
 .container {
+  padding-top: 1rem;
+}
+
+.container-narrow {
 	padding: 1rem;
 	max-width: 780px;
 	min-height: 100%;
@@ -95,7 +104,7 @@ body {
 }
 
 @media screen and (max-width: 769px), print {
-  .hero {
+  .hero.is-main {
     margin-left: -2rem;
     margin-right: -2rem;
     margin-top: -2.5rem;

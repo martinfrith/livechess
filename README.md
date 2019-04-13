@@ -27,4 +27,4 @@ Un especial agradecimiento a [Jeff Hlywa](https://github.com/jhlywa) de [chess.j
 - 6.4.19 Versión 0.2 — Detalle completo de partidas.
 - 9.4.19 Versión 0.3 — Modo nocturno. Noticación sonora de movimiento. Resaltar último movimiento.
 - 11.4.19 Versión 0.4 — Partidas Online. Formulario de búsqueda de partidas por jugador, lugar o evento.
-- 16.4.19 Versión 0.4 — Seguridad: ID exclusiva para transmisión.
+- 13.4.19 Versión 0.4 — Código de seguridad que garantiza la privacidad de las mesas siendo emitidas. Vista de resultados completos.

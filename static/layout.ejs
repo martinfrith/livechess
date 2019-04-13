@@ -32,7 +32,7 @@
             En vivo
           </a>
 
-          <a href="/games" class="navbar-item">
+          <a href="/results" class="navbar-item">
             Resultados
           </a>
 
@@ -42,6 +42,9 @@
             </a>
 
             <div class="navbar-dropdown">
+              <a href="/games" class="navbar-item">
+                Encontrar partidas
+              </a>
               <a href="/about" class="navbar-item">
                 Acerca de
               </a>
@@ -71,9 +74,16 @@
       </div>
     </nav>
 
-    <section class="container">
+    <section class="container is-fluid">
       <%- content %>    
     </section>
+
+    <script id="notification" type="text/x-jsrender">
+      <div class="notification is-[[:status]]">
+        <button class="delete"></button>
+        [[:message]]
+      </div>
+    </script>
 
     <script src="/js/libs/jquery-1.10.1.min.js"></script>
     <script src="/js/libs/jsrender.min.js"></script>

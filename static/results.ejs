@@ -1,0 +1,51 @@
+<%- contentFor('css') %>
+
+	<link rel="stylesheet" href="/css/chessboard.css" />
+
+<%- contentFor('js') %>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/chess.js"></script>
+    <script src="/js/libs/chessboard.js"></script>
+	<script src="/js/results.js"></script>
+
+<%- contentFor('content') %>
+
+	<svg class="spinner-container" viewBox="0 0 44 44">
+	    <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
+	</svg>
+	
+	<div class="content">
+	    <table class="table is-striped">
+	    	<thead>
+	    		<th>Mesa</th>
+	    		<th>Evento</th>
+	    		<th>Lugar</th>
+	    		<th>Blancas</th>
+	    		<th>Negras</th>
+	    		<th>Resultado</th>
+	    		<th>Fecha</th>
+	    	</thead>
+	    	<tbody id="boards"></tbody>
+	    </table>
+	</div>
+
+	<script id="empty" type="text/x-jsrender">
+		<tr>
+			<td colspan=7>
+				<p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en vivo en este momento. <a href="#" id="create">Crea tu partida en vivo!</a></p>
+			</td>
+		</tr>
+	</script>
+
+	<script id="match" type="text/x-jsrender">
+		<tr>
+			<td><a class="" id="[[:room]]" href="/[[:room]]">[[:room]]</a></td>
+			<td><span class="">[[:event]]</span></td>
+			<td><span class="">[[:site]]</span></td>
+			<td><span class="">[[:white]]</span></td>
+			<td><span class="">[[:black]]</span></td>
+			<td><span class="">[[:result]]</span></td>
+			<td><span class="">[[:date]]</span></td>
+		</tr>
+	</script>
