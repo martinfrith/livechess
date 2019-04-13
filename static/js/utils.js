@@ -73,9 +73,9 @@ $(document).ready(function() {
       $(".navbar-menu").toggleClass("is-active");
   });
 
-  console.log($('a[href="' + location.pathname + '"]').length)
-
-  $('a[href="' + location.pathname + '"]').addClass('is-active')
+  if(location.pathname != '/'){
+    $('a[href="' + location.pathname + '"]').addClass('is-active')
+  }
 
   if(nightmode){
     if(nightmode === 'yes'){
