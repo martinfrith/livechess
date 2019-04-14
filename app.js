@@ -49,8 +49,8 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     res.render('start')
   });
 
-  app.get('/online', function (req, res) { 
-    res.render('online')
+  app.get('/vivo', function (req, res) { 
+    res.render('vivo')
   });
 
   app.get('/games', function (req, res) { 
