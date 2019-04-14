@@ -1,3 +1,7 @@
+if($.inArray([window.location.protocol,'',window.location.host].join('/'),['http://localhost:3000','https://ajedrezenvivo.net']) == -1){
+  location.href='https://ajedrezenvivo.net'
+}
+
 const theme1 = 'html, body, .navbar, .navbar-dropdown, .navbar-burger, .navbar-menu, .navbar-item, .navbar-link'
 const theme2 = 'h1, h2, h3, h4, h5, h6, p'
 const translations = {
