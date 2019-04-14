@@ -82,6 +82,14 @@ $(document).ready(function() {
     $('a[href="' + location.pathname + '"]').addClass('is-active')
   }
 
+  if(location.pathname.split('/').reverse()[2] == 'live'){
+    $('#create').hide()
+  } else {
+    setTimeout(function(){
+      $('#create').fadeIn('slow')
+    },1000)    
+  }
+
   if(nightmode){
     if(nightmode === 'yes'){
       $(theme1).css({"background": "black","color": "#f8f8f8"});

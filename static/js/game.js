@@ -119,7 +119,7 @@ $(document).ready(function() {
     method:'POST',
     data: {room:room,filter:'pgn'},
     success:function(res){
-      if(!res.length) return location.href="/game-unknown"
+      if(!res.length) return location.href="/404"
       const match = res[0]
       data = match;
       $('.game-container').html($.templates("#match").render(match)).promise().done(function (){
