@@ -15,8 +15,8 @@ Existe la posibilidad de extender la aplicación a multi-idioma pero es necesari
 Si estas interesado en participar de este proyecto puedes [solicitarlo aquí](mailto:overlemonsoft@gmail.com?Subject=Hola, Quiero colaborar con el proyecto AjedrezEV).
 
 ## Equipo
-- 👨🏻‍ ‍Martín Frith (programador)
-- ‍👨🏻‍ ‍Cristhian Daher (tester)
+- 👨🏻‍ ‍Martín Frith - 🌎 Esquel
+- ‍👨🏻‍ ‍Cristhian Daher - 🌎 Esquel
 
 ## Agradecimientos
 Un especial agradecimiento a [Jeff Hlywa](https://github.com/jhlywa) de [chess.js](https://github.com/jhlywa/chess.js) y a [Chris Oakman](https://github.com/oakmac) de [chessboard.js](https://github.com/oakmac/chessboardjs), como así también a todo su equipo de desarrollo por su contribución al render y al motor de juego. 
