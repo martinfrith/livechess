@@ -135,9 +135,10 @@ $(document).ready(function() {
       url:'/gamecount',
       method:'POST',
       success:function(res){
-        $('#gamecount').html("Total " + res + " partidas.")
-        $('.spinner-container').fadeOut('fast', function(){
-          $('.spinner-content').fadeTo('fast',1)
+        $('#gamecount').html($.templates("#count").render({count:res})).promise().done(function (){
+          $('.spinner-container').fadeOut('fast', function(){
+            $('.spinner-content').fadeTo('fast',1)
+          })
         })
       }
     })	

@@ -5,8 +5,8 @@
 ## Transmisión en vivo de torneos de ajedrez
 ### Tablero virtual para transmisión en vivo de torneos de ajedrez. Base de datos de partidas.
 
-## Disclaimer
-Este proyecto es puramente educacional, no recibe ningún tipo de financiación y no persigue ánimos de lucro.
+## Aclaraciones
+Este proyecto es puramente educacional y motivado, por parte de todos los integrantes de su equipo, por el amor que dedicamos a este singular deporte que es el ajedrez. AjedrezEV no recibe ningún tipo de aporte o inversión económica y no persigue ánimos de lucro. Debido a que este proyecto es voluntario, y se realiza con el tiempo que generosamente cada miembro del equipo puede aportar entonces no pide ni necesita de su colaboración ecónomica. Solo esperamos que sea útil y visualicen y carguen todas las partidas que deseen.
 
 El código de este proyecto fue creado y es mantenido producto de un solo desarrollador y es totalmente ad honorem. Actualmente tiene un solo idioma, castellano porque pretende llegar a los nuevos entusiastas del ajedrez en Argentina y países hermanos de habla castellana. 
 
@@ -22,9 +22,9 @@ Si estas interesado en participar de este proyecto puedes [solicitarlo aquí](ma
 Un especial agradecimiento a [Jeff Hlywa](https://github.com/jhlywa) de [chess.js](https://github.com/jhlywa/chess.js) y a [Chris Oakman](https://github.com/oakmac) de [chessboard.js](https://github.com/oakmac/chessboardjs), como así también a todo su equipo de desarrollo por su contribución al render y al motor de juego. 
 
 ## ChangeLog
-- 2.4.19 Inicio del proyecto — Visualización de partidas online.
-- 4.4.19 Versión 0.1 — Capa de datos persistente. Posibilidad de guardar partidas.
-- 6.4.19 Versión 0.2 — Detalle completo de partidas.
-- 9.4.19 Versión 0.3 — Modo nocturno. Noticación sonora de movimiento. Resaltar último movimiento.
-- 11.4.19 Versión 0.4 — Partidas Online. Formulario de búsqueda de partidas por jugador, lugar o evento.
-- 13.4.19 Versión 0.4 — Código de seguridad que garantiza la privacidad de las mesas siendo emitidas. Vista de resultados completos.
+- 2019.4.2 Versión 0.1  Inicio del proyecto — Visualización de partidas online.
+- 2019.4.4 Versión 0.11 — Capa de datos persistente. Posibilidad de guardar partidas.
+- 2019.4.6 Versión 0.111 — Detalle completo de partidas.
+- 2019.4.9 Versión 0.2 — Modo nocturno. Noticación sonora de movimiento. Resaltar último movimiento.
+- 2019.4.11 Versión 0.3 — Partidas Online. Formulario de búsqueda de partidas por jugador, lugar o evento.
+- 2019.4.13 Versión 0.4 — Código de seguridad que garantiza la privacidad de las mesas siendo emitidas. Vista de resultados completos.

@@ -1,12 +1,23 @@
 <%- contentFor('css') %>
-  
+
+  <link rel="stylesheet" href="/css/chessboard.css" />
+
 <%- contentFor('js') %>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/chess.js"></script>
+    <script src="/js/libs/chessboard.js"></script>
+    <script src="/js/games.js"></script>
  
 <%- contentFor('content') %>
 
-  <section class="hero is-info is-main">
-    <div class="hero-body">
-      <div class="container">
+  <svg class="spinner-container" viewBox="0 0 44 44">
+      <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
+  </svg>
+
+  <div class="container">
+    <div class="hero is-info">
+      <div class="hero-body">
         <div class="columns is-tablet">
           <div class="column is-2">
             <img src="/img/knightpawn.png">
@@ -21,30 +32,55 @@
             </h2>
           </div>
         </div>
+
+        <form id="search">
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input is-rounded" name="query" type="text" placeholder="Ingresa evento, lugar o jugador">
+            </div>
+            <div class="control">
+              <button type="submit" id="searchbtn" class="button is-rounded">
+                  Buscar
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
+    
+    <span class="has-text-success" id="gamecount"></span>
 
-  <div class="container">
-    <div class="content">            
-      <h3>¿Qué es?</h3>
-      <p>AjedrezEV es una herramienta para seguir en vivo y estudiar el deporte del Ajedrez. Este proyecto es puramente educacional y motivado por el amor a este deporte, no recibe ningún tipo de financiación y no persigue ánimos de lucro.</p>
-      <p><a href="/about" class="button is-success is-outlined">Conocer mas sobre AjedrezEV</a></p>
-      <h3>Equipo de desarrollo</h3>
-      <ul>
-        <li>👨🏻‍ ‍Martín Frith - 🌎 Esquel </li>
-        <li>👨🏻‍ Cristhian Daher - 🌎 Esquel</li>
-      </ul>
-      <h3>Agradecimientos</h3>
-      <p>Un agradecimiento especial a <a href="https://github.com/jhlywa">Jeff Hlywa</a> de <a href="https://github.com/jhlywa/chess.js">chess.js</a> y a <a href="https://github.com/oakmac">Chris Oakman</a> de <a href="https://github.com/oakmac/chessboardjs">chessboard.js</a> como así también a todo su equipo de desarrollo por su contribución al render y al motor de juego. </p>
-      <h3>ChangeLog</h3>
-      <ul>
-        <li class="has-text-success">2.4.19 Inicio del proyecto — Visualización de partidas online.</li>
-        <li class="has-text-success">4.4.19 Versión 0.1 — Capa de datos persistente. Posibilidad de guardar partidas.</li>
-        <li class="has-text-success">6.4.19 Versión 0.2 — Detalle completo de partidas.</li>
-        <li class="has-text-success">9.4.19 Versión 0.3 — Modo nocturno. Noticación sonora de movimiento. Resaltar último movimiento.</li>
-        <li class="has-text-success">11.4.19 Versión 0.4 — Listado de partidas Online. Formulario de  búsqueda de partidas por jugador, lugar o evento.</li>
-        <li class="has-text-success">13.4.19 Versión 0.4 — Código de seguridad que garantiza la privacidad de las mesas siendo emitidas. Vista de resultados completos.</li>
-      </ul>
+    <div id="boards" class="columns is-multiline">
     </div>
   </div>
+
+  <script id="empty" type="text/x-jsrender">
+    <p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en este momento. <a href="#" id="create">Crea tu partida!</a></p>
+  </script>
+
+  <script id="count" type="text/x-jsrender">
+    <p>Total [[:count]] partidas</p>
+  </script>
+
+  <script id="match" type="text/x-jsrender">
+    <a class="column is-4 is-tablet has-text-grey" href="/[[:room]]">
+      <p>
+        [[if black && black.length]]
+        <small>[[:black]]&nbsp;</small>
+        <!--small class="has-text-grey">[[:blackelo]]</small-->
+          [[else]]
+        <small>[[:event]]&nbsp;</small>
+        <!--small class="has-text-grey">[[:blackelo]]</small-->
+          [[/if]]
+      </p>
+      <div id="[[:room]]"></div>
+      <p class="has-text-right">
+        [[if white && white.length]]
+        <small>[[:white]]&nbsp;</small>
+        <!--small class="has-text-grey">[[:whiteelo]]&nbsp;</small-->
+          [[else]]
+        <small>[[:site]]&nbsp;[[:date]]</small>
+          [[/if]]
+      </p>
+    </a>
+  </script>  
