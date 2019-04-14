@@ -17,18 +17,19 @@
   </svg>
   
   <div class="spinner-content">
+    <div class="game-container content"></div>
   </div>
 
   <script id="match" type="text/x-jsrender">
     <div class="columns">
-      <div class="column">
+      <div class="column  pull-right">
         [[if black && black.length]]
-        <p class="boardhead">
+        <p class="has-text-left boardhead">
           <span id="black">[[:black]]&nbsp;</span>
           <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
         </p>
         [[else]]
-        <p class="has-text-right">
+        <p class="has-text-left">
           <span id="white">[[:event]]&nbsp;</span>
         </p>
         [[/if]]

@@ -1,6 +1,6 @@
 # LiveChess
 
-[![Latest Stable Version](https://livechess.glitch.me/img/knightpawn.png)](https://livechess.glitch.me)
+[![Latest Stable Version](https://ajedrezenvivo.net/img/knightpawn.png)](https://ajedrezenvivo.net)
 
 ## Transmisión en vivo de torneos de ajedrez
 ### Tablero virtual para transmisión en vivo de torneos de ajedrez. Base de datos de partidas.
@@ -8,11 +8,11 @@
 ## Disclaimer
 Este proyecto es puramente educacional, no recibe ningún tipo de financiación y no persigue ánimos de lucro.
 
-Este proyecto fue creado y es mantenido por un solo desarrollador y es totalmente ad honorem. Actualmente tiene un solo idioma, castellano porque pretende llegar a los nuevos entusiastas del ajedrez en Argentina y países hermanos de habla castellana. 
+El código de este proyecto fue creado y es mantenido producto de un solo desarrollador y es totalmente ad honorem. Actualmente tiene un solo idioma, castellano porque pretende llegar a los nuevos entusiastas del ajedrez en Argentina y países hermanos de habla castellana. 
 
 Existe la posibilidad de extender la aplicación a multi-idioma pero es necesaria la bondadosa colaboración de eventuales entusiastas.
 
-Si estas interesado en participar de este proyecto puedes [solicitarlo aquí](mailto:overlemonsoft@gmail.com?Subject=Hola, Quiero colaborar con el proyecto LiveChess).
+Si estas interesado en participar de este proyecto puedes [solicitarlo aquí](mailto:overlemonsoft@gmail.com?Subject=Hola, Quiero colaborar con el proyecto AjedrezEV).
 
 ## Equipo
 - 👨🏻‍ ‍Martín Frith (programador)

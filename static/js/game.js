@@ -29,6 +29,10 @@ $(document).ready(function() {
     synced = false,
     game = new Chess()
 
+  $(window).resize(function(){
+    board.resize()  
+  })
+
   var removeHighlights = function() {
     boardEl.find('.square-55d63')
       .removeClass('highlight-last');
@@ -118,7 +122,7 @@ $(document).ready(function() {
       if(!res.length) return location.href="/game-unknown"
       const match = res[0]
       data = match;
-      $('.spinner-content').html($.templates("#match").render(match)).promise().done(function (){
+      $('.game-container').html($.templates("#match").render(match)).promise().done(function (){
         $('.gameinfo').html($.templates("#gameinfo").render(match))
         var pos = 'start'
 
@@ -175,9 +179,8 @@ $(document).ready(function() {
             foot = $('.boardfoot').html()
             $('.boardhead').html(foot)
             $('.boardfoot').html(head)
-          })   
-
-        },750)
+          })
+        },500)
       })  
 
       $('.spinner-container').fadeOut('fast', function(){

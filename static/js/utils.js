@@ -2,10 +2,15 @@ const theme1 = 'html, body, .navbar, .navbar-dropdown, .navbar-burger, .navbar-m
 const theme2 = 'h1, h2, h3, h4, h5, h6, p'
 const translations = {
   not_enough_params : 'No hay suficientes parámetros.',
-  thankyou_for_browsing : 'Gracias por revisar nuestros resultados.',
+  thankyou_for_browsing : 'Gracias por seguir las partidas en AjedrezEV.',
   cannot_create_room_twice : 'No se puede crear el misma partida dos veces'
 }
 var ts = function(){ return new Date().getTime() },
+parseHelpers = {timeSpan : function(id){
+  var timestamp = id.toString().substring(0,8)
+  var date = new Date( parseInt( timestamp, 16 ) * 1000 )
+  return moment(date).fromNow()
+}},
 ralfnum = function (a){ return Math.random().toString(36).substring(2, a) + Math.random().toString(36).substring(2, a)},
 switchNightmode = function (){
   var nightmode = localStorage.getItem("nightmode")
@@ -85,6 +90,7 @@ $(document).ready(function() {
   }
 });
 
+moment.locale('es')
 $.views.settings.delimiters("[[", "]]");
 $.ajaxSetup({
 	cache: false,

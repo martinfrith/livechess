@@ -6,6 +6,15 @@
   padding-top: 1.25rem;
 }
 
+.game-container {
+	max-width: 90%;
+}
+
+.game-container p {
+	margin-bottom: 0!important;
+}
+
 .navigation .button {
 	min-width: 35px;
 }
+
