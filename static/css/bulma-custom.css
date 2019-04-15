@@ -122,6 +122,10 @@ blockquote {
   margin-bottom: 0!important;
 }
 
+#boards a {
+  color: #a4a4a4;
+}
+
 #nightmode-indicator {
   position: fixed;
   bottom: 1rem;

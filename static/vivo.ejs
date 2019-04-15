@@ -25,13 +25,14 @@
 	</div>
 	<script id="empty" type="text/x-jsrender">
 		<div class="container">
-			<p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en vivo en este momento. <a href="#" id="create">Crea tu partida en vivo!</a></p>
+			<p class="has-text-grey"><span class="fa fa-warning"></span> No hay partidas en vivo en este momento.</p>
+			<a href="#" class="button is-large is-grey is-outlined hero" id="create">Crea tu partida en vivo!</a></p>
 		</div>
 	</script>
 
 	<script id="match" type="text/x-jsrender">
 	    <a href="/[[:room]]" class="columns">
-	      <div class="column is-2">
+	      <div class="column is-3">
 	        <p>
 	          [[if black && black.length]]
 	          <small>[[:black]]&nbsp;</small>
@@ -54,19 +55,19 @@
 	      <div class="column">
 	        <div class="hero-title">
 	        [[if event]]
-	          <p>Evento <span class="has-text-info">[[:event]]</span></p>
+	          <p>Evento <span class="has-text-grey">[[:event]]</span></p>
 	        [[/if]]
 	        [[if date]]
-	          <p>Fecha <span class="has-text-info">[[:date]]</span></p>
+	          <p>Fecha <span class="has-text-grey">[[:date]]</span></p>
 	        [[/if]]
 	        [[if site]]
-	          <p>Lugar <span class="has-text-info">[[:site]]</span></p>
+	          <p>Lugar <span class="has-text-grey">[[:site]]</span></p>
 	        [[/if]]
 	        [[if eco]]
-	          <p>ECO <span class="has-text-info">[[:eco]]</span></p>
+	          <p>ECO <span class="has-text-grey">[[:eco]]</span></p>
 	        [[/if]]
 	        [[if result]]
-	          <p>Resultado <span class="has-text-info">[[:result]]</span></p>
+	          <p>Resultado <span class="has-text-grey">[[:result]]</span></p>
 	        [[/if]]
 	        </div>   
 	      </div>

@@ -29,6 +29,10 @@ $(document).ready(function() {
   }
 
   var findGames = function(){
+    $('#boards').html('')
+    $('.spinner-content').fadeOut('fast', function(){
+      $('.spinner-container').fadeTo('fast',1)
+    })    
     $.ajax({
       url:'/online',
       method:'POST',
@@ -36,11 +40,12 @@ $(document).ready(function() {
         if(!res.length){
           $('.empty-container').html($.templates("#empty").render()).promise().done(function (){
             $('.spinner-container').fadeOut('fast', function(){
-              $('.spinner-content').fadeTo('slow',1)
+              $('.spinner-content, .empty-container').fadeTo('slow',1)
             })
           })
-
           return false
+        } else {
+          $('.empty-container').fadeOut()
         }
 
         // inject html boards
@@ -87,8 +92,15 @@ $(document).ready(function() {
     addHightlights(move)
   };
 
+  socket.on('data', function(dataObj){ //remote move by peer
+    findGames()
+  })
+
   socket.on('move', function(moveObj){ //remote move by peer
-    console.log('peer move: ' + JSON.stringify(moveObj));
+    if($.inArray(moveObj.room,Object.keys(boards)) === -1){
+      findGames()
+    }
+
     if(boards[moveObj.room]){
       var move = game.move(moveObj);
       // illegal move
@@ -101,5 +113,4 @@ $(document).ready(function() {
 	});
 
   findGames()
-
 });
