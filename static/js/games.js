@@ -49,7 +49,7 @@ $(document).ready(function() {
         $('#gamecount').html(res.length + " partida" + s + " encontrada" + s)
 
         // inject html boards
-        $('#boards').html($.templates("#match").render(res)).promise().done(function (){
+        $('#boards').html($.templates("#match").render(res,parseHelpers)).promise().done(function (){
           // check for last moves on every game
           $(res).each(function(i,match){
 

@@ -61,6 +61,15 @@ $(document).ready(function() {
   var markPGN = function() {
     $('.pgn').removeClass('has-text-success')
     $('.pgn'+(game_index-1)).addClass('has-text-success')
+
+    var status = '',
+    moveColor = 'Blancas'
+    
+    if (game_index%2 != 0) {
+      moveColor = 'Negras'
+    }
+
+    $('#status').text(moveColor + ' por mover.')
   }
 
   var onChange = function(old_position,position) {
@@ -156,7 +165,7 @@ $(document).ready(function() {
       if(!res.length) return location.href="/404"
       const match = res[0]
       data = match;
-      $('.game-container').html($.templates("#match").render(match)).promise().done(function (){
+      $('.game-container').html($.templates("#match").render(match,parseHelpers)).promise().done(function (){
         $('.gameinfo').html($.templates("#gameinfo").render(match))
         var pos = 'start'
 
@@ -197,15 +206,19 @@ $(document).ready(function() {
           flipEl = $('#flip')
 
           backEl.click(function(){
-            if(game_index) game_index--
-            board.position(game.back())
-            removeHighlights()
+            if(game_index) {
+              game_index--
+              board.position(game.back())
+              removeHighlights()
+            }
           })
 
           nextEl.click(function(){
-            if(game_index <= game_pgn.length ) game_index++
-            board.position(game.next())
-            removeHighlights()
+            if(game_index < game_pgn.length ) {
+              game_index++
+              board.position(game.next())
+              removeHighlights()
+            }
           })
 
           firstEl.click(function(){
