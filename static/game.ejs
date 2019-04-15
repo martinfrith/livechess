@@ -21,40 +21,45 @@
   </div>
 
   <script id="match" type="text/x-jsrender">
-    <div class="columns">
-      <div class="column  pull-right">
-        [[if black && black.length]]
-        <p class="has-text-left boardhead">
-          <span id="black">[[:black]]&nbsp;</span>
-          <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
-        </p>
-        [[else]]
-        <p class="has-text-left">
-          <span id="white">[[:event]]&nbsp;</span>
-        </p>
-        [[/if]]
-        <div id="board"></div>
-        [[if white && white.length]]
-        <p class="has-text-right boardfoot">
-          <span id="white">[[:white]]&nbsp;</span>
-          <span class="has-text-info" id="whiteelo">[[:whiteelo]]</span>
-        </p>
-        [[else]]
-        <p class="has-text-right">
-          <span id="white">[[:date]] [[:site]]&nbsp;</span>
-        </p>
-        [[/if]]
-
-      </div>
-      <div class="column">
-        <div class="navigation">
-          <a class="button" id="first" title="Posición inicial [down]">«</a>
-          <a class="button" id="back" title="Posición anterior [left]">‹</a>
-          <a class="button" id="next" title="Posición seiguiente [right]">›</a>
-          <a class="button" id="last" title="Posición final [up]">»</a>
-          <a class="button" id="flip" title="Rotar [f]">⟲</a>
-          <a class="button" id="nightmode" title="Modo nocturno [n]">💡</a>
+    <div>
+      <div class="columns">
+        <div class="column">
+          [[if black && black.length]]
+          <p class="has-text-left boardhead">
+            <span id="black">[[:black]]&nbsp;</span>
+            <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
+          </p>
+          [[else]]
+          <p class="has-text-left">
+            <span id="white">[[:event]]&nbsp;</span>
+          </p>
+          [[/if]]
+          <div id="board"></div>
+          [[if white && white.length]]
+          <p class="has-text-right boardfoot">
+            <span id="white">[[:white]]&nbsp;</span>
+            <span class="has-text-info" id="whiteelo">[[:whiteelo]]</span>
+          </p>
+          [[else]]
+          <p class="has-text-right">
+            <span id="white">[[:date]] [[:site]]&nbsp;</span>
+          </p>
+          [[/if]]
         </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <div class="navigation">
+            <a class="button" id="first" title="Posición inicial [down]">«</a>
+            <a class="button" id="back" title="Posición anterior [left]">‹</a>
+            <a class="button" id="next" title="Posición seiguiente [right]">›</a>
+            <a class="button" id="last" title="Posición final [up]">»</a>
+            <a class="button" id="flip" title="Rotar [f]">⟲</a>
+            <a class="button" id="nightmode" title="Modo nocturno [n]">💡</a>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
         <div class="gameinfo">
         </div>
       </div>
