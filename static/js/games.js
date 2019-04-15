@@ -143,4 +143,5 @@ $(document).ready(function() {
       }
     })	
   }
+  $('input[name="query"]').focus()
 });

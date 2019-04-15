@@ -15,15 +15,15 @@
       <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
   </svg>
 
-  <div class="container">
-    <div class="hero is-info">
-      <div class="hero-body">
-        <div class="columns is-tablet">
-          <div class="column is-2">
-            <img src="/img/knightpawn.png">
-          </div>
-          <div class="column">
-            <div class="group-control">&nbsp;</div>
+  <div class="hero is-info">
+    <div class="hero-body">
+
+      <div class="columns is-tablet">
+        <div class="column is-2">
+          <img src="/img/knightpawn.png">
+        </div>
+        <div class="column">
+          <div class="hero-title">
             <h1 class="title">
               Ajedrez en Vivo
             </h1>
@@ -31,25 +31,26 @@
               Emisión en vivo de torneos de ajedrez
             </h2>
           </div>
+          <form id="search">
+            <div class="field has-addons">
+              <div class="control">
+                <input class="input is-large is-rounded" name="query" type="text" placeholder="Ingresa evento, lugar o jugador">
+              </div>
+              <div class="control">
+                <button type="submit" id="searchbtn" class="button is-large is-rounded is-success">
+                    <span class="fa fa-search"></span>
+                </button>
+              </div>
+            </div>
+          </form>            
         </div>
-
-        <form id="search">
-          <div class="field has-addons">
-            <div class="control">
-              <input class="input is-rounded" name="query" type="text" placeholder="Ingresa evento, lugar o jugador">
-            </div>
-            <div class="control">
-              <button type="submit" id="searchbtn" class="button is-rounded">
-                  Buscar
-              </button>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
-    
-    <span class="has-text-success" id="gamecount"></span>
+  </div>
+  
+  <span class="has-text-success" id="gamecount"></span>
 
+  <div class="container">
     <div id="boards" class="columns is-multiline">
     </div>
   </div>

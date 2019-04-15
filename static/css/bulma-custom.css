@@ -63,9 +63,12 @@ body {
   }
 }
 
+
+body > .hero {
+  padding-top: 2rem;
+}
+
 body > .notification {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   border-radius: 0;
   position: fixed;
   bottom: 0;
@@ -91,12 +94,14 @@ body > .container {
 	max-height: 8rem;
 }
 
+blockquote {
+  color: #a4a4a4;
+}
+
 .navbar {
   background-color: whitesmoke;
 }
-#search .has-addons{
-  justify-content: center;
-}
+
 
 #gamecount {
   padding: 0.5rem;
@@ -104,7 +109,7 @@ body > .container {
   position: fixed;
   z-index: 99;
   bottom: 0;
-  left:0;
+  right:0;
 }
 
 #nightmode-indicator {
@@ -112,6 +117,10 @@ body > .container {
   bottom: 1rem;
   right: 1rem;
   display: none;
+}
+
+.hero-title {
+  padding: 1.25rem;
 }
 
 .navbar #create {
