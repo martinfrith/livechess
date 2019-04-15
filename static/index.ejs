@@ -55,7 +55,15 @@
   </div>
 
   <script id="empty" type="text/x-jsrender">
-    <p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en este momento. <a href="#" id="create">Crea tu partida!</a></p>
+    <div class="hero">
+      <div class="hero-body">
+        <p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en que coincidan con <strong>[[:query]]</strong>. Prueba con otra ej: Capablanca, Kasparov, Fischer, Botvinnik, etc. ó </p>
+        <hr>
+        <p class="has-text-centered hero">
+          <a href="#" class="button is-success is-outlined" id="create">Crea tu partida!</a>
+        </p>
+      </div>
+    </div>
   </script>
 
   <script id="count" type="text/x-jsrender">

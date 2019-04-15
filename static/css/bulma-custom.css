@@ -79,8 +79,6 @@ body > .notification {
 
 body > .container {
   padding-top: 3.25rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
   padding-bottom: 3.25rem;
   margin-bottom: 3.25rem;
 }
@@ -88,6 +86,7 @@ body > .container {
 .content {
   padding: 1rem;
 }
+
 .spinner-content {
 	opacity: 0;
 }

@@ -177,6 +177,9 @@ $(document).ready(function() {
         var loadpgnEl = $('#loadpgn'),
         undoEl = $('#undo'),
         flipEl = $('#flip'),
+        wwinsEl = $('#wwins'),
+        bwinsEl = $('#bwins'),
+        drawEl = $('#draw'),
         broadcastEl = $('#broadcast'),
         updateclosebtnEl = $('#updateclosebtn')
 
@@ -187,6 +190,18 @@ $(document).ready(function() {
           data.broadcast = $('input[name="broadcast"]').is(':checked')?'true':'false'
           socket.emit('data',  data);
           return false
+        })
+
+        wwinsEl.click(function(){
+          socket.emit('data', {room:room,result:'1-0'});
+        })
+
+        bwinsEl.click(function(){
+          socket.emit('data', {room:room,result:'0-1'});
+        })
+
+        drawEl.click(function(){
+          socket.emit('data', {room:room,result:'1/2-1/2'});
         })
 
         updateclosebtnEl.click(function(){
@@ -211,6 +226,8 @@ $(document).ready(function() {
         flipEl.click(function(){
           board.flip()
         })    
+
+        
 
         $(window).on('hashchange', function(){
           if(location.hash.indexOf('info') > -1) {

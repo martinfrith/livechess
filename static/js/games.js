@@ -24,10 +24,11 @@ $(document).ready(function() {
   })
 
   var findGames = function(query){
+    var data = {query:query}
     $.ajax({
       url:'/search',
       method:'POST',
-      data: {query:query},
+      data: data,
       success:function(res){
 
         $('#searchbtn').prop('disabled',false).removeClass('is-loading')
@@ -35,7 +36,7 @@ $(document).ready(function() {
 
         if(!res.length){
 
-          $('#boards').html($.templates("#empty").render()).promise().done(function (){
+          $('#boards').html($.templates("#empty").render(data)).promise().done(function (){
             $('.spinner-container').fadeOut('fast', function(){
               $('.spinner-content').fadeTo('slow',1)
             })
