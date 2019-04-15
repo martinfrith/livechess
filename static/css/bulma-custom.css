@@ -79,6 +79,8 @@ body > .notification {
 
 body > .container {
   padding-top: 3.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-bottom: 3.25rem;
   margin-bottom: 3.25rem;
 }
@@ -104,12 +106,15 @@ blockquote {
 
 
 #gamecount {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   background-color: white;
   position: fixed;
   z-index: 99;
   bottom: 0;
   right:0;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;  
 }
 
 #nightmode-indicator {

@@ -59,6 +59,7 @@ $(document).ready(function() {
       moveObj.from = source;
       moveObj.to = target;
       socket.emit('move', moveObj);
+      socket.emit('data', {room:room,pgn:moveObj.pgn});
       updateStatus(moveObj);
   };
 
@@ -122,6 +123,7 @@ $(document).ready(function() {
   })
 
   socket.on('data', function(dataObj){
+    if(dataObj.pgn) $('textarea[name="pgn"]').val(dataObj.pgn)
     $('#updatebtn').prop('disabled',false).removeClass('is-loading')
   })
 
@@ -197,7 +199,7 @@ $(document).ready(function() {
 
         broadcastEl.click(function(){
           var data = {};
-          data.room = data.room
+          data.room = room
           data.broadcast = $('input[name="broadcast"]').is(':checked')?'true':'false'
           socket.emit('data',data)
         })

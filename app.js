@@ -180,7 +180,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       {
         "$set": moveObj
       },{ new: true }).then(function(doc){
-        console.log('user moved: ' + JSON.stringify(move));
+        console.log(data.room + '- user moved: ' + JSON.stringify(move));
         io.emit('move', move);
       })
     });
@@ -193,7 +193,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       {
         "$set": data
       },{ new: true }).then(function(doc){
-        console.log('data updated: ' + JSON.stringify(data));
+        console.log(data.room + '- data updated: ' + JSON.stringify(data));
         io.emit('data', data);
       })
     });

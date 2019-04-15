@@ -17,10 +17,9 @@
 
   <div class="hero is-info">
     <div class="hero-body">
-
       <div class="columns is-tablet">
         <div class="column is-2">
-          <img src="/img/knightpawn.png">
+          <!--img src="/img/knightpawn.png"-->
         </div>
         <div class="column">
           <div class="hero-title">
@@ -51,7 +50,7 @@
   <span class="has-text-success" id="gamecount"></span>
 
   <div class="container">
-    <div id="boards" class="columns is-multiline">
+    <div id="boards">
     </div>
   </div>
 
@@ -64,24 +63,46 @@
   </script>
 
   <script id="match" type="text/x-jsrender">
-    <a class="column is-4 is-tablet has-text-grey" href="/[[:room]]">
-      <p>
-        [[if black && black.length]]
-        <small>[[:black]]&nbsp;</small>
-        <!--small class="has-text-grey">[[:blackelo]]</small-->
-          [[else]]
-        <small>[[:event]]&nbsp;</small>
-        <!--small class="has-text-grey">[[:blackelo]]</small-->
-          [[/if]]
-      </p>
-      <div id="[[:room]]"></div>
-      <p class="has-text-right">
-        [[if white && white.length]]
-        <small>[[:white]]&nbsp;</small>
-        <!--small class="has-text-grey">[[:whiteelo]]&nbsp;</small-->
-          [[else]]
-        <small>[[:site]]&nbsp;[[:date]]</small>
-          [[/if]]
-      </p>
+    <a href="/[[:room]]" class="columns">
+      <div class="column is-2">
+        <p>
+          [[if black && black.length]]
+          <small>[[:black]]&nbsp;</small>
+          <!--small class="has-text-grey">[[:blackelo]]</small-->
+            [[else]]
+          <small>[[:event]]&nbsp;</small>
+          <!--small class="has-text-grey">[[:blackelo]]</small-->
+            [[/if]]
+        </p>
+        <div id="[[:room]]"></div>
+        <p class="has-text-right">
+          [[if white && white.length]]
+          <small>[[:white]]&nbsp;</small>
+          <!--small class="has-text-grey">[[:whiteelo]]&nbsp;</small-->
+            [[else]]
+          <small>[[:site]]&nbsp;[[:date]]</small>
+            [[/if]]
+        </p>
+      </div>
+      <div class="column">
+        <div class="hero-title">
+        [[if event]]
+          <p>Evento <span class="has-text-info">[[:event]]</span></p>
+        [[/if]]
+        [[if date]]
+          <p>Fecha <span class="has-text-info">[[:date]]</span></p>
+        [[/if]]
+        [[if site]]
+          <p>Lugar <span class="has-text-info">[[:site]]</span></p>
+        [[/if]]
+        [[if eco]]
+          <p>ECO <span class="has-text-info">[[:eco]]</span></p>
+        [[/if]]
+        [[if result]]
+          <p>Resultado <span class="has-text-info">[[:result]]</span></p>
+        [[/if]]
+        </div>   
+      </div>
+      <hr>
     </a>
   </script>  

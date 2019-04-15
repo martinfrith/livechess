@@ -16,7 +16,7 @@
       <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
   </svg>
   
-  <div class="spinner-content">
+  <div class="spinner-content container">
     <div class="panel-indicator">
       <a href="#" id="flip">
         <span class="icon has-text-grey">
@@ -34,7 +34,7 @@
         </span>
       </a>
     </div>
-
+  
     <div class="columns">
       <div class="column board-container">
         <div class="game-status">
@@ -53,13 +53,6 @@
         <div class="column panel-info">
           <div class="container">
             <div class="columns is-tablet">
-              <div class="column is-10">
-                <div class="switch">
-                  <input name="broadcast" id="broadcast" class="cmn-toggle cmn-toggle-round" type="checkbox" value="1"[[if broadcast == 'true']] checked[[/if]]>
-                  <label for="broadcast"></label> 
-                </div>
-                <span class="has-text-grey is-size-7 has-text-weight-bold">Transmitir EN VIVO</span>
-              </div>
               <div class="column field">
                 <a href="#">
                   <div class="pull-right">
@@ -73,6 +66,14 @@
             <form method="POST" id="loadpgn">
               <input type="hidden" name="room" value="[[:room]]">
               <div class="columns is-tablet">
+                <div class="column">
+                  <div class="switch">
+                    <input name="broadcast" id="broadcast" class="cmn-toggle cmn-toggle-round" type="checkbox" value="1"[[if broadcast == 'true']] checked[[/if]]>
+                    <label for="broadcast"></label> 
+                  </div>
+                  <span class="has-text-grey has-text-weight-bold">Transmitir EN VIVO</span>
+                </div>
+
                 <div class="column field">
                   <label class="label">Evento</label>
                   <div class="control">
@@ -103,6 +104,12 @@
               </div>
               
               <div class="columns is-tablet">
+                <div class="column field">
+                  <label class="label">ECO</label>
+                  <div class="control">
+                    <input name="eco" class="input" type="text" placeholder="8th World Championship" value="[[:eco]]">
+                  </div>
+                </div>
 
                 <div class="column field">
                   <label class="label">Blancas</label>
@@ -151,12 +158,7 @@
               </div>
 
               <div class="columns is-tablet">
-                <div class="column field">
-                  <label class="label">ECO</label>
-                  <div class="control">
-                    <input name="eco" class="input" type="text" placeholder="8th World Championship" value="[[:eco]]">
-                  </div>
-                </div>
+
 
                 <div class="column field">
                   <label class="label">Resultado</label>
