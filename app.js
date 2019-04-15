@@ -118,6 +118,11 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       delete req.body.filter
     }
     db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
+      if(docs){
+        docs.forEach(function(doc){
+          delete doc.secret_room 
+        })
+      }
       return res.json(docs)
     })   
   })

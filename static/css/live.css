@@ -14,6 +14,11 @@
 .panel .field {
 	margin-bottom:  0;
 }
+
+.panel .button:active, .button.is-active {
+	background-color: #f8f8f8;
+}
+
 #board {
 	width: 40%;
 }

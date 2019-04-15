@@ -215,10 +215,10 @@
             </div>
             <div class="columns is-tablet">
               <div class="column">
-                <a class="button" id="undo">Atrás</a>
-                <a class="button" id="wwins">Ganan blancas</a>
-                <a class="button" id="bwins">Ganan negras</a>
-                <a class="button" id="draw">Tabla</a>
+                <a class="button is-danger" id="undo">Atrás</a>
+                <a class="button[[if result == '1-0']] is-active[[/if]]" id="wwins">Ganan blancas</a>
+                <a class="button[[if result == '0-1']] is-active[[/if]]" id="bwins">Ganan negras</a>
+                <a class="button[[if result == '1/2-1/2']] is-active[[/if]]" id="draw">Tabla</a>
               </div>
             </div>
             <div class="columns is-tablet">

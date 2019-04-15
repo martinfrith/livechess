@@ -125,6 +125,7 @@ $(document).ready(function() {
   socket.on('data', function(dataObj){
     if(dataObj.pgn) $('textarea[name="pgn"]').val(dataObj.pgn)
     $('#updatebtn').prop('disabled',false).removeClass('is-loading')
+    $('.is-loading').removeClass('is-loading').addClass('is-active')
   })
 
   socket.on('move', function(moveObj){
@@ -193,14 +194,20 @@ $(document).ready(function() {
         })
 
         wwinsEl.click(function(){
+          $(this).parent().find('.button').removeClass('is-active')
+          $(this).addClass('is-loading')
           socket.emit('data', {room:room,result:'1-0'});
         })
 
         bwinsEl.click(function(){
+          $(this).parent().find('.button').removeClass('is-active')
+          $(this).addClass('is-loading')
           socket.emit('data', {room:room,result:'0-1'});
         })
 
         drawEl.click(function(){
+          $(this).parent().find('.button').removeClass('is-active')
+          $(this).addClass('is-loading')
           socket.emit('data', {room:room,result:'1/2-1/2'});
         })
 
@@ -226,8 +233,6 @@ $(document).ready(function() {
         flipEl.click(function(){
           board.flip()
         })    
-
-        
 
         $(window).on('hashchange', function(){
           if(location.hash.indexOf('info') > -1) {

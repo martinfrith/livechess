@@ -27,6 +27,9 @@ $(document).ready(function() {
     room = location.pathname.replace('/',''),
     data = {},
     synced = false,
+    game_index = undefined,
+    game_pgns = undefined,
+    synced = false,
     game = new Chess()
 
   $(window).resize(function(){
@@ -138,6 +141,8 @@ $(document).ready(function() {
         };
 
         if(data.pgn){
+          game_index = 0
+          game_pgns = data.pgn.split('.')
           game.load_pgn(data.pgn)
         }
 
@@ -154,21 +159,25 @@ $(document).ready(function() {
           flipEl = $('#flip')
 
           backEl.click(function(){
+            if(game_index) game_index--
             board.position(game.back())
             removeHighlights()
           })
 
           nextEl.click(function(){
+            if(game_index <= game_pgns.length ) game_index++
             board.position(game.next())
             removeHighlights()
           })
 
           firstEl.click(function(){
+            game_index = 0
             board.position(game.first())
             removeHighlights()
           })
 
           lastEl.click(function(){
+            game_index = game_pgns.length
             board.position(game.last())
           })
 

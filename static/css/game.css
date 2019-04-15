@@ -6,12 +6,12 @@
   padding-top: 1.25rem;
 }
 
-.game-container {
-	max-width: 90%;
-}
-
 .game-container p {
 	margin-bottom: 0!important;
+}
+
+.game-container .columns .column:nth-child(2) {
+	padding-top: 0;
 }
 
 .navigation .button {
