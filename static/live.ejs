@@ -224,8 +224,23 @@
                 <!--p>FEN: <span id="fen"></span></p-->
                 <p><span>[[:pgn]]</span></p>
                 <hr>
-                <small>URL transmisión pública</small>
-                <input type="text" class="input" name="gameurl" value="[[:watch_url]]" readonly>
+                <small>URL emisión pública</small>
+                <div class="field has-addons">
+
+                  <p class="control">
+                    <input type="text" class="input" name="gameurl" value="[[:watch_url]]" readonly>
+                  </p>
+                  <p class="control">
+                    <a class="button is-static" id="searchbtn">
+                      <span class="fa fa-file"></span>
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a class="button is-static" id="sharebtn">
+                      <span class="fa fa-share"></span>
+                    </a>
+                  </p>  
+                </div>
               </div>
             </div>
           </div>
