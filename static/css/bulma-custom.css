@@ -63,9 +63,8 @@ body {
   }
 }
 
-
 body > .hero {
-  padding-top: 2rem;
+  padding-top: 3.25rem;
 }
 
 body > .notification {
@@ -95,6 +94,10 @@ body > .container {
 	max-height: 8rem;
 }
 
+.is-hero-height {
+  height: 100%;
+}
+
 blockquote {
   color: #a4a4a4;
 }
@@ -107,12 +110,16 @@ blockquote {
   padding: 0.25rem 1rem;
   background-color: white;
   position: fixed;
-  z-index: 99;
+  z-index: 10;
   bottom: 0;
   right:0;
   -webkit-border-top-left-radius: 4px;
   -moz-border-radius-topleft: 4px;
   border-top-left-radius: 4px;  
+}
+
+#boards p {
+  margin-bottom: 0!important;
 }
 
 #nightmode-indicator {
@@ -125,6 +132,7 @@ blockquote {
 .hero-title {
   padding: 1.25rem;
 }
+
 
 .navbar #create {
   display: none;

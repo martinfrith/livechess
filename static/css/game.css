@@ -4,6 +4,7 @@
 
 .gameinfo {
   padding-top: 1.25rem;
+  padding-right: 4rem;
 }
 
 .game-container p {
@@ -15,5 +16,5 @@
 }
 
 .navigation .button {
-	min-width: 35px;
+	min-width: 3.25rem;
 }

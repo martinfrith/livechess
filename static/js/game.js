@@ -28,13 +28,22 @@ $(document).ready(function() {
     data = {},
     synced = false,
     game_index = undefined,
-    game_pgns = undefined,
-    synced = false,
+    game_pgn = undefined,
     game = new Chess()
 
   $(window).resize(function(){
     board.resize()  
   })
+
+  var markCurrentMove = function() {
+    var _pgn = game.pgn(),
+    cur_move = game_pgn[game_index-1]
+    $('#pgn').html(_pgn.replace(cur_move,'<span class="has-text-success">'+cur_move+'</span>'))
+  }
+
+  var onChange = function(old_position,position) {
+    markCurrentMove()
+  };
 
   var removeHighlights = function() {
     boardEl.find('.square-55d63')
@@ -137,18 +146,28 @@ $(document).ready(function() {
 
         var cfg = {
           draggable: false,
-          position: pos
+          position: pos,
+          onChange:onChange
         };
 
         if(data.pgn){
           game_index = 0
-          game_pgns = data.pgn.split('.')
+          game_pgn = []
+          data.pgn.split('.').forEach(function(turn){
+            turn.split(' ').forEach(function(move){
+              if(move.length > 1){
+                game_pgn.push(move)
+              }
+            })
+          })
           game.load_pgn(data.pgn)
         }
 
         board = ChessBoard('board', cfg)
+        game_index = game_pgn.length
         board.position(game.last())
         updateStatus(data);
+        markCurrentMove()
 
         setTimeout(function(){
 
@@ -165,7 +184,7 @@ $(document).ready(function() {
           })
 
           nextEl.click(function(){
-            if(game_index <= game_pgns.length ) game_index++
+            if(game_index <= game_pgn.length ) game_index++
             board.position(game.next())
             removeHighlights()
           })
@@ -177,13 +196,12 @@ $(document).ready(function() {
           })
 
           lastEl.click(function(){
-            game_index = game_pgns.length
+            game_index = game_pgn.length
             board.position(game.last())
           })
 
           flipEl.click(function(){
             board.flip()
-            addHightlights()
             var head = $('.boardhead').html(),
             foot = $('.boardfoot').html()
             $('.boardhead').html(foot)
