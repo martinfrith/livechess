@@ -2,6 +2,10 @@
   padding-top: 2.25rem;
 }
 
+.tag {
+	margin-right: 0.25rem;
+	margin-bottom: 0.25rem;
+}
 .gameinfo {
   padding-top: 1.25rem;
   padding-right: 4rem;

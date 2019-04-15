@@ -64,7 +64,7 @@ $(document).on('click','#create',function(e) {
         return location.href = '/'
       }
       else if(res.status==='success'){
-        return location.href = ['live',res.secret_room,res.room].join('/')
+        return location.href = ['live',res.secret_room,res.room].join('/') + '#info'
       }
     }
   })

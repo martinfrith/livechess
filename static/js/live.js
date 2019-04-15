@@ -142,9 +142,9 @@ $(document).ready(function() {
   });
 
   $.ajax({
-    url:'/games',
+    url:'/secretgames',
     method:'POST',
-    data: {room:room},
+    data: {secret_room:secret_room},
     success:function(res){
       const match = res[0]
       data = match

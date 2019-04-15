@@ -53,196 +53,192 @@
     <div class="inner-panel">
       <div class="columns">
         <div class="column panel-info">
-          <div class="container">
-            <div class="columns is-tablet">
-              <div class="column field">
-                <a href="#">
-                  <div class="pull-right">
-                    <span class="icon has-text-info">
-                      <i class="fa fa-close"></i>
-                    </span>
-                  </div>
-                </a>
-              </div>
+          <div class="columns is-tablet">
+            <div class="column field">
+              <a href="#">
+                <div class="pull-right">
+                  <span class="icon has-text-info">
+                    <i class="fa fa-close"></i>
+                  </span>
+                </div>
+              </a>
             </div>
-            <form method="POST" id="loadpgn">
-              <input type="hidden" name="room" value="[[:room]]">
-              <div class="columns is-tablet">
-                <div class="column">
-                  <div class="switch">
-                    <input name="broadcast" id="broadcast" class="cmn-toggle cmn-toggle-round" type="checkbox" value="1"[[if broadcast == 'true']] checked[[/if]]>
-                    <label for="broadcast"></label> 
-                  </div>
-                  <span class="has-text-grey has-text-weight-bold">Transmitir EN VIVO</span>
+          </div>
+          <form method="POST" id="loadpgn">
+            <input type="hidden" name="room" value="[[:room]]">
+            <div class="columns is-tablet">
+              <div class="column">
+                <div class="switch">
+                  <input name="broadcast" id="broadcast" class="cmn-toggle cmn-toggle-round" type="checkbox" value="1"[[if broadcast == 'true']] checked[[/if]]>
+                  <label for="broadcast"></label> 
                 </div>
+                <span class="has-text-grey has-text-weight-bold">Transmitir EN VIVO</span>
+              </div>
 
-                <div class="column field">
-                  <label class="label">Evento</label>
-                  <div class="control">
-                    <input name="event" class="input" type="text" placeholder="8th World Championship" value="[[:event]]">
-                  </div>
+              <div class="column field">
+                <label class="label">Evento</label>
+                <div class="control">
+                  <input name="event" class="input" type="text" placeholder="8th World Championship" value="[[:event]]">
                 </div>
+              </div>
 
-                <div class="column field">
-                  <label class="label">Lugar</label>
-                  <div class="control">
-                    <input name="site" class="input" type="text" placeholder="Reikiavik, Iceland" value="[[:site]]">
-                  </div>
-                </div>
-                
-                <div class="column field">
-                  <label class="label">Fecha</label>
-                  <div class="control">
-                    <input name="date" class="input" type="text" placeholder="1972.11.22" value="[[:date]]">
-                  </div>
-                </div>
-
-                <div class="column field">
-                  <label class="label">Ronda</label>
-                  <div class="control">
-                    <input name="round" class="input" type="text" placeholder="3" value="[[:round]]">
-                  </div>
+              <div class="column field">
+                <label class="label">Lugar</label>
+                <div class="control">
+                  <input name="site" class="input" type="text" placeholder="Reikiavik, Iceland" value="[[:site]]">
                 </div>
               </div>
               
-              <div class="columns is-tablet">
-                <div class="column field">
-                  <label class="label">ECO</label>
-                  <div class="control">
-                    <input name="eco" class="input" type="text" placeholder="8th World Championship" value="[[:eco]]">
-                  </div>
-                </div>
-
-                <div class="column field">
-                  <label class="label">Blancas</label>
-                  <div class="control">
-                    <input name="white" class="input" type="text" placeholder="Spassky, Boris V" value="[[:white]]">
-                  </div>
-                </div>
-
-                <div class="column field">
-                  <label class="label">Negras</label>
-                  <div class="control">
-                    <input name="black" class="input" type="text" placeholder="Fischer, Robert James" value="[[:black]]">
-                  </div>
-                </div>
-
-                <div class="column field">
-                  <label class="label">ELO Blancas</label>
-                  <div class="control">
-                    <input name="whiteelo" class="input" type="text" placeholder="2660" value="[[:whiteelo]]">
-                  </div>
-                </div>
-
-
-                <div class="column field">
-                  <label class="label">ELO Negras</label>
-                  <div class="control">
-                    <input name="blackelo" class="input" type="text" placeholder="2785" value="[[:blackelo]]">
-                  </div>
-                </div>
-              </div>
-
-              <div class="columns is-tablet">
-                <div class="column field is-6">
-                  <label class="label">PGN</label>
-                  <div class="control">
-                    <textarea name="pgn" class="textarea" placeholder="1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. Nf3 Bg4 5. Be2 e6 6. O-O Be7 7. h3 Bh5 8. c4 Nb6 9. Nc3 O-O 10. Be3 d5 11. c5 Bxf3 12. Bxf3 Nc4 13. b3 Nxe3 14. fxe3 b6 15. e4 c6 16. b4 bxc5 17. bxc5 Qa5 18. Nxd5 Bg5 19. Bh5 cxd5 20. Bxf7+ Rxf7 21. Rxf7 Qd2 22. Qxd2 Bxd2 23. Raf1 Nc6 24. exd5 exd5 25. Rd7 Be3+ 26. Kh1 Bxd4 27. e6 Be5 28. Rxd5 Re8 29. Re1 Rxe6 30. Rd6 Kf7 31. Rxc6 Rxc6 32. Rxe5 Kf6 33. Rd5 Ke6 34. Rh5 h6 35. Kh2 Ra6 36. c6 Rxc6 37. Ra5 a6 38. Kg3 Kf6 39. Kf3 Rc3+ 40. Kf2 Rc2+ ">[[:pgn]]</textarea>
-                  </div>
-                </div>
-
-                <div class="column field is-6">
-                  <label class="label">Observaciones</label>
-                  <div class="control">
-                    <textarea name="comments" class="textarea" placeholder="Escribe tus observaciones aquí">[[:comments]]</textarea>
-                  </div>
-                </div>
-              </div>
-
-              <div class="columns is-tablet">
-
-
-                <div class="column field">
-                  <label class="label">Resultado</label>
-                  <div class="control">
-                    <input name="result" class="input" type="text" placeholder="0-1" value="[[:result]]">
-                  </div>
-                </div>
-                <div class="column field">
-                  <label class="label">URL para oponente</label>
-                  <div class="control">
-                    <input name="live_url" class="input" type="text" placeholder="8th World Championship" value="[[:live_url]]">
-                  </div>
-                </div>
-                <!--div class="column field">
-                  <label class="label">Emitir en vivo</label>
-                  <div class="control">
-                    <input name="broadcast" class="checkbox" type="checkbox" value="1"[[if broadcast]] checked[[/if]]>
-                  </div>
-                </div-->                
-              </div>
-              <div class="field is-grouped">
+              <div class="column field">
+                <label class="label">Fecha</label>
                 <div class="control">
-                  <button type="submit" class="button is-link" id="updatebtn">Actualizar</button>
-                </div>
-
-                <div class="control">
-                    <button type="button" class="button is-text" id="updateclosebtn">Actualizar y cerrar</button>
-                  </a>
-                </div>
-                <div class="control">
-                  <button onclick="location.hash=''" class="button is-text">Cerrar</button>
+                  <input name="date" class="input" type="text" placeholder="1972.11.22" value="[[:date]]">
                 </div>
               </div>
-              <div class="group-control">&nbsp;</div>
-              <div class="group-control">&nbsp;</div>
-            </form>
-          </div>
+
+              <div class="column field">
+                <label class="label">Ronda</label>
+                <div class="control">
+                  <input name="round" class="input" type="text" placeholder="3" value="[[:round]]">
+                </div>
+              </div>
+            </div>
+            
+            <div class="columns is-tablet">
+              <div class="column field">
+                <label class="label">ECO</label>
+                <div class="control">
+                  <input name="eco" class="input" type="text" placeholder="8th World Championship" value="[[:eco]]">
+                </div>
+              </div>
+
+              <div class="column field">
+                <label class="label">Blancas</label>
+                <div class="control">
+                  <input name="white" class="input" type="text" placeholder="Spassky, Boris V" value="[[:white]]">
+                </div>
+              </div>
+
+              <div class="column field">
+                <label class="label">Negras</label>
+                <div class="control">
+                  <input name="black" class="input" type="text" placeholder="Fischer, Robert James" value="[[:black]]">
+                </div>
+              </div>
+
+              <div class="column field">
+                <label class="label">ELO Blancas</label>
+                <div class="control">
+                  <input name="whiteelo" class="input" type="text" placeholder="2660" value="[[:whiteelo]]">
+                </div>
+              </div>
+
+
+              <div class="column field">
+                <label class="label">ELO Negras</label>
+                <div class="control">
+                  <input name="blackelo" class="input" type="text" placeholder="2785" value="[[:blackelo]]">
+                </div>
+              </div>
+            </div>
+
+            <div class="columns is-tablet">
+              <div class="column field is-6">
+                <label class="label">PGN</label>
+                <div class="control">
+                  <textarea name="pgn" class="textarea" placeholder="1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. Nf3 Bg4 5. Be2 e6 6. O-O Be7 7. h3 Bh5 8. c4 Nb6 9. Nc3 O-O 10. Be3 d5 11. c5 Bxf3 12. Bxf3 Nc4 13. b3 Nxe3 14. fxe3 b6 15. e4 c6 16. b4 bxc5 17. bxc5 Qa5 18. Nxd5 Bg5 19. Bh5 cxd5 20. Bxf7+ Rxf7 21. Rxf7 Qd2 22. Qxd2 Bxd2 23. Raf1 Nc6 24. exd5 exd5 25. Rd7 Be3+ 26. Kh1 Bxd4 27. e6 Be5 28. Rxd5 Re8 29. Re1 Rxe6 30. Rd6 Kf7 31. Rxc6 Rxc6 32. Rxe5 Kf6 33. Rd5 Ke6 34. Rh5 h6 35. Kh2 Ra6 36. c6 Rxc6 37. Ra5 a6 38. Kg3 Kf6 39. Kf3 Rc3+ 40. Kf2 Rc2+ ">[[:pgn]]</textarea>
+                </div>
+              </div>
+
+              <div class="column field is-6">
+                <label class="label">Observaciones</label>
+                <div class="control">
+                  <textarea name="comments" class="textarea" placeholder="Escribe tus observaciones aquí">[[:comments]]</textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="columns is-tablet">
+
+
+              <div class="column field">
+                <label class="label">Resultado</label>
+                <div class="control">
+                  <input name="result" class="input" type="text" placeholder="0-1" value="[[:result]]">
+                </div>
+              </div>
+              <div class="column field">
+                <label class="label">URL para oponente</label>
+                <div class="control">
+                  <input name="live_url" class="input" type="text" placeholder="8th World Championship" value="[[:live_url]]">
+                </div>
+              </div>
+              <!--div class="column field">
+                <label class="label">Emitir en vivo</label>
+                <div class="control">
+                  <input name="broadcast" class="checkbox" type="checkbox" value="1"[[if broadcast]] checked[[/if]]>
+                </div>
+              </div-->                
+            </div>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" class="button is-link" id="updatebtn">Actualizar</button>
+              </div>
+
+              <div class="control">
+                  <button type="button" class="button is-text" id="updateclosebtn">Actualizar y cerrar</button>
+                </a>
+              </div>
+              <div class="control">
+                <button onclick="location.hash=''" class="button is-text">Cerrar</button>
+              </div>
+            </div>
+            <div class="group-control">&nbsp;</div>
+            <div class="group-control">&nbsp;</div>
+          </form>
         </div>
         
         <div class="column panel-action">
-          <div class="container">
-            <div class="columns is-tablet">
-              <div class="column field">
-                <a href="#">
-                  <div class="pull-right">
-                    <span class="icon has-text-info">
-                      <i class="fa fa-close"></i>
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="columns is-tablet">
-              <div class="column">
-                <a class="button is-danger" id="undo">Atrás</a>
-                <a class="button[[if result == '1-0']] is-active[[/if]]" id="wwins">Ganan blancas</a>
-                <a class="button[[if result == '0-1']] is-active[[/if]]" id="bwins">Ganan negras</a>
-                <a class="button[[if result == '1/2-1/2']] is-active[[/if]]" id="draw">Tabla</a>
-              </div>
-            </div>
-            <div class="columns is-tablet">
-              <div class="column">
-                <!--p>FEN: <span id="fen"></span></p-->
-                <p><span>[[:pgn]]</span></p>
-                <hr>
-                <small>URL emisión pública</small>
-                <div class="field has-addons">
-
-                  <p class="control">
-                    <input type="text" class="input" name="gameurl" value="[[:watch_url]]" readonly>
-                  </p>
-                  <p class="control">
-                    <a class="button is-static" id="searchbtn">
-                      <span class="fa fa-file"></span>
-                    </a>
-                  </p>
-                  <p class="control">
-                    <a class="button is-static" id="sharebtn">
-                      <span class="fa fa-share"></span>
-                    </a>
-                  </p>  
+          <div class="columns is-tablet">
+            <div class="column field">
+              <a href="#">
+                <div class="pull-right">
+                  <span class="icon has-text-info">
+                    <i class="fa fa-close"></i>
+                  </span>
                 </div>
+              </a>
+            </div>
+          </div>
+          <div class="columns is-tablet">
+            <div class="column">
+              <a class="button is-danger" id="undo">Atrás</a>
+              <a class="button[[if result == '1-0']] is-active[[/if]]" id="wwins">Ganan blancas</a>
+              <a class="button[[if result == '0-1']] is-active[[/if]]" id="bwins">Ganan negras</a>
+              <a class="button[[if result == '1/2-1/2']] is-active[[/if]]" id="draw">Tabla</a>
+            </div>
+          </div>
+          <div class="columns is-tablet">
+            <div class="column">
+              <!--p>FEN: <span id="fen"></span></p-->
+              <p><span>[[:pgn]]</span></p>
+              <hr>
+              <small>URL emisión pública</small>
+              <div class="field has-addons">
+
+                <p class="control">
+                  <input type="text" class="input" name="gameurl" value="[[:watch_url]]" readonly>
+                </p>
+                <p class="control">
+                  <a class="button is-static" id="searchbtn">
+                    <span class="fa fa-file"></span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a class="button is-static" id="sharebtn">
+                    <span class="fa fa-share"></span>
+                  </a>
+                </p>  
               </div>
             </div>
           </div>

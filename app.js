@@ -119,10 +119,21 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     }
     db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
       if(docs){
-        docs.forEach(function(doc){
+        docs.forEach(function(doc){ // hide security data
           delete doc.secret_room 
+          delete doc.live_url 
         })
       }
+      return res.json(docs)
+    })   
+  })
+
+  app.post('/secretgames', function (req, res) { 
+    if(req.body.filter){
+      req.body.filter.split('|').map(function(x){req.body[x] =  {$ne : null}});       
+      delete req.body.filter
+    }
+    db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
       return res.json(docs)
     })   
   })
@@ -185,20 +196,22 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       {
         "$set": moveObj
       },{ new: true }).then(function(doc){
-        console.log(data.room + '- user moved: ' + JSON.stringify(move));
+        console.log(moveObj.room + '- user moved: ' + JSON.stringify(move));
         io.emit('move', move);
       })
     });
 
     socket.on('data', function(data) { //move object emitter
+      var dataObj = data
+      dataObj.updatedAt = moment().utc().format()      
       return db.collection('games').findOneAndUpdate(
       {
         room:data.room
       },
       {
-        "$set": data
+        "$set": dataObj
       },{ new: true }).then(function(doc){
-        console.log(data.room + '- data updated: ' + JSON.stringify(data));
+        console.log(dataObj.room + '- data updated: ' + JSON.stringify(data));
         io.emit('data', data);
       })
     });

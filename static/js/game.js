@@ -35,14 +35,36 @@ $(document).ready(function() {
     board.resize()  
   })
 
-  var markCurrentMove = function() {
-    var _pgn = game.pgn(),
-    cur_move = game_pgn[game_index-1]
-    $('#pgn').html(_pgn.replace(cur_move,'<span class="has-text-success">'+cur_move+'</span>'))
+  var taggedPGN = function() {
+    var html = []
+    game_pgn.forEach(function(move,i){
+      if(i%2==0){
+        html.push('<span>' + (i/2+1) +'.</span>')
+      }
+      html.push('<span class="pgn pgn'+i+'">'+move+'</span>')
+    })
+    $('#pgn').html(html.join(' '))
+  }
+
+  var gamePGN = function(pgn) {
+    var data = []
+    pgn.split('.').forEach(function(turn){
+      turn.split(' ').forEach(function(move){
+        if(isNaN(move) && move.length > 1){
+          data.push(move)
+        }
+      })
+    })
+    return data
+  }
+
+  var markPGN = function() {
+    $('.pgn').removeClass('has-text-success')
+    $('.pgn'+(game_index-1)).addClass('has-text-success')
   }
 
   var onChange = function(old_position,position) {
-    markCurrentMove()
+    markPGN()
   };
 
   var removeHighlights = function() {
@@ -152,22 +174,19 @@ $(document).ready(function() {
 
         if(data.pgn){
           game_index = 0
-          game_pgn = []
-          data.pgn.split('.').forEach(function(turn){
-            turn.split(' ').forEach(function(move){
-              if(move.length > 1){
-                game_pgn.push(move)
-              }
-            })
-          })
+          game_pgn = gamePGN(data.pgn)
           game.load_pgn(data.pgn)
         }
 
         board = ChessBoard('board', cfg)
-        game_index = game_pgn.length
         board.position(game.last())
         updateStatus(data);
-        markCurrentMove()
+
+        if(game_pgn){
+          game_index = game_pgn.length
+          taggedPGN()
+          markPGN()
+        }
 
         setTimeout(function(){
 
