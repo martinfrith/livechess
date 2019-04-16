@@ -778,7 +778,7 @@ window['Chess'] = window['Chess'] || function(fen) {
 
       /* has the position occurred three or move times */
       positions[fen] = (fen in positions) ? positions[fen] + 1 : 1;
-      if (positions[fen] >= 3) {
+      if (positions[fen] >= 4) {
         repetition = true;
       }
 
