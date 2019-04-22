@@ -29,26 +29,29 @@ $(document).ready(function() {
   }
 
   var findGames = function(){
-    console.log("findGames")
+    $('#boards').html('')
+    $('.spinner-content').fadeOut('fast', function(){
+      $('.spinner-container').fadeTo('fast',1)
+    })    
     $.ajax({
       url:'/games',
       method:'POST',
       data: {filter:'pgn|white|black'},
       success:function(res){
         if(!res.length){
-          $('#boards').html($.templates("#empty").render()).promise().done(function (){
+          $('.empty-container').html($.templates("#empty").render()).promise().done(function (){
             $('.spinner-container').fadeOut('fast', function(){
-              $('.spinner-content').fadeTo('slow',1)
+              $('.spinner-content, .empty-container').fadeTo('slow',1)
             })
           })
-
           return false
+        } else {
+          $('.empty-container').fadeOut()
         }
 
         // inject html boards
         $('#boards').html($.templates("#match").render(res,parseHelpers)).promise().done(function (){
           // check for last moves on every game
-          /*
           $(res).each(function(i,match){
 
             var pos = 'start'
@@ -74,7 +77,6 @@ $(document).ready(function() {
 
             updateStatus(match)
           }) 
-          */
 
           $('.spinner-container').fadeOut('fast', function(){
             $('.spinner-content').fadeTo('fast',1)
@@ -91,8 +93,15 @@ $(document).ready(function() {
     addHightlights(move)
   };
 
+  socket.on('data', function(dataObj){ //remote move by peer
+    findGames()
+  })
+
   socket.on('move', function(moveObj){ //remote move by peer
-    console.log('peer move: ' + JSON.stringify(moveObj));
+    if($.inArray(moveObj.room,Object.keys(boards)) === -1){
+      findGames()
+    }
+
     if(boards[moveObj.room]){
       var move = game.move(moveObj);
       // illegal move
@@ -105,5 +114,4 @@ $(document).ready(function() {
 	});
 
   findGames()
-
 });

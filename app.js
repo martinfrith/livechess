@@ -1,3 +1,4 @@
+const fs = require('fs')
 var express = require('express');
 var path = require('path');
 var app = express();
@@ -27,42 +28,6 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
 
   app.get('/', function (req, res) {
     res.render('index')
-  });
-
-  app.get('/about', function (req, res) {
-    res.render('about')
-  });
-
-  app.get('/contact', function (req, res) {
-    res.render('contact')
-  });
-
-  app.get('/results', function (req, res) {
-    res.render('results')
-  });
-
-  app.get('/loadpgn', function (req, res) {
-    res.render('loadpgn')
-  })
-
-  app.get('/start', function (req, res) {
-    res.render('start')
-  });
-
-  app.get('/vivo', function (req, res) { 
-    res.render('vivo')
-  });
-
-  app.get('/games', function (req, res) { 
-    res.render('games')
-  });
-
-  app.get('/game-unknown', function (req, res) { 
-    res.render('game-unknown')
-  });
-
-  app.get('/:room', function (req, res) {
-    res.render('game')
   });
 
   app.post('/create/:room', function (req, res) { 
@@ -180,6 +145,24 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     })    
   })
 
+  app.get('*', function (req, res) { 
+    const pathurl = [path.join(__dirname, 'static'),req.path+'.ejs'].join('')
+    const pathname = req.path.split('/').join('')
+    fs.stat(pathurl, function(err, stat) {
+      if(err == null) {
+        res.render(pathname)
+      } else {
+        db.collection('games').find({room:pathname}).toArray(function(err,docs){
+          if(docs.length) {
+            res.render('game')
+          } else {
+            res.render('404')
+          }
+        })
+      }
+    });
+  })
+
   io.on('connection', function(socket){ //join room on connect
     socket.on('join', function(room) {
       socket.join(room);
@@ -222,14 +205,10 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     });
   });
 
+
   var server = http.listen(process.env.PORT, function () { //run http and web socket server
     var host = server.address().address;
     var port = server.address().port;
-
-    app.get('*', function (req, res) { 
-      res.render('404')
-    });
-
     console.log('Server listening at address ' + host + ', port ' + port);
   });
 });
