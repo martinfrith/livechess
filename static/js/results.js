@@ -29,7 +29,6 @@ $(document).ready(function() {
   }
 
   var findGames = function(){
-    console.log("findGames")
     $.ajax({
       url:'/games',
       method:'POST',

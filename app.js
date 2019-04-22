@@ -79,7 +79,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
 
   app.post('/games', function (req, res) { 
     if(req.body.filter){
-      req.body.filter.split('|').map(function(x){req.body[x] =  {$ne : null}});       
+      req.body.filter.split('|').map(function(x){req.body[x] = { "$regex": /^.{1,}$/ }});       
       delete req.body.filter
     }
     db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
