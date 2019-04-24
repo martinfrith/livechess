@@ -123,7 +123,9 @@ $(document).ready(function() {
   })
 
   socket.on('data', function(dataObj){
+    var broadcast = $('input[name="broadcast"]').is(':checked')?1:0
     if(dataObj.pgn) $('textarea[name="pgn"]').val(dataObj.pgn)
+    $('#watch_url').css({opacity:broadcast})
     $('#updatebtn').prop('disabled',false).removeClass('is-loading')
     $('.is-loading').removeClass('is-loading').addClass('is-active')
   })

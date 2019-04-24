@@ -57,8 +57,8 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     })
   });
 
-  app.get('/live/:secret_room/:room', function (req, res) { 
-    if(!req.params.secret_room||!req.params.room) return res.json({status:'error',message:'not_enough_params'})
+  app.get('/live/:secret/:room', function (req, res) { 
+    if(!req.params.secret||!req.params.room) return res.json({status:'error',message:'not_enough_params'})
     db.collection('games').findOneAndUpdate(
     {
       room:req.params.room
@@ -66,7 +66,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     {
       "$set": {
         room:req.params.room,
-        secret_room:req.params.secret_room
+        secret_room:req.params.secret
       }
     },{ 
       upsert: true, 

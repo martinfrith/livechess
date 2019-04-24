@@ -149,5 +149,9 @@ blockquote {
   display: none;
 }
 
+.splash img {
+  max-height: 50vh;
+}
+
 @media screen and (max-width: 769px), print {
 }
