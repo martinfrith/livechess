@@ -143,7 +143,7 @@ $(document).ready(function() {
     if (move === null) {
       return;
     }
-    updateStatus(move);
+    //updateStatus(move);
     board.position(game.fen());
   });
 

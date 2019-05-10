@@ -81,11 +81,13 @@ $(document).ready(function() {
 
     // checkmate?
     if (game.in_checkmate() === true) {
+      socket.emit('data', {room:room,result:(moveColor==='Blancas'?'0-1':'1-0')});
       status = 'Juego finalizado. ' + moveColor + ' en jaquemate.';
     }
 
     // draw?
     else if (game.in_draw() === true) {
+      socket.emit('data', {room:room,result:'1/2-1/2'});
       status = 'Juego finalizado, tablas.';
     }
 

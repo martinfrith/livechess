@@ -42,7 +42,10 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
         {
           "$set": {
             room:req.params.room,
-            secret_room:secret_room
+            secret_room:secret_room,
+            date:moment().utc().format('YYYY.MM.DD'),
+            event: 'Online game',
+            views: 1
           }
         },{ 
           upsert: true, 
@@ -79,9 +82,16 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
 
   app.post('/games', function (req, res) { 
     if(req.body.filter){
-      req.body.filter.split('|').map(function(x){req.body[x] = { "$regex": /^.{1,}$/ }});       
+      req.body.filter.split('|').map(function(x){
+        if(x==='puzzles'){
+          req.body["result"] = ""
+        } else {
+          req.body[x] = { "$regex": /^.{1,}$/ }
+        }
+      });       
       delete req.body.filter
     }
+    console.log(req.body)
     db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
       if(docs){
         docs.forEach(function(doc){ // hide security data
@@ -152,9 +162,19 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       if(err == null) {
         res.render(pathname)
       } else {
-        db.collection('games').find({room:pathname}).toArray(function(err,docs){
+        db.collection('games').findOne({room:pathname}).toArray(function(err,doc){
           if(docs.length) {
-            res.render('game')
+            db.collection('games').findOneAndUpdate(
+            {
+              room:pathname
+            },
+            {
+              "$set": {
+                views : doc.views + 1
+              }
+            },{ new: false }).then(function(){
+              res.render('game')
+            })
           } else {
             res.render('404')
           }

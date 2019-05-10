@@ -36,7 +36,7 @@ $(document).ready(function() {
     $.ajax({
       url:'/games',
       method:'POST',
-      data: {filter:'pgn|white|black'},
+      data: {filter:'puzzles'},
       success:function(res){
         if(!res.length){
           $('.empty-container').html($.templates("#empty").render()).promise().done(function (){
