@@ -17,7 +17,7 @@
       -moz-box-shadow: inset 0 0 5px 5px blue;
       box-shadow: inset 0 0 5px 5px blue;  
     }
-    .gamebar {
+    .bar {
       display: inline-block;
       width: 100%;
       position: fixed;  
@@ -25,15 +25,15 @@
       background-color: rgba(0,0,0,0.1);
       cursor: pointer;
     }
-    .gamebar-progress {
-      height: 0.75rem;
+    .bar-progress {
+      height: 1.5rem;
       background-color: red;
       width: 0;
     }
-    .nightmode .gamebar-progress {
+    .nightmode .bar-progress {
       background-color: orange; 
     }
-    .gamebar-progress.paused {
+    .bar-progress.paused {
       background-color: grey;
     }
     .boardhead {
@@ -61,8 +61,8 @@
     <div class="game-container content"></div>
   </div>
 
-  <div class="gamebar">
-    <div class="gamebar-progress"></div>
+  <div class="bar">
+    <div class="bar-progress"></div>
   </div>
 
   <script id="game" type="text/x-jsrender">

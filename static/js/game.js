@@ -1,15 +1,15 @@
 var board,
+room = location.pathname.replace('/',''),
 boardEl = $('#board'),
 game = new Chess(),
-room = location.pathname.replace('/',''),
-squareClass = 'square-55d63',
-squareToHighlight,
-paused = false,
-speed = 2000,
-colorToHighlight,
-possibleMoves = [],
 index = 0,
-makeMove = function() {
+paused = false,
+speed = 2500,
+squareToHighlight,
+colorToHighlight,
+squareClass = 'square-55d63',
+possibleMoves = [],
+makeMove = () => {
 
   if(!paused){
     // exit if the game is over
@@ -20,7 +20,8 @@ makeMove = function() {
       game.in_draw() === true ||
       possibleMoves.length === 0) return;
 
-    square = move.replace(/[A-Z]/,"")
+    var square = move.replace(/[^\w\s]/gi,'')
+    square = square.substr(-2)
 
     if (index%2===0) {
       boardEl.find('.' + squareClass).removeClass('highlight-white');
@@ -36,10 +37,9 @@ makeMove = function() {
     }
 
     var perc = (index + 1) / possibleMoves.length * 100;
-    $('.gamebar-progress').animate({width:perc+'%'},speed,'linear')
+    $('.bar-progress').animate({width:perc+'%'},speed,'linear')
 
-    console.log("move:" + move)
-
+    console.log(index + ":" + move)
     index++
     game.move(move);
     board.position(game.fen());
@@ -88,13 +88,20 @@ gameFlip = () => {
   $('.boardhead').html(foot)
   $('.boardfoot').html(head)
 },
-gamePos = () => {
+gamePos = (pos) => {
+  game.reset();
+  possibleMoves.forEach((move,i) => {
+    if(i < pos){
+      game.move(move)
+    }
+  })
+  index = pos
 },
 gamePause = () => {
   paused = !paused
-  $('.gamebar-progress').removeClass('paused')
+  $('.bar-progress').removeClass('paused')
   if(paused){
-    $('.gamebar-progress').addClass('paused')
+    $('.bar-progress').addClass('paused')
   } else {
     window.setTimeout(makeMove, 500)
   }
@@ -109,10 +116,13 @@ cfg = {
 }
 /**/
 $(document).on('click','.game-container', () => {
-  boardFlip()
+  gameFlip()
 })
-$(document).on('click','.gamebar', () => {
-  gamePos()
+$(document).on('click','.bar', (e) => {
+    var x = e.pageX - e.target.offsetLeft
+    var w = $(document).width()
+    var pos = parseInt(x / w * possibleMoves.length)
+    gamePos(pos)
 })
 $(document).keydown(function(e) {
   if(e.keyCode == 37){

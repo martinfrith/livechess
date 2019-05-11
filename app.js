@@ -127,16 +127,15 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
 
   app.post('/search', function (req, res) { 
     if(!req.body.query) return res.json({'error':'not_enough_params'})
+    var $or = []
+    req.body.query.split(' ').forEach((w) => {
+      $or.push({"event": {'$regex' : w, '$options' : 'i'}})
+      $or.push({"site": {'$regex' : w, '$options' : 'i'}})
+      $or.push({"white": {'$regex' : w, '$options' : 'i'}})
+      $or.push({"black": {'$regex' : w, '$options' : 'i'}})
+    })
     db.collection('games').find({        
-      "$or": [{
-          "event": {'$regex' : req.body.query, '$options' : 'i'}
-      }, {
-          "site": {'$regex' : req.body.query, '$options' : 'i'}
-      }, {
-          "white": {'$regex' : req.body.query, '$options' : 'i'}
-      }, {
-          "black": {'$regex' : req.body.query, '$options' : 'i'}
-      }]
+      "$or": $or
     }).toArray(function(err,docs){
       return res.json(docs)
     })   
