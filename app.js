@@ -91,7 +91,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       });       
       delete req.body.filter
     }
-    console.log(req.body)
+
     db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
       if(docs){
         docs.forEach(function(doc){ // hide security data
@@ -162,8 +162,8 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       if(err == null) {
         res.render(pathname)
       } else {
-        db.collection('games').findOne({room:pathname}).toArray(function(err,doc){
-          if(docs.length) {
+        db.collection('games').findOne({room:pathname}).then(function(doc){
+          if(doc) {
             db.collection('games').findOneAndUpdate(
             {
               room:pathname
