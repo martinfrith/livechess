@@ -16,6 +16,13 @@ parseHelpers = {
     var date = new Date( parseInt( timestamp, 16 ) * 1000 )
     return moment(date).fromNow()
   },
+  parseResult(result,p){
+    if(p==='w'){
+      return result.split('-').reverse()[0]
+    } else if(p==='b'){
+      return result.split('-')[0]
+    }
+  },
   abbrRoom:function(id){
     return id.substr(-5)
   }
