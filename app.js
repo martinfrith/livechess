@@ -8,7 +8,7 @@ var moment = require('moment');
 var mongodb = require('mongodb');
 var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
-var onlinewhen = moment().utc().subtract(30, 'minutes').format()
+var onlinewhen = moment().utc().subtract(10, 'minutes')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
@@ -114,7 +114,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
   })
 
   app.post('/online', function (req, res) { 
-    db.collection('games').find({updatedAt: { $gte: onlinewhen }, pgn: {$ne : null}, broadcast : 'true'}).toArray(function(err,docs){
+    db.collection('games').find({updatedAt: { $gte: onlinewhen.format() }, pgn: {$ne : null}, broadcast : 'true'}).toArray(function(err,docs){
       return res.json(docs)
     })   
   })
@@ -158,9 +158,10 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
   app.get('*', function (req, res) { 
     const pathurl = [path.join(__dirname, 'static'),req.path+'.ejs'].join('')
     const pathname = req.path.split('/').join('')
+    const query = req.query
     fs.stat(pathurl, function(err, stat) {
       if(err == null) {
-        res.render(pathname)
+        res.render(pathname,{query: query})
       } else {
         db.collection('games').findOneAndUpdate(
         {
@@ -172,7 +173,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
           }
         },{ upsert: false, new: true }).then(function(doc){
           if(doc.value){
-            if(doc.value.updatedAt && doc.value.broadcast && moment(doc.value.updatedAt).format('x') > moment().subtract(2,'minutes').format('x')) {
+            if(doc.value.updatedAt && doc.value.broadcast && moment(doc.value.updatedAt).format('x') > onlinewhen.format('x')) {
               res.render('watch')
             } else {
               res.render('game')

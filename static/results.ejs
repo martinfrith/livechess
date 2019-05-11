@@ -1,13 +1,27 @@
 <%- contentFor('css') %>
 
-	<link rel="stylesheet" href="/css/chessboard.css" />
-
 <%- contentFor('js') %>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/libs/chess.js"></script>
-    <script src="/js/libs/chessboard.js"></script>
-	<script src="/js/results.js"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			var query = '<%= query.q %>';
+			$('input[name=query]').val(query)
+		    $.ajax({
+		      url:'/search',
+		      method:'POST',
+		      data: {query:query},
+		      success:function(res){
+		        $('#results').html($.templates(res.length?"#games":"#empty").render({games:res},parseHelpers)).promise().done(function (){
+		          $('.spinner-container').fadeOut('fast', function(){
+		            $('.spinner-content').fadeTo('fast',1)
+		          })
+		        })
+		      }
+		    })  
+		})
+
+	</script>
 
 <%- contentFor('content') %>
 
@@ -17,39 +31,52 @@
 	
 	<div class="container">
 		<div class="content">
-		    <table class="table is-striped">
-		    	<thead>
-		    		<th>Mesa</th>
-		    		<th>Evento</th>
-		    		<th>Lugar</th>
-		    		<th>Blancas</th>
-		    		<th>Negras</th>
-		    		<th>Resultado</th>
-		    		<th>Fecha</th>
-		    		<th>Cargado</th>
-		    	</thead>
-		    	<tbody id="boards"></tbody>
-		    </table>
+	        <form id="search">
+	            <div class="field has-addons">
+	              <div class="control">
+	                <input class="input is-rounded" name="query" type="text" placeholder="Ingresa evento, lugar o jugador" autofocus="">
+	              </div>
+	              <div class="control">
+	                <button type="submit" id="searchbtn" class="button is-rounded is-success">
+	                    <span class="fa fa-search"></span>
+	                </button>
+	              </div>
+	            </div>
+	        </form>   		
+	        <div class="" id="results">
+	        </div>
 		</div>
 	</div>
 
 	<script id="empty" type="text/x-jsrender">
-		<tr>
-			<td colspan=7>
-				<p class="has-text-danger"><span class="fa fa-warning"></span> No hay partidas en vivo en este momento. <a href="#" id="create">Crea tu partida en vivo!</a></p>
-			</td>
-		</tr>
+		<p class="is-notification has-text-danger">No hay partidas que coincidan con tu palabra clave.</p>
 	</script>
 
-	<script id="match" type="text/x-jsrender">
-		<tr>
-			<td><a class="" id="[[:room]]" href="/[[:room]]">[[:~abbrRoom(room)]]</a></td>
-			<td><span class="">[[:event]]</span></td>
-			<td><span class="">[[:site]]</span></td>
-			<td><span class="">[[:white]]</span></td>
-			<td><span class="">[[:black]]</span></td>
-			<td><span class="">[[:result]]</span></td>
-			<td><span class="">[[:date]]</span></td>
-			<td><span class="">[[:~timeSpan(_id)]]</span></td>
-		</tr>
+	<script id="games" type="text/x-jsrender">
+	    <table class="table is-striped">
+	    	<thead>
+	    		<th>Mesa</th>
+	    		<th>Evento</th>
+	    		<th>Lugar</th>
+	    		<th>Blancas</th>
+	    		<th>Negras</th>
+	    		<th>Resultado</th>
+	    		<th>Fecha</th>
+	    		<th>Cargado</th>
+	    	</thead>
+	    	<tbody>
+	    	[[for games]]
+				<tr>
+					<td><a class="" id="[[:room]]" href="/[[:room]]">[[:~abbrRoom(room)]]</a></td>
+					<td><span class="">[[:event]]</span></td>
+					<td><span class="">[[:site]]</span></td>
+					<td><span class="">[[:white]]</span></td>
+					<td><span class="">[[:black]]</span></td>
+					<td><span class="">[[:result]]</span></td>
+					<td><span class="">[[:date]]</span></td>
+					<td><span class="">[[:~timeSpan(_id)]]</span></td>
+				</tr>
+			[[/for]]
+	    	</tbody>
+	    </table>
 	</script>

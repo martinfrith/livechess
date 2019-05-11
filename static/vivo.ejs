@@ -1,13 +1,23 @@
 <%- contentFor('css') %>
 
-	<link rel="stylesheet" href="/css/chessboard.css" />
-
 <%- contentFor('js') %>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/libs/chess.js"></script>
-    <script src="/js/libs/chessboard.js"></script>
-	<script src="/js/vivo.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		    $.ajax({
+		      url:'/online',
+		      method:'POST',
+		      success:function(res){
+		        $('#results').html($.templates(res.length?"#games":"#empty").render({games:res},parseHelpers)).promise().done(function (){
+		          $('.spinner-container').fadeOut('fast', function(){
+		            $('.spinner-content').fadeTo('fast',1)
+		          })
+		        })
+		      }
+		    })  
+		})
+
+	</script>
 
 <%- contentFor('content') %>
 
@@ -16,62 +26,37 @@
 	</svg>
 	
 	<div class="container">
-		<div class="hero">
-			<div class="hero-body">
-				<div class="empty-container"></div>
-			    <div id="boards"></div>
-			</div>
-	    </div>
-	</div>
-	<script id="empty" type="text/x-jsrender">
-		<div class="container">
-			<p class="has-text-grey">No hay partidas en vivo en este momento. 🤷</p>
-			<a href="#" class="button is-large is-grey is-outlined hero" id="create">Crea tu partida en vivo!</a></p>
+		<div class="content">
+	        <div class="" id="results">
+	        </div>
 		</div>
+	</div>
+
+	<script id="empty" type="text/x-jsrender">
+		<p class="is-notification has-text-danger">No hay partidas en vivo en este momento.</p>
 	</script>
 
-	<script id="match" type="text/x-jsrender">
-	    <a href="/[[:room]]" class="columns">
-	      <div class="column is-3">
-	        <p>
-	          [[if black && black.length]]
-	          <small>[[:black]]&nbsp;</small>
-	          <!--small class="has-text-grey">[[:blackelo]]</small-->
-	            [[else]]
-	          <small>[[:event]]&nbsp;</small>
-	          <!--small class="has-text-grey">[[:blackelo]]</small-->
-	            [[/if]]
-	        </p>
-	        <div id="[[:room]]"></div>
-	        <p class="has-text-right">
-	          [[if white && white.length]]
-	          <small>[[:white]]&nbsp;</small>
-	          <!--small class="has-text-grey">[[:whiteelo]]&nbsp;</small-->
-	            [[else]]
-	          <small>[[:site]]&nbsp;[[:date]]</small>
-	            [[/if]]
-	        </p>
-	      </div>
-	      <div class="column">
-	        <div class="hero-title content">
-	        [[if event]]
-	          <h3><span class="has-text-info">[[:event]]</span></h3>
-	        [[/if]]
-	        [[if date]]
-	          <p><span class="has-text-info">[[:date]]</span></p>
-	        [[/if]]
-	        [[if site]]
-	          <p><span class="has-text-info">[[:site]]</span></p>
-	        [[/if]]
-	        [[if eco]]
-	          <p><span class="has-text-info">[[:eco]]</span></p>
-	        [[/if]]
-	        [[if result]]
-	          <p><span class="has-text-info">[[:result]]</span></p>
-	        [[/if]]
-	        <p><span class="has-text-info">[[:~timeSpan(_id)]]</span></p>
-	        </div>   
-	      </div>
-	      <hr>
-	    </a>
+	<script id="games" type="text/x-jsrender">
+	    <table class="table is-striped">
+	    	<thead>
+	    		<th>Mesa</th>
+	    		<th>Evento</th>
+	    		<th>Ronda</th>	    		
+	    		<th>Lugar</th>
+	    		<th>Blancas</th>
+	    		<th>Negras</th>
+	    	</thead>
+	    	<tbody>
+	    	[[for games]]
+				<tr>
+					<td><a class="" id="[[:room]]" href="/[[:room]]">[[:~abbrRoom(room)]]</a></td>
+					<td><span class="">[[:event]]</span></td>
+					<td><span class="">[[:site]]</span></td>
+					<td><span class="">[[:round]]</span></td>
+					<td><span class="">[[:white]]</span></td>
+					<td><span class="">[[:black]]</span></td>
+				</tr>
+			[[/for]]
+	    	</tbody>
+	    </table>
 	</script>

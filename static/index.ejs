@@ -1,14 +1,21 @@
 <%- contentFor('css') %>
 
-  <link rel="stylesheet" href="/css/chessboard.css" />
-
 <%- contentFor('js') %>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/libs/chess.js"></script>
-    <script src="/js/libs/chessboard.js"></script>
-    <script src="/js/games.js"></script>
- 
+  <script type="text/javascript">
+    $.ajax({
+      url:'/gamecount',
+      method:'POST',
+      success:function(res){
+        $('#gamecount').html($.templates("#count").render({count:res})).promise().done(function (){
+          $('.spinner-container').fadeOut('fast', function(){
+            $('.spinner-content').fadeTo('fast',1)
+          })
+        })
+      }
+    })  
+  </script>
+
 <%- contentFor('content') %>
 
   <svg class="spinner-container" viewBox="0 0 44 44">
@@ -74,49 +81,3 @@
   <script id="count" type="text/x-jsrender">
     <p>Total [[:count]] partidas</p>
   </script>
-
-  <script id="match" type="text/x-jsrender">
-    <a href="/[[:room]]" class="columns">
-      <div class="column is-3">
-        <p>
-          [[if black && black.length]]
-          <small>[[:black]]&nbsp;</small>
-          <!--small class="has-text-grey">[[:blackelo]]</small-->
-            [[else]]
-          <small>[[:event]]&nbsp;</small>
-          <!--small class="has-text-grey">[[:blackelo]]</small-->
-            [[/if]]
-        </p>
-        <div id="[[:room]]"></div>
-        <p class="has-text-right">
-          [[if white && white.length]]
-          <small>[[:white]]&nbsp;</small>
-          <!--small class="has-text-grey">[[:whiteelo]]&nbsp;</small-->
-            [[else]]
-          <small>[[:site]]&nbsp;[[:date]]</small>
-            [[/if]]
-        </p>
-      </div>
-      <div class="column">
-        <div class="hero-title">
-        [[if event]]
-          <h3><span class="has-text-info">[[:event]]</span></h3>
-        [[/if]]
-        [[if date]]
-          <p><span class="has-text-info">[[:date]]</span></p>
-        [[/if]]
-        [[if site]]
-          <p><span class="has-text-info">[[:site]]</span></p>
-        [[/if]]
-        [[if eco]]
-          <p><span class="has-text-info">[[:eco]]</span></p>
-        [[/if]]
-        [[if result]]
-          <p><span class="has-text-info">[[:result]]</span></p>
-        [[/if]]
-        <p><span class="has-text-info">[[:~timeSpan(_id)]]</span></p>
-        </div>   
-      </div>
-      <hr>
-    </a>
-  </script>  

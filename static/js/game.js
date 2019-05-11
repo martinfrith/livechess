@@ -115,7 +115,6 @@ $(document).on('click','.gamebar', () => {
   gamePos()
 })
 $(document).keydown(function(e) {
-    console.log("key pressed:" + e.keyCode)
   if(e.keyCode == 37){
     if(index){
       console.log("bwd")

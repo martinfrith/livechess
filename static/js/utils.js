@@ -110,6 +110,11 @@ $(document).ready(function() {
   }
 });
 
+$(document).on('submit','#search',function(){
+  location.href = '/results?q=' + encodeURIComponent($('input[name=query]').val().trim())
+  return false
+})
+
 moment.locale('es')
 $.views.settings.delimiters("[[", "]]");
 $.ajaxSetup({
