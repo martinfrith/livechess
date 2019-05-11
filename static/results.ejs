@@ -4,22 +4,22 @@
 
 	<script type="text/javascript">
 
-		$(document).ready(function(){
-			var query = '<%= query.q %>';
-			$('input[name=query]').val(query)
-		    $.ajax({
-		      url:'/search',
-		      method:'POST',
-		      data: {query:query},
-		      success:function(res){
-		        $('#results').html($.templates(res.length?"#games":"#empty").render({games:res},parseHelpers)).promise().done(function (){
-		          $('.spinner-container').fadeOut('fast', function(){
-		            $('.spinner-content').fadeTo('fast',1)
-		          })
-		        })
-		      }
-		    })  
-		})
+	$(document).ready(function(){
+		var query = '<%= query.q %>';
+		$('input[name=query]').val(query)
+	    $.ajax({
+	      url:'/search',
+	      method:'POST',
+	      data: {query:query},
+	      success:function(res){
+	        $('#results').html($.templates(res.length?"#games":"#empty").render({games:res,query:query},parseHelpers)).promise().done(function (){
+	          $('.spinner-container').fadeOut('fast', function(){
+	            $('.spinner-content').fadeTo('fast',1)
+	          })
+	        })
+	      }
+	    })  
+	})
 
 	</script>
 
@@ -49,10 +49,15 @@
 	</div>
 
 	<script id="empty" type="text/x-jsrender">
+	[[if query.length]]
 		<p class="is-notification has-text-danger">No hay partidas que coincidan con tu palabra clave.</p>
+	[[else]]
+		<p class="is-notification has-text-success">Busca por jugador, evento o lugar.</p>
+	[[/if]]
 	</script>
 
 	<script id="games" type="text/x-jsrender">
+	    <p class="is-notification has-text-success">[[:games.length]] partidas</p>
 	    <table class="table is-striped">
 	    	<thead>
 	    		<th>Mesa</th>

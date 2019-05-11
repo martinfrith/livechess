@@ -96,23 +96,23 @@
   <script id="match" type="text/x-jsrender">
     <div class="columns is-tablet">
       <div class="column">
-        <h3 class="has-text-left boardhead">
+        <h4 class="has-text-left boardhead">
         [[if black && black.length]]
           <span id="black">[[:black]]&nbsp;</span>
           <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
         [[else]]
           <span id="white">[[:event]]&nbsp;</span>
         [[/if]]
-        </h3>
+        </h4>
         <div id="board"></div>
-        <h3 class="has-text-right boardfoot">
+        <h4 class="has-text-right boardfoot">
         [[if white && white.length]]
           <span id="white">[[:white]]&nbsp;</span>
           <span class="has-text-info" id="whiteelo">[[:whiteelo]]</span>
         [[else]]
           <span id="white">[[:date]] [[:site]]&nbsp;</span>
         [[/if]]
-        </h3>
+        </h4>
       </div>
     </div>
   </script>
