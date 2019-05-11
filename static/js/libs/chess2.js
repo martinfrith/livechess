@@ -160,6 +160,7 @@ window['Chess'] = window['Chess'] || function(fen) {
   var half_moves = 0;
   var move_number = 1;
   var history = [];
+  var future = [];
   var header = {};
 
   /* if the user passes in a fen string, load it, else default to
@@ -777,7 +778,7 @@ window['Chess'] = window['Chess'] || function(fen) {
 
       /* has the position occurred three or move times */
       positions[fen] = (fen in positions) ? positions[fen] + 1 : 1;
-      if (positions[fen] >= 3) {
+      if (positions[fen] >= 4) {
         repetition = true;
       }
 
@@ -1636,8 +1637,43 @@ window['Chess'] = window['Chess'] || function(fen) {
       }
 
       return move_history;
-    }
-
+    },
+    first: function(){
+      var moves = this.history();
+      var tmp = new Chess();
+      future = []
+      for(var i=0;i<moves.length;i++) {
+        tmp.move(moves[i]);
+        future.push(tmp.fen());
+      }
+      future.reverse()
+      return 'start';
+    }, 
+    last: function(){
+      var moves = this.history();
+      var tmp = new Chess();
+      for(var i=0;i< moves.length;i++) {
+        tmp.move(moves[i]);
+      }
+      var previous_fen = tmp.fen();
+      future = []
+      return previous_fen;
+    },
+    back: function() {
+      var moves = this.history();
+      var tmp = new Chess();
+      var previous = moves.length-future.length-1;
+      for(var i=0;i<previous;i++) {
+        tmp.move(moves[i]);
+      }
+      var previous_fen = tmp.fen();
+      tmp.move(moves[previous]);
+      future.push(tmp.fen());
+      return previous_fen;
+    },
+    next: function() {
+      return future.pop();
+    }    
   };
 };
 

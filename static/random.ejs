@@ -1,0 +1,32 @@
+<%- contentFor('css') %>
+
+  <link rel="stylesheet" href="/css/chessboard.css" />
+
+  <style type="text/css">
+  .highlight-white {
+    -webkit-box-shadow: inset 0 0 3px 3px yellow;
+    -moz-box-shadow: inset 0 0 3px 3px yellow;
+    box-shadow: inset 0 0 3px 3px yellow;  
+  }
+  .highlight-black {
+    -webkit-box-shadow: inset 0 0 3px 3px blue;
+    -moz-box-shadow: inset 0 0 3px 3px blue;
+    box-shadow: inset 0 0 3px 3px blue;  
+  }
+  </style>
+
+<%- contentFor('js') %>
+
+    <script src="/js/libs/chess.js"></script>
+    <script src="/js/libs/chessboard.js"></script>
+    <script src="/js/random.js"></script>
+ 
+<%- contentFor('content') %>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-body">
+        <div id="board" style="width: 400px"></div>
+      </div>
+    </div>
+  </div>

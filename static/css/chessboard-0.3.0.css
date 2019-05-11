@@ -1,11 +1,11 @@
 /*!
- * chessboard.js $version$
+ * chessboard.js v0.3.0
  *
  * Copyright 2013 Chris Oakman
  * Released under the MIT license
  * https://github.com/oakmac/chessboardjs/blob/master/LICENSE
  *
- * Date: $date$
+ * Date: 10 Aug 2013
  */
 
 /* clearfix */
@@ -16,7 +16,6 @@
 /* board */
 .board-b72b1 {
   border: 2px solid #404040;
-  -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }

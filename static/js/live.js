@@ -176,7 +176,7 @@ $(document).ready(function() {
         }
 
         board = ChessBoard('board', cfg);
-        board.position(game.last())
+        board.position(game.fen())
         updateStatus(data);
         
         var loadpgnEl = $('#loadpgn'),
