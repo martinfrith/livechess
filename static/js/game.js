@@ -13,11 +13,13 @@ makeMove = function() {
 
   if(!paused){
     // exit if the game is over
-    if (game.game_over() === true ||
+
+    var move = possibleMoves[index];
+
+    if (!move || game.game_over() === true ||
       game.in_draw() === true ||
       possibleMoves.length === 0) return;
 
-    var move = possibleMoves[index];
     square = move.replace(/[A-Z]/,"")
 
     if (index%2===0) {
@@ -33,7 +35,7 @@ makeMove = function() {
       colorToHighlight = 'black';    
     }
 
-    var perc = index / possibleMoves.length * 100;
+    var perc = (index + 1) / possibleMoves.length * 100;
     $('.gamebar-progress').animate({width:perc+'%'},speed,'linear')
 
     console.log("move:" + move)
@@ -79,6 +81,24 @@ loadgame = () => {
     }
   })
 },
+gameFlip = () => {
+  board.flip()
+  var head = $('.boardhead').html(),
+  foot = $('.boardfoot').html()
+  $('.boardhead').html(foot)
+  $('.boardfoot').html(head)
+},
+gamePos = () => {
+},
+gamePause = () => {
+  paused = !paused
+  $('.gamebar-progress').removeClass('paused')
+  if(paused){
+    $('.gamebar-progress').addClass('paused')
+  } else {
+    window.setTimeout(makeMove, 500)
+  }
+},
 onMoveEnd = function() {
   boardEl.find('.square-' + squareToHighlight)
     .addClass('highlight-' + colorToHighlight);
@@ -89,19 +109,34 @@ cfg = {
 }
 /**/
 $(document).on('click','.game-container', () => {
-  board.flip()
-  var head = $('.boardhead').html(),
-  foot = $('.boardfoot').html()
-  $('.boardhead').html(foot)
-  $('.boardfoot').html(head)
+  boardFlip()
 })
 $(document).on('click','.gamebar', () => {
-  paused = !paused
-  $('.gamebar-progress').removeClass('paused')
-  if(paused){
-    $('.gamebar-progress').addClass('paused')
-  } else {
-    window.setTimeout(makeMove, 500)
-  }
+  gamePos()
 })
+$(document).keydown(function(e) {
+    console.log("key pressed:" + e.keyCode)
+  if(e.keyCode == 37){
+    if(index){
+      console.log("bwd")
+      //index--
+    }
+  } else if(e.keyCode == 38){
+    //index = possibleMoves.length -1
+  } else if(e.keyCode == 39){
+    if(index <= possibleMoves.length){
+      console.log("fwd")
+      //index++
+    }
+  } else if(e.keyCode == 40){
+    //index = 0
+  } else if(e.keyCode == 32){
+    gamePause()
+  } else if(e.keyCode == 70){
+    gameFlip()
+  } else if(e.keyCode == 78){
+    switchNightmode()
+  }
+});
+
 loadgame()

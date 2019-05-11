@@ -1,0 +1,143 @@
+<%- contentFor('css') %>
+
+  <link rel="stylesheet" href="/css/chessboard.css" />
+  <link rel="stylesheet" href="/css/watch.css" />
+
+  <style type="text/css">
+  .highlight-white {
+    -webkit-box-shadow: inset 0 0 3px 3px yellow;
+    -moz-box-shadow: inset 0 0 3px 3px yellow;
+    box-shadow: inset 0 0 3px 3px yellow;  
+  }
+  .highlight-black {
+    -webkit-box-shadow: inset 0 0 3px 3px blue;
+    -moz-box-shadow: inset 0 0 3px 3px blue;
+    box-shadow: inset 0 0 3px 3px blue;  
+  }
+
+  .led-box {
+    height: 30px;
+    width: 100px;
+    margin: 10px 0;
+    position: fixed;
+    top: 4rem;
+    left: 1rem;
+  }
+
+  .led-box p {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 700;
+    margin: 1em;
+  }
+
+  .led-red {
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+    background-color: #F00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
+    -webkit-animation: blinkRed 0.5s infinite;
+    -moz-animation: blinkRed 0.5s infinite;
+    -ms-animation: blinkRed 0.5s infinite;
+    -o-animation: blinkRed 0.5s infinite;
+    animation: blinkRed 0.5s infinite;
+  }
+
+
+  @-moz-keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+  @-ms-keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+  @-o-keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+  @keyframes blinkRed {
+      from { background-color: #F00; }
+      50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+      to { background-color: #F00; }
+  }
+
+
+
+  </style>
+  
+<%- contentFor('js') %>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/libs/chess.js"></script>
+  <script src="/js/libs/chessboard.js"></script>
+  <script src="/js/watch.js"></script>
+
+<%- contentFor('content') %>
+
+  <svg class="spinner-container" viewBox="0 0 44 44">
+      <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
+  </svg>
+  
+  <div class="spinner-content container">
+    <div class="game-container content"></div>
+  </div>
+
+  <div class="led-box">
+    <div class="led-red"></div>
+    <p>EN VIVO</p>
+  </div>  
+
+  <script id="match" type="text/x-jsrender">
+    <div class="columns is-tablet">
+      <div class="column">
+        <h3 class="has-text-left boardhead">
+        [[if black && black.length]]
+          <span id="black">[[:black]]&nbsp;</span>
+          <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
+        [[else]]
+          <span id="white">[[:event]]&nbsp;</span>
+        [[/if]]
+        </h3>
+        <div id="board"></div>
+        <h3 class="has-text-right boardfoot">
+        [[if white && white.length]]
+          <span id="white">[[:white]]&nbsp;</span>
+          <span class="has-text-info" id="whiteelo">[[:whiteelo]]</span>
+        [[else]]
+          <span id="white">[[:date]] [[:site]]&nbsp;</span>
+        [[/if]]
+        </h3>
+      </div>
+    </div>
+  </script>
+
+  <script id="gameinfo" type="text/x-jsrender">
+    [[if event]]
+      <h3><span class="has-text-info">[[:event]]</span></h3>
+    [[/if]]
+    [[if date]]
+      <p>Fecha <span class="has-text-info">[[:date]]</span></p>
+    [[/if]]
+    [[if site]]
+      <p>Lugar <span class="has-text-info">[[:site]]</span></p>
+    [[/if]]
+    [[if eco]]
+      <p>ECO <span class="has-text-info">[[:eco]]</span></p>
+    [[/if]]
+    [[if result]]
+      <p>Resultado <span class="has-text-info">[[:result]]</span></p>
+    [[/if]] 
+    [[if comments]]
+      <p>Comentarios <span class="has-text-info">[[:comments]]</span></p>
+    [[/if]]     
+      <hr>
+      <p>Estado <span class="has-text-info" id="status">[[:status]]</span></p>
+      <p>PGN <span class="has-text-info" id="pgn">[[:pgn]]</span></p>
+      <p>FEN <span class="has-text-info" id="fen">[[:fen]]</span></p>
+  </script>

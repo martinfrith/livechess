@@ -75,7 +75,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       upsert: true, 
       'new': true, 
       returnOriginal:false 
-    }).then(function(doc){
+    }).then(function(){
       res.render('live')
     })
   });
@@ -172,7 +172,11 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
           }
         },{ upsert: false, new: true }).then(function(doc){
           if(doc.value){
-            res.render('game')
+            if(doc.value.updatedAt && doc.value.broadcast && moment(doc.value.updatedAt).format('x') > moment().subtract(2,'minutes').format('x')) {
+              res.render('watch')
+            } else {
+              res.render('game')
+            }
           } else {
             res.render('404')
           }

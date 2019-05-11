@@ -26,10 +26,12 @@ switchNightmode = function (){
   if (!nightmode || nightmode === 'no'){
     $(theme1).css({"background": "black","color": "#f8f8f8"});
     $(theme2).css({"color": "#f8f8f8"});
+    $('body').addClass('nightmode')
     localStorage.setItem("nightmode", "yes");
   } else {
     $(theme1).css({"background": "white","color": "#4a4a4a"});
     $(theme2).css({"color": "#4a4a4a"});
+    $('body').removeClass('nightmode')
     localStorage.setItem("nightmode", "no");
   }
 }, 
@@ -103,6 +105,7 @@ $(document).ready(function() {
     if(nightmode === 'yes'){
       $(theme1).css({"background": "black","color": "#f8f8f8"});
       $(theme2).css({"color": "#f8f8f8"});
+      $('body').addClass('nightmode')
     }
   }
 });

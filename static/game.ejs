@@ -5,18 +5,18 @@
   <style type="text/css">
   
   #board {
-    width: 70%; 
+    width: 50%; 
     margin: 0 auto;
   }
   .highlight-white {
-    -webkit-box-shadow: inset 0 0 3px 3px yellow;
-    -moz-box-shadow: inset 0 0 3px 3px yellow;
-    box-shadow: inset 0 0 3px 3px yellow;  
+    -webkit-box-shadow: inset 0 0 5px 5px yellow;
+    -moz-box-shadow: inset 0 0 5px 5px yellow;
+    box-shadow: inset 0 0 5px 5px yellow;  
   }
   .highlight-black {
-    -webkit-box-shadow: inset 0 0 3px 3px blue;
-    -moz-box-shadow: inset 0 0 3px 3px blue;
-    box-shadow: inset 0 0 3px 3px blue;  
+    -webkit-box-shadow: inset 0 0 5px 5px blue;
+    -moz-box-shadow: inset 0 0 5px 5px blue;
+    box-shadow: inset 0 0 5px 5px blue;  
   }
   .gamebar {
     display: inline-block;
@@ -30,6 +30,9 @@
     height: 1rem;
     background-color: blue;
     width: 0;
+  }
+  .nightmode .gamebar-progress {
+    background-color: red; 
   }
   .gamebar-progress.paused {
     background-color: grey;
