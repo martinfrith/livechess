@@ -71,6 +71,7 @@ loadgame = () => {
         $('.spinner-container').fadeOut('fast', () => {
           $('.spinner-content').fadeTo('slow',1, () => {
             board = ChessBoard('board', cfg);
+            boardEl = $('#board')
             window.setTimeout(makeMove, 500);
           })
         })
@@ -79,7 +80,7 @@ loadgame = () => {
   })
 },
 onMoveEnd = function() {
-  $('#board').find('.square-' + squareToHighlight)
+  boardEl.find('.square-' + squareToHighlight)
     .addClass('highlight-' + colorToHighlight);
 },
 cfg = {
