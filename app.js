@@ -162,19 +162,17 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       if(err == null) {
         res.render(pathname)
       } else {
-        db.collection('games').findOne({room:pathname}).then(function(doc){
-          if(doc) {
-            db.collection('games').findOneAndUpdate(
-            {
-              room:pathname
-            },
-            {
-              "$set": {
-                views : doc.views + 1
-              }
-            },{ new: false }).then(function(){
-              res.render('game')
-            })
+        db.collection('games').findOneAndUpdate(
+        {
+          room:pathname
+        },
+        {
+          "$inc": {
+            views : 1
+          }
+        },{ upsert: false, new: true }).then(function(doc){
+          if(doc.value){
+            res.render('game')
           } else {
             res.render('404')
           }
