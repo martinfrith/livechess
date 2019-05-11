@@ -75,6 +75,7 @@ loadgame = () => {
             board = ChessBoard('board', cfg);
             boardEl = $('#board')
             window.setTimeout(makeMove, 500);
+            $('#speed').text(speed)
           })
         })
       })
@@ -127,18 +128,24 @@ $(document).on('click','.bar', (e) => {
 $(document).keydown(function(e) {
   if(e.keyCode == 37){
     if(index){
-      console.log("bwd")
-      //index--
+      gamePos(index-1)
     }
   } else if(e.keyCode == 38){
-    //index = possibleMoves.length -1
+    if(speed < 10000){
+      speed+= 100
+    }
+    $('#speed').text(speed)
+    //gamePos(possibleMoves.length -1)
   } else if(e.keyCode == 39){
     if(index <= possibleMoves.length){
-      console.log("fwd")
-      //index++
+      gamePos(index+1)
     }
   } else if(e.keyCode == 40){
-    //index = 0
+    if(speed > 1000){
+      speed-= 100
+    }
+    $('#speed').text(speed)
+    //gamePos(0)
   } else if(e.keyCode == 32){
     gamePause()
   } else if(e.keyCode == 70){

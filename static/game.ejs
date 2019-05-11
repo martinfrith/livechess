@@ -17,11 +17,13 @@
       -moz-box-shadow: inset 0 0 5px 5px blue;
       box-shadow: inset 0 0 5px 5px blue;  
     }
-    .bar {
+    .status {
       display: inline-block;
       width: 100%;
       position: fixed;  
       bottom: 0;
+    }
+    .bar {
       background-color: rgba(0,0,0,0.1);
       cursor: pointer;
     }
@@ -60,9 +62,12 @@
   <div class="spinner-content container">
     <div class="game-container content"></div>
   </div>
-
-  <div class="bar">
-    <div class="bar-progress"></div>
+  
+  <div class="status">
+    <span class="has-text-weight-semibold">&nbsp;🕗 <span id="speed"></span>ms</span>
+    <div class="bar">
+      <div class="bar-progress"></div>
+    </div>
   </div>
 
   <script id="game" type="text/x-jsrender">
