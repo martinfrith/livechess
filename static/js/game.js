@@ -117,6 +117,9 @@ cfg = {
 }
 /**/
 $(document).on('click','.game-container', () => {
+  gamePause()
+})
+$(document).on('click','#board', () => {
   gameFlip()
 })
 $(document).on('click','.bar', (e) => {
@@ -150,8 +153,6 @@ $(document).keydown(function(e) {
     gamePause()
   } else if(e.keyCode == 70){
     gameFlip()
-  } else if(e.keyCode == 78){
-    switchNightmode()
   }
 });
 

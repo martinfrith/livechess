@@ -71,23 +71,21 @@
   </div>
 
   <script id="game" type="text/x-jsrender">
-    <div class="columns is-tablet">
+    <div class="columns">
       <div class="column">
         <h4 class="has-text-left boardhead">
         [[if black && black.length]]
-          <span id="black">([[:~parseResult(result,'w')]]) [[:black]]&nbsp;</span>
-          <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
+          <span id="black">[[if result && result.length]]([[:~parseResult(result,'w')]]) [[/if]][[:black]] [[:blackelo]]</span>
         [[else]]
-          <span id="white">[[:event]]&nbsp;</span>
+          <span>[[:event]]</span>
         [[/if]]
         </h4>
         <div id="board"></div>
         <h4 class="has-text-right boardfoot">
         [[if white && white.length]]
-          <span id="white">([[:~parseResult(result,'b')]]) [[:white]]&nbsp;</span>
-          <span class="has-text-info" id="whiteelo">[[:whiteelo]]</span>
+          <span id="white">[[if result && result.length]]([[:~parseResult(result,'b')]]) [[/if]][[:white]] [[:whiteelo]]</span>
         [[else]]
-          <span id="white">[[:date]] [[:site]]&nbsp;</span>
+          <span>[[:date]] [[:site]]</span>
         [[/if]]
         </h4>
       </div>

@@ -2,8 +2,6 @@ if($.inArray([window.location.protocol,'',window.location.host].join('/'),['http
   location.href='https://ajedrezenvivo.net'
 }
 
-const theme1 = 'html, body, .navbar, .navbar-dropdown, .navbar-burger, .navbar-menu, .navbar-item, .navbar-link'
-const theme2 = 'h1, h2, h3, h4, h5, h6, p'
 const translations = {
   not_enough_params : 'No hay suficientes parámetros.',
   thankyou_for_browsing : 'Gracias por seguir las partidas en AjedrezEV.',
@@ -31,14 +29,10 @@ ralfnum = function (a){ return Math.random().toString(36).substring(2, a) + Math
 switchNightmode = function (){
   var nightmode = localStorage.getItem("nightmode")
   if (!nightmode || nightmode === 'no'){
-    $(theme1).css({"background": "black","color": "#f8f8f8"});
-    $(theme2).css({"color": "#f8f8f8"});
-    $('body').addClass('nightmode')
+    $('html').addClass('nightmode')
     localStorage.setItem("nightmode", "yes");
   } else {
-    $(theme1).css({"background": "white","color": "#4a4a4a"});
-    $(theme2).css({"color": "#4a4a4a"});
-    $('body').removeClass('nightmode')
+    $('html').removeClass('nightmode')
     localStorage.setItem("nightmode", "no");
   }
 }, 
@@ -110,10 +104,14 @@ $(document).ready(function() {
 
   if(nightmode){
     if(nightmode === 'yes'){
-      $(theme1).css({"background": "black","color": "#f8f8f8"});
-      $(theme2).css({"color": "#f8f8f8"});
-      $('body').addClass('nightmode')
+      $('html').addClass('nightmode')
     }
+  }
+});
+
+$(document).keydown(function(e) {
+  if(e.keyCode == 78){
+    switchNightmode()
   }
 });
 
