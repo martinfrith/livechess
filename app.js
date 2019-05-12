@@ -9,6 +9,7 @@ var mongodb = require('mongodb');
 var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
 var onlinewhen = moment().utc().subtract(10, 'minutes')
+var gamesort = {_id:-1}
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
@@ -92,7 +93,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       delete req.body.filter
     }
 
-    db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
+    db.collection('games').find(req.body).sort(gamesort).toArray(function(err,docs){
       if(docs){
         docs.forEach(function(doc){ // hide security data
           delete doc.secret_room 
@@ -108,7 +109,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       req.body.filter.split('|').map(function(x){req.body[x] =  {$ne : null}});       
       delete req.body.filter
     }
-    db.collection('games').find(req.body).sort({_id:-1}).toArray(function(err,docs){
+    db.collection('games').find(req.body).sort(gamesort).toArray(function(err,docs){
       return res.json(docs)
     })   
   })
@@ -135,11 +136,13 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       $or.push({"black": {'$regex' : w, '$options' : 'i'}})
     })
     db.collection('games').find({        
-      "$or": $or
-    }).toArray(function(err,docs){
+      "$or": $or      
+    }).sort(gamesort).toArray(function(err,docs){
       return res.json(docs)
     })   
   })
+
+  //.sort( { name: 1 } )
 
   app.post('/loadpgn', function (req, res) {
     if(!req.body.room) return res.json({'error':'no_room_provided'})
