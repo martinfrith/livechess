@@ -1,5 +1,7 @@
 <%- contentFor('css') %>
 
+<title>Ajedrez en vivo</title>
+
 <%- contentFor('js') %>
 
   <script type="text/javascript">
@@ -44,7 +46,7 @@
               </div>
               <div class="control">
                 <button type="submit" id="searchbtn" class="button is-large is-rounded is-success">
-                    <span class="fa fa-search"></span>
+                    <span>🔎</span>
                 </button>
               </div>
             </div>
@@ -79,5 +81,5 @@
   </script>
 
   <script id="count" type="text/x-jsrender">
-    <p>Total [[:count]] partidas</p>
+    <p>Total [[:count]] partida[[if count > 1]]s[[/if]]</p>
   </script>

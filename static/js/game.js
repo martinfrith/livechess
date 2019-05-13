@@ -10,12 +10,9 @@ colorToHighlight,
 squareClass = 'square-55d63',
 possibleMoves = [],
 makeMove = () => {
-
   if(!paused){
-    // exit if the game is over
-
     var move = possibleMoves[index];
-
+    // exit if the game is over
     if (!move || game.game_over() === true ||
       game.in_draw() === true ||
       possibleMoves.length === 0) return;
@@ -39,7 +36,7 @@ makeMove = () => {
     var perc = (index + 1) / possibleMoves.length * 100;
     $('.bar-progress').animate({width:perc+'%'},speed,'linear')
 
-    console.log(index + ":" + move)
+    //console.log(index + ":" + move)
     index++
     game.move(move);
     board.position(game.fen());
@@ -75,7 +72,7 @@ loadgame = () => {
             board = ChessBoard('board', cfg);
             boardEl = $('#board')
             window.setTimeout(makeMove, 500);
-            $('#speed').text(speed)
+            $('#speed').text(speed+'ms')
           })
         })
       })
@@ -137,7 +134,7 @@ $(document).keydown(function(e) {
     if(speed < 10000){
       speed+= 100
     }
-    $('#speed').text(speed)
+    $('#speed').text(speed+'ms')
     //gamePos(possibleMoves.length -1)
   } else if(e.keyCode == 39){
     if(index <= possibleMoves.length){

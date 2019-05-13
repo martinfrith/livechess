@@ -1,5 +1,6 @@
 <%- contentFor('css') %>
 
+  <title>Partida</title>
   <link rel="stylesheet" href="/css/chessboard.css" />
   <style type="text/css">
     
@@ -40,11 +41,24 @@
     }
     .boardhead {
       padding-left: 25%;
+      margin-bottom: 0!important;
     }
     .boardfoot {
       padding-right: 25%;
-      margin-top: 0.75rem!important;
+      margin-top: 0.15rem!important;
     }
+    @media screen and (max-width: 480px), print {
+      #board {
+        width: 90%!important;
+      }
+      .boardhead {
+        padding-left: 5%!important;
+      }
+      .boardfoot {
+        padding-right: 5%!important;
+      }
+    }
+
   </style>
 
 <%- contentFor('js') %>
@@ -64,7 +78,12 @@
   </div>
   
   <div class="status">
-    <span class="has-text-weight-semibold">&nbsp;🕗 <span id="speed"></span>ms</span>
+    <span class="has-text-weight-semibold">
+    <!-- &nbsp;🕗 <a href="#" id="quickview"> <input type="checkbox" /> Mas info</a-->
+    &nbsp;🕗 <span id="speed"></span>
+    <!-- &nbsp;🕗 <span class="quick" content="Usa las flechas + f,n,[espacio] del teclado.">Atajos de teclado</span-->
+    </span>
+    
     <div class="bar">
       <div class="bar-progress"></div>
     </div>

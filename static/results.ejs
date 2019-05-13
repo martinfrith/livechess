@@ -1,4 +1,6 @@
 <%- contentFor('css') %>
+	
+	<title>Resultados</title>
 
 <%- contentFor('js') %>
 
@@ -52,12 +54,12 @@
 	[[if query.length]]
 		<p class="is-notification has-text-danger">No hay partidas que coincidan con tu palabra clave.</p>
 	[[else]]
-		<p class="is-notification has-text-success">Busca por jugador, evento o lugar.</p>
+		<p class="is-notification has-text-success">Busca por jugador, evento, fecha y/o lugar.</p>
 	[[/if]]
 	</script>
 
 	<script id="games" type="text/x-jsrender">
-	    <p class="is-notification has-text-success">[[:games.length]] partidas</p>
+	    <p class="is-notification has-text-success">[[:games.length]] partida[[if games.length > 1]]s[[/if]]</p>
 	    <table class="table is-striped">
 	    	<thead>
 	    		<th>Mesa</th>

@@ -26,7 +26,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     if (err) throw err;
     console.log('OK: ' + filename);
 
-    var parts = data.split(/\s\r\n\r\n/)
+    var parts = data.split(/\s\r\n\r\n/).reverse()
     parts.forEach((part,index) => {
       if(index%2===0){
 
@@ -73,6 +73,9 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
             returnOriginal:true
           }).then(function(doc){
             console.log('OK game loaded ' + index)
+            if(doc && doc.value){
+              console.log(doc.value.white+' vs '+doc.value.black + ' (' + doc.value.date + ')');
+            }
           })
         } else {
           console.log("ERR game load fail " + index)

@@ -1,58 +1,42 @@
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="/img/logo.png">
-        </a>
+    
+    <div id="anchor">
+      <a href="/">
+        <img src="/img/logo.png">
+      </a>
+    </div>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a href="/vivo" class="navbar-item">
-            En vivo
-          </a>
-
-          <a href="/results" class="navbar-item">
-            Resultados
-          </a>
-
-          <a href="/puzzles" class="navbar-item">
-            Puzzles
-          </a>
-
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              
-            </a>
-
-            <div class="navbar-dropdown">
-              <a href="mailto:overlemonsoft@gmail.com?Subject=Contacto desde Ajedrez en Vivo" class="navbar-item">
-                Contacto
-              </a>
-              <a href="https://github.com/martinfrith/livechess" class="navbar-item">
-                Github
-              </a>
-              <!--hr class="navbar-divider"-->
-              <a href="/about" class="navbar-item">
-                Acerca de
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-info is-uppercase" id="create">
-                Partida nueva
-              </a>
-            </div>
-          </div>
-        </div>
+    <nav role='navigation'>
+      <div id="menuToggle">
+        <!--
+        A fake / hidden checkbox is used as click reciever,
+        so you can use the :checked selector on it.
+        -->
+        <input type="checkbox" />
+        
+        <!--
+        Some spans to act as a hamburger.
+        
+        They are acting like a real hamburger,
+        not that McDonalds stuff.
+        -->
+        <span></span>
+        <span></span>
+        <span></span>
+        
+        <!--
+        Too bad the menu has to be inside of the button
+        but hey, it's pure CSS magic.
+        -->
+        <ul id="menu">
+          <a href="#"><li><img src="/img/logo.png"></li></a>
+          <a href="/vivo"><li>En vivo</li></a>
+          <a href="/results"><li>Resultados</li></a>
+          <a href="/puzzles"><li>Puzzles</li></a>
+          <a href="/about"><li>Acerca de</li></a>
+          <a href="#"><li>Github</li></a>
+          <a href="#"><li>Contacto</li></a>
+          <a href="#" class="button is-large is-success" id="create"><li>Nueva partida</li></a>
+        </ul>
       </div>
     </nav>
+

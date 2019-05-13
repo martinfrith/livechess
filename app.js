@@ -132,6 +132,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     req.body.query.split(' ').forEach((w) => {
       $or.push({"event": {'$regex' : w, '$options' : 'i'}})
       $or.push({"site": {'$regex' : w, '$options' : 'i'}})
+      $or.push({"date": {'$regex' : w, '$options' : 'i'}})
       $or.push({"white": {'$regex' : w, '$options' : 'i'}})
       $or.push({"black": {'$regex' : w, '$options' : 'i'}})
     })
