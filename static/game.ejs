@@ -49,11 +49,12 @@
     }
     .moreinfo {
       display: none;
-      margin-top: 2.5rem;
     }
     .showmore {
       position: absolute;
+      top: -1.5rem;
     }
+
     @media screen and (max-width: 480px), print {
       #board {
         width: 90%!important;
@@ -98,67 +99,64 @@
 
   <script id="game" type="text/x-jsrender">
     <div>
-      <div class="columns">
-        <div class="column">
-
-          <a href="#" class="showmore is-size-3">
-            <span>♛</span>
-          </a>
-          <div class="moreinfo">
-            <table class="table is-striped">
-              <tr>
-                <td>Evento</td>
-                <td>[[:event]]</td>
-              </tr>
-              <tr>
-                <td>Ronda</td>
-                <td>[[:round]]</td>
-              </tr>
-              <tr>
-                <td>Blancas</td>
-                <td>[[:white]][[if whiteelo && whiteelo.length]] ([[:whiteelo]])[[/if]]</td>
-              </tr>
-              <tr>
-                <td>Negras</td>
-                <td>[[:black]][[if blackelo && blackelo.length]] ([[:blackelo]])[[/if]]</td>
-              </tr>
-              <tr>
-                <td>Fecha</td>
-                <td>[[:date]]</td>
-              </tr>
-              <tr>
-                <td>Lugar</td>
-                <td>[[:site]]</td>
-              </tr>
-              <tr>
-                <td>Resultado</td>
-                <td>[[:result]]</td>
-              </tr>
-              <tr>
-                <td>PGN</td>
-                <td>[[:pgn]]</td>
-              </tr>
-            </table>
-          </div>
+      <div class="">
+        <a href="#" class="showmore is-size-3">
+          <span>♛</span>
+        </a>
+        <div class="moreinfo">
+          <table class="table is-striped">
+            <tr>
+              <td>Evento</td>
+              <td>[[:event]]</td>
+            </tr>
+            <tr>
+              <td>Ronda</td>
+              <td>[[:round]]</td>
+            </tr>
+            <tr>
+              <td>Blancas</td>
+              <td>[[:white]][[if whiteelo && whiteelo.length]] ([[:whiteelo]])[[/if]]</td>
+            </tr>
+            <tr>
+              <td>Negras</td>
+              <td>[[:black]][[if blackelo && blackelo.length]] ([[:blackelo]])[[/if]]</td>
+            </tr>
+            <tr>
+              <td>Fecha</td>
+              <td>[[:date]]</td>
+            </tr>
+            <tr>
+              <td>Lugar</td>
+              <td>[[:site]]</td>
+            </tr>
+            <tr>
+              <td>Resultado</td>
+              <td>[[:result]]</td>
+            </tr>
+            <tr>
+              <td>PGN</td>
+              <td>[[:pgn]]</td>
+            </tr>
+          </table>
         </div>
       </div>
       <div class="columns">
         <div class="column">
-          <h4 class="has-text-left boardhead">
+          <h5 class="has-text-left boardhead">
           [[if black && black.length]]
             <span id="black">[[if result && result.length]]([[:~parseResult(result,'w')]]) [[/if]][[:black]] [[:blackelo]]</span>
           [[else]]
             <span>[[:event]]</span>
           [[/if]]
-          </h4>
+          </h5>
           <div id="board"></div>
-          <h4 class="has-text-right boardfoot">
+          <h5 class="has-text-right boardfoot">
           [[if white && white.length]]
             <span id="white">[[if result && result.length]]([[:~parseResult(result,'b')]]) [[/if]][[:white]] [[:whiteelo]]</span>
           [[else]]
             <span>[[:date]] [[:site]]</span>
           [[/if]]
-          </h4>
+          </h5>
         </div>
       </div>
     </div>
