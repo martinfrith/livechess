@@ -1,6 +1,6 @@
 <%- contentFor('css') %>
 
-  <title>Partida</title>
+  <title><%= game.white %> vs <%= game.black %>, <%= game.event %> </title>
   <link rel="stylesheet" href="/css/chessboard.css" />
   <style type="text/css">
     
@@ -47,6 +47,13 @@
       padding-right: 25%;
       margin-top: 0.15rem!important;
     }
+    .moreinfo {
+      display: none;
+      margin-top: 2.5rem;
+    }
+    .showmore {
+      position: absolute;
+    }
     @media screen and (max-width: 480px), print {
       #board {
         width: 90%!important;
@@ -90,23 +97,69 @@
   </div>
 
   <script id="game" type="text/x-jsrender">
-    <div class="columns">
-      <div class="column">
-        <h4 class="has-text-left boardhead">
-        [[if black && black.length]]
-          <span id="black">[[if result && result.length]]([[:~parseResult(result,'w')]]) [[/if]][[:black]] [[:blackelo]]</span>
-        [[else]]
-          <span>[[:event]]</span>
-        [[/if]]
-        </h4>
-        <div id="board"></div>
-        <h4 class="has-text-right boardfoot">
-        [[if white && white.length]]
-          <span id="white">[[if result && result.length]]([[:~parseResult(result,'b')]]) [[/if]][[:white]] [[:whiteelo]]</span>
-        [[else]]
-          <span>[[:date]] [[:site]]</span>
-        [[/if]]
-        </h4>
+    <div>
+      <div class="columns">
+        <div class="column">
+
+          <a href="#" class="showmore is-size-3">
+            <span>♛</span>
+          </a>
+          <div class="moreinfo">
+            <table class="table is-striped">
+              <tr>
+                <td>Evento</td>
+                <td>[[:event]]</td>
+              </tr>
+              <tr>
+                <td>Ronda</td>
+                <td>[[:round]]</td>
+              </tr>
+              <tr>
+                <td>Blancas</td>
+                <td>[[:white]][[if whiteelo && whiteelo.length]] ([[:whiteelo]])[[/if]]</td>
+              </tr>
+              <tr>
+                <td>Negras</td>
+                <td>[[:black]][[if blackelo && blackelo.length]] ([[:blackelo]])[[/if]]</td>
+              </tr>
+              <tr>
+                <td>Fecha</td>
+                <td>[[:date]]</td>
+              </tr>
+              <tr>
+                <td>Lugar</td>
+                <td>[[:site]]</td>
+              </tr>
+              <tr>
+                <td>Resultado</td>
+                <td>[[:result]]</td>
+              </tr>
+              <tr>
+                <td>PGN</td>
+                <td>[[:pgn]]</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <h4 class="has-text-left boardhead">
+          [[if black && black.length]]
+            <span id="black">[[if result && result.length]]([[:~parseResult(result,'w')]]) [[/if]][[:black]] [[:blackelo]]</span>
+          [[else]]
+            <span>[[:event]]</span>
+          [[/if]]
+          </h4>
+          <div id="board"></div>
+          <h4 class="has-text-right boardfoot">
+          [[if white && white.length]]
+            <span id="white">[[if result && result.length]]([[:~parseResult(result,'b')]]) [[/if]][[:white]] [[:whiteelo]]</span>
+          [[else]]
+            <span>[[:date]] [[:site]]</span>
+          [[/if]]
+          </h4>
+        </div>
       </div>
     </div>
   </script>  

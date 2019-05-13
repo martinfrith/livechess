@@ -177,9 +177,9 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
         },{ upsert: false, new: true }).then(function(doc){
           if(doc.value){
             if(doc.value.updatedAt && doc.value.broadcast && moment(doc.value.updatedAt).format('x') > onlinewhen.format('x')) {
-              res.render('watch')
+              res.render('watch',{game:doc.value})
             } else {
-              res.render('game')
+              res.render('game',{game:doc.value})
             }
           } else {
             res.render('404')

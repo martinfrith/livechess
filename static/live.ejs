@@ -233,9 +233,9 @@
           <div class="columns is-tablet">
             <div class="column">
               <a class="button is-danger" id="undo">Atrás</a>
-              <a class="button[[if result == '1-0']] is-active[[/if]]" id="wwins">Ganan blancas</a>
-              <a class="button[[if result == '0-1']] is-active[[/if]]" id="bwins">Ganan negras</a>
-              <a class="button[[if result == '1/2-1/2']] is-active[[/if]]" id="draw">Tabla</a>
+              <a class="button[[if result == '1-0']] is-active[[/if]]" id="wwins">1-0</a>
+              <a class="button[[if result == '0-1']] is-active[[/if]]" id="bwins">0-1</a>
+              <a class="button[[if result == '1/2-1/2']] is-active[[/if]]" id="draw">1/2-1/2</a>
             </div>
           </div>
           <div class="columns is-tablet">
@@ -245,18 +245,17 @@
               <hr>
               <small>URL emisión pública</small>
               <div class="field has-addons">
-
                 <p class="control">
                   <input type="text" class="input" name="gameurl" value="[[:watch_url]]" readonly>
                 </p>
                 <p class="control">
                   <a class="button is-static" id="searchbtn">
-                    <span class="fa fa-file"></span>
+                    <span>📁</span>
                   </a>
                 </p>
                 <p class="control">
                   <a class="button is-static" id="sharebtn">
-                    <span class="fa fa-share"></span>
+                    <span>🔗</span>
                   </a>
                 </p>  
               </div>

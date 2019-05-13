@@ -171,7 +171,6 @@ body {
 table {
   display: block;
   overflow-x: auto;
-  white-space: nowrap;
   margin: auto;
   width: fit-content;
   max-width: 100%;  

@@ -113,6 +113,9 @@ cfg = {
   onMoveEnd: onMoveEnd
 }
 /**/
+$(document).on('click','.showmore', () => {
+  $('.moreinfo').slideToggle()
+})
 $(document).on('click','.game-container', () => {
   gamePause()
 })
