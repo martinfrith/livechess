@@ -12,9 +12,10 @@
     <%- css %>
   </head>
   <body>
-
-    <%- include('navbar') %>  
-    <%- content %>    
+    <div id="app">
+      <%- include('navbar') %>  
+      <%- content %>    
+    </div>
 
     <script id="notification" type="text/x-jsrender">
       <div class="notification is-[[:status]]">
