@@ -50,7 +50,8 @@
     .moreinfo {
       display: none;
     }
-    .showmore {
+    .game-container {
+      padding-top: 0;
     }
 
     @media screen and (max-width: 480px), print {
@@ -102,7 +103,7 @@
         <div class="column">
           <h5 class="has-text-left boardhead">
           [[if black && black.length]]
-            <span id="black">[[if result && result.length]]([[:~parseResult(result,'w')]]) [[/if]][[:black]] [[:blackelo]]</span>
+            <span id="black">[[:black]][[if result && result.length]] ([[:~parseResult(result,'w')]])[[/if]]</span>
           [[else]]
             <span>[[:event]]</span>
           [[/if]]
@@ -110,7 +111,7 @@
           <div id="board"></div>
           <h5 class="has-text-right boardfoot">
           [[if white && white.length]]
-            <span id="white">[[if result && result.length]]([[:~parseResult(result,'b')]]) [[/if]][[:white]] [[:whiteelo]]</span>
+            <span id="white">[[:white]][[if result && result.length]] ([[:~parseResult(result,'b')]])[[/if]]</span>
           [[else]]
             <span>[[:date]] [[:site]]</span>
           [[/if]]
