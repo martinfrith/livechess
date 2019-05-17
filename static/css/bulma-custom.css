@@ -93,6 +93,7 @@ body {
 {
   opacity: 1;
   transform: rotate(-45deg) translate(0, -1px);
+  left: 1px;
 }
 
 /*
@@ -329,6 +330,10 @@ blockquote {
     backface-visibility: hidden;
     perspective: 1000;
     will-change: transform;
+}
+
+.is-notification {
+  padding-left: 1rem;  
 }
 
 #anchor {
