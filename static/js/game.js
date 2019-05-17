@@ -57,7 +57,10 @@ gamePGN = (pgn) => {
   })
   return data
 },
-loadgame = () => {
+gameStart = () => {
+  if(localStorage.getItem('speed')){
+    speed = parseInt(localStorage.getItem('speed'))
+  }
   $.ajax({
     url:'/games',
     method:'POST',
@@ -72,7 +75,7 @@ loadgame = () => {
             board = ChessBoard('board', cfg);
             boardEl = $('#board')
             window.setTimeout(makeMove, 500);
-            $('#speed').text(speed+'ms')
+            $('#speed').text(speed/1000+'s')
           })
         })
       })
@@ -102,6 +105,13 @@ gamePause = () => {
     $('.bar-progress').addClass('paused')
   } else {
     window.setTimeout(makeMove, 500)
+  }
+},
+gameSpeed = (s) => {
+  if(speed > 1000 && speed < 10000){
+    speed+= s
+    $('#speed').text(speed/1000+'s')
+    localStorage.setItem('speed',speed)
   }
 },
 onMoveEnd = function() {
@@ -136,20 +146,14 @@ $(document).keydown(function(e) {
       gamePos(index-1)
     }
   } else if(e.keyCode == 38){
-    if(speed < 10000){
-      speed+= 100
-    }
-    $('#speed').text(speed+'ms')
+    gameSpeed(100)
     //gamePos(possibleMoves.length -1)
   } else if(e.keyCode == 39){
     if(index <= possibleMoves.length){
       gamePos(index+1)
     }
   } else if(e.keyCode == 40){
-    if(speed > 1000){
-      speed-= 100
-    }
-    $('#speed').text(speed)
+    gameSpeed(-100)
     //gamePos(0)
   } else if(e.keyCode == 32){
     gamePause()
@@ -158,4 +162,4 @@ $(document).keydown(function(e) {
   }
 })
 
-loadgame()
+gameStart()
