@@ -39,7 +39,7 @@ makeMove = () => {
     //console.log(index + ":" + move)
     index++
     game.move(move);
-    board.position(game.fen());
+    board.position(game.fen());  
 
     window.setTimeout(makeMove, speed);
   }
@@ -109,7 +109,9 @@ onMoveEnd = function() {
     .addClass('highlight-' + colorToHighlight);
 },
 cfg = {
+  showErrors:true,
   position: 'start',
+  draggable: false,
   onMoveEnd: onMoveEnd
 }
 /**/
@@ -154,6 +156,6 @@ $(document).keydown(function(e) {
   } else if(e.keyCode == 70){
     gameFlip()
   }
-});
+})
 
 loadgame()

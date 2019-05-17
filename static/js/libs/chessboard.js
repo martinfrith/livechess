@@ -232,7 +232,7 @@ var containerEl,
 
 // constructor return object
 var widget = {};
-
+var imgCache = {};
 //------------------------------------------------------------------------------
 // Stateful
 //------------------------------------------------------------------------------
@@ -637,7 +637,32 @@ function buildBoard(orientation) {
   return html;
 }
 
+function cacheImages() {
+  var pieces = ['wK', 'wQ', 'wR', 'wB', 'wN', 'wP', 'bK', 'bQ', 'bR', 'bB', 'bN', 'bP'];
+  pieces.forEach(function(piece) {
+    var img = new Image()
+    img.onload = function() {
+      imgCache[piece] = getBase64Image(img)
+    }
+    img.src = buildPieceImgSrc(piece)
+  })
+
+  function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL;     
+  }
+}
+
+
 function buildPieceImgSrc(piece) {
+
+  if(imgCache[piece]) return imgCache[piece]
+
   if (typeof cfg.pieceTheme === 'function') {
     return cfg.pieceTheme(piece);
   }
@@ -1687,7 +1712,7 @@ function initDom() {
 function init() {
   if (checkDeps() !== true ||
       expandConfig() !== true) return;
-
+  cacheImages();
   initDom();
   addEvents();
 }
