@@ -49,11 +49,12 @@
     }
     .moreinfo {
       display: none;
+      margin-bottom: 3rem;
     }
     .game-container {
       padding-top: 0;
     }
-
+  
     @media screen and (max-width: 480px), print {
       #board {
         width: 90%!important;
@@ -81,7 +82,7 @@
   </svg>
   
   <div class="spinner-content container">
-    <div class="game-container content"></div>
+    <div class="game-container"></div>
   </div>
   
   <div class="status">
@@ -98,7 +99,7 @@
   </div>
 
   <script id="game" type="text/x-jsrender">
-    <div>
+    <div class="content padless">
       <div class="columns">
         <div class="column">
           <h5 class="has-text-left boardhead">

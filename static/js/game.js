@@ -108,10 +108,12 @@ gamePause = () => {
   }
 },
 gameSpeed = (s) => {
-  if(speed > 1000 && speed < 10000){
-    speed+= s
+  speed+= s
+  if(speed >= 1000 && speed <= 10000){
     $('#speed').text(speed/1000+'s')
     localStorage.setItem('speed',speed)
+  } else {
+    speed-=s
   }
 },
 onMoveEnd = function() {
@@ -146,14 +148,14 @@ $(document).keydown(function(e) {
       gamePos(index-1)
     }
   } else if(e.keyCode == 38){
-    gameSpeed(100)
+    gameSpeed(250)
     //gamePos(possibleMoves.length -1)
   } else if(e.keyCode == 39){
     if(index <= possibleMoves.length){
       gamePos(index+1)
     }
   } else if(e.keyCode == 40){
-    gameSpeed(-100)
+    gameSpeed(-250)
     //gamePos(0)
   } else if(e.keyCode == 32){
     gamePause()
