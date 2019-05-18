@@ -349,14 +349,16 @@ blockquote {
 .boardhead {
   margin-bottom: 0 !important;
 }
+
 .boardfoot {
   margin-top: 0 !important;
 }
 
+.content:not(.padless) {
+  padding: 1rem;
+}
+
 @media screen and (max-width: 769px), print {
-  .content:not(.padless) {
-    padding: 1rem;
-  }
 }
 @media screen and (max-width: 480px), print {
 }
