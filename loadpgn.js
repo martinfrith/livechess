@@ -15,8 +15,6 @@ var gen_room = function (factor){
   return Math.random().toString(36).substring(2, factor) + Math.random().toString(36).substring(2, factor)
 }
 
-
-// MONGO_URL=mongodb://user:user1234@ds163689.mlab.com:63689/chessdev
 mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, function(err, database) {
   if(err) throw err
 
