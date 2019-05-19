@@ -10,9 +10,11 @@ squareToHighlight,
 colorToHighlight,
 squareClass = 'square-55d63',
 possibleMoves = [],
-makeMove = () => {
+gameMove = () => {
   if(!paused){
     var move = possibleMoves[index];
+    selectedIndex = parseInt(location.hash.replace('#',''))
+
     // exit if the game is over
     if (!move || game.game_over() === true ||
       game.in_draw() === true ||
@@ -34,13 +36,20 @@ makeMove = () => {
       colorToHighlight = 'black';    
     }
 
+    $('.moveindex').removeClass('active')
+    $('.moveindex[href="#' + index + '"]').addClass('active')
+
     var perc = (index + 1) / possibleMoves.length * 100;
     $('.bar-progress').animate({width:perc+'%'},speed,'linear')
     index++
     game.move(move);
     board.position(game.fen());  
 
-    window.setTimeout(makeMove, speed);
+    if(index === possibleMoves.length){
+      gamePause()
+    }
+
+    window.setTimeout(gameMove, speed);
   }
 },
 gamePGN = (pgn) => {
@@ -55,17 +64,6 @@ gamePGN = (pgn) => {
     })
   })
   return data
-},
-gameSeek = () => {
-  window.setTimeout(() => {
-    if(!isNaN(selectedIndex)) {
-      gamePos(selectedIndex)
-    }
-    makeMove()
-    if(!isNaN(selectedIndex) && !paused) {
-      gamePause()
-    }
-  }, 500);
 },
 gameStart = () => {
   if(localStorage.getItem('speed')){
@@ -86,6 +84,9 @@ gameStart = () => {
             boardEl = $('#board')
             window.setTimeout(gameSeek, 500);
             $('#speed').text(speed/1000+'s')
+            $('.moreinfo').delay(1000).fadeIn('fast', () => {
+              $('.boardhead, .boardfoot').fadeTo('fast',1)
+            })
           })
         })
       })
@@ -99,6 +100,18 @@ gameFlip = () => {
   $('.boardhead').html(foot)
   $('.boardfoot').html(head)
 },
+gameSeek = () => {
+  window.setTimeout(() => {
+    if(!isNaN(selectedIndex)) {
+      gamePos(selectedIndex)
+      $('.moreinfo').show()
+    }
+    gameMove()
+    if(!isNaN(selectedIndex) && !paused) {
+      gamePause()
+    }
+  }, 500);
+},
 gamePos = (pos) => {
   boardEl.find('.square-55d63').removeClass('highlight-black highlight-white');
   game.reset();
@@ -108,6 +121,7 @@ gamePos = (pos) => {
     }
   })
   index = pos
+  gameMove()
 },
 gamePause = () => {
   paused = !paused
@@ -115,7 +129,7 @@ gamePause = () => {
   if(paused){
     $('.bar-progress').addClass('paused')
   } else {
-    window.setTimeout(makeMove, 500)
+    window.setTimeout(gameMove, 500)
   }
 },
 gameSpeed = (s) => {
@@ -178,5 +192,7 @@ $(document).keydown(function(e) {
 gameStart()
 $(window).on('hashchange', () => {
   selectedIndex = parseInt(location.hash.replace('#',''))
+  $('.moveindex').removeClass('active')
+  $('.moveindex[href="#' + selectedIndex + '"]').addClass('active')
   gameSeek()
 })

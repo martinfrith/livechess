@@ -3,10 +3,10 @@
   <title><%= game.white %> vs <%= game.black %>, <%= game.event %> </title>
   <link rel="stylesheet" href="/css/chessboard.css" />
   <style type="text/css">
-    
+ 
     #board {
       width: 50%; 
-      margin: 0 auto;
+      /*margin: 0 auto;*/
     }
     .highlight-white {
       -webkit-box-shadow: inset 0 0 5px 5px yellow;
@@ -40,11 +40,11 @@
       background-color: grey;
     }
     .boardhead {
-      padding-left: 25%;
+      display: none;
       margin-bottom: 0!important;
     }
     .boardfoot {
-      padding-right: 25%;
+      opacity: 0;
       margin-top: 0.15rem!important;
     }
     .moreinfo,.keyboard-tips {
@@ -60,16 +60,19 @@
     .game-container {
       padding-top: 0;
     }
-  
+    .moveindex {
+      background-color: whitesmoke;
+      padding: 0 .25rem;
+      line-height: 30px;
+      border-radius: 3px;
+    }
+    .active {
+      background-color: red;
+      color: white;
+    }
     @media screen and (max-width: 480px), print {
       #board {
         width: 90%!important;
-      }
-      .boardhead {
-        padding-left: 5%!important;
-      }
-      .boardfoot {
-        padding-right: 5%!important;
       }
     }
 
@@ -84,7 +87,7 @@
 <%- contentFor('content') %>
 
   <svg class="spinner-container" viewBox="0 0 44 44">
-      <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
+    <circle class="path" cx="22" cy="22" r="20" fill="none" stroke-width="4"></circle>
   </svg>
   
   <div class="spinner-content container">
@@ -93,12 +96,8 @@
   
   <div class="status">
     <span class="has-text-weight-semibold">
-    <!-- &nbsp;🕗 <a href="#" id="quickview"> <input type="checkbox" /> Mas info</a-->
-    <span>&nbsp;🕗 <span id="speed"></span></span>
-    <a href="#" class="showmore" toggle=".moreinfo"><span>♛</span> +info</a>
-    <!-- &nbsp;🕗 <span class="quick" content="Usa las flechas + f,n,[espacio] del teclado.">Atajos de teclado</span-->
+      <span>&nbsp;🕗 <span id="speed"></span></span>
     </span>
-    
     <div class="bar">
       <div class="bar-progress"></div>
     </div>
@@ -124,13 +123,11 @@
           [[/if]]
           </h5>
         </div>
-      </div>
-      <div class="">
-        <div class="moreinfo">
+        <div class="column moreinfo">
+          <h5><span>♛</span> Datos de la partida</h5>
           <table class="table is-striped">
             <tr>
-              <td class="has-text-weight-bold">PGN</td>
-              <td>[[:~pgnIndex(pgn)]]</td>
+              <td colspan=2>[[:~pgnIndex(pgn)]]</td>
             </tr>          
             <tr>
               <td class="has-text-weight-bold">Evento</td>

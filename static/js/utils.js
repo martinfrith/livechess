@@ -27,15 +27,20 @@ parseHelpers = {
   pgnIndex:function(pgn){
     var data = []
     ,index = 0
+    , selectedIndex = parseInt(location.hash.replace('#',''))
     pgn.split('.').forEach(function(turn,i){
       turn.split(' ').forEach(function(move){
         if(move.length){
           if(isNaN(move) && move.length > 1){
             var mindex = ""
+            , cls = ''
             if((index+1)%2||index===0){
               mindex = (Math.ceil(index/2) + 1) + ". "
             }
-            data.push(mindex + '<a href="#' + index + '">' + move + '</a>')
+            if(index===selectedIndex){
+              cls='active'
+            }
+            data.push(mindex + '<a class="moveindex ' + cls + '" href="#' + index + '">' + move + '</a>')
             index++
           }
         }
