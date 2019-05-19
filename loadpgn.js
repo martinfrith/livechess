@@ -82,4 +82,3 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     },5000)
   });
 });
-
