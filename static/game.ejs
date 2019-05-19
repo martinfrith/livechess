@@ -49,7 +49,10 @@
     }
     .moreinfo,.keyboard-tips {
       display: none;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
+    }
+    .keyboard-tips {
+      margin-bottom: 0;
     }
     .notification h5 {
       margin: 0;
@@ -126,6 +129,10 @@
         <div class="moreinfo">
           <table class="table is-striped">
             <tr>
+              <td class="has-text-weight-bold">PGN</td>
+              <td>[[:~pgnIndex(pgn)]]</td>
+            </tr>          
+            <tr>
               <td class="has-text-weight-bold">Evento</td>
               <td>[[:event]]</td>
             </tr>
@@ -153,15 +160,8 @@
               <td class="has-text-weight-bold">Resultado</td>
               <td>[[:result]]</td>
             </tr>
-            <tr>
-              <td class="has-text-weight-bold">PGN</td>
-              <td>[[:pgn]]</td>
-            </tr>
           </table>
           <div class="notification is-info">
-            <a href="#" class="showmore">
-              <h5 class="has-text-white" toggle=".keyboard-tips">⌨ Atajos de teclado</h5>
-            </a>
             <ul class="keyboard-tips">
               <li>[⬌] Navega movimientos de la partida con las flechas horizontales</li>
               <li>[⬍] Establece velocidad de los movimientos con flechas verticales</li>
@@ -169,6 +169,9 @@
               <li>[F] Invierte el tablero</li>
               <li>[N] Visión nocturna</li>
             </ul>
+            <a href="#" class="showmore">
+              <h5 class="has-text-white" toggle=".keyboard-tips">⌨ Atajos de teclado</h5>
+            </a>
           </div>
         </div>
       </div>

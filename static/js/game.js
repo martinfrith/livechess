@@ -36,8 +36,6 @@ makeMove = () => {
 
     var perc = (index + 1) / possibleMoves.length * 100;
     $('.bar-progress').animate({width:perc+'%'},speed,'linear')
-
-    //console.log(index + ":" + move)
     index++
     game.move(move);
     board.position(game.fen());  
@@ -58,6 +56,17 @@ gamePGN = (pgn) => {
   })
   return data
 },
+gameSeek = () => {
+  window.setTimeout(() => {
+    if(!isNaN(selectedIndex)) {
+      gamePos(selectedIndex)
+    }
+    makeMove()
+    if(!isNaN(selectedIndex) && !paused) {
+      gamePause()
+    }
+  }, 500);
+},
 gameStart = () => {
   if(localStorage.getItem('speed')){
     speed = parseInt(localStorage.getItem('speed'))
@@ -75,7 +84,7 @@ gameStart = () => {
           $('.spinner-content').fadeTo('slow',1, () => {
             board = ChessBoard('board', cfg);
             boardEl = $('#board')
-            window.setTimeout(makeMove, 500);
+            window.setTimeout(gameSeek, 500);
             $('#speed').text(speed/1000+'s')
           })
         })
@@ -91,6 +100,7 @@ gameFlip = () => {
   $('.boardfoot').html(head)
 },
 gamePos = (pos) => {
+  boardEl.find('.square-55d63').removeClass('highlight-black highlight-white');
   game.reset();
   possibleMoves.forEach((move,i) => {
     if(i < pos){
@@ -129,7 +139,7 @@ cfg = {
 }
 /**/
 $(document).on('click','.showmore', (e) => {
-  console.log($(e.target))
+  e.preventDefault()
   $($(e.target).attr('toggle')).slideToggle()
 })
 $(document).on('click','.game-container', () => {
@@ -150,14 +160,14 @@ $(document).keydown(function(e) {
       gamePos(index-1)
     }
   } else if(e.keyCode == 38){
-    gameSpeed(250)
+    gameSpeed(200)
     //gamePos(possibleMoves.length -1)
   } else if(e.keyCode == 39){
     if(index <= possibleMoves.length){
       gamePos(index+1)
     }
   } else if(e.keyCode == 40){
-    gameSpeed(-250)
+    gameSpeed(-200)
     //gamePos(0)
   } else if(e.keyCode == 32){
     gamePause()
@@ -165,10 +175,8 @@ $(document).keydown(function(e) {
     gameFlip()
   }
 })
-
-if(!isNaN(selectedIndex)) {
-  gamePos(selectedIndex)
-  gamePause()
-} else {
-  gameStart()
-}
+gameStart()
+$(window).on('hashchange', () => {
+  selectedIndex = parseInt(location.hash.replace('#',''))
+  gameSeek()
+})

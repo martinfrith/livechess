@@ -23,6 +23,25 @@ parseHelpers = {
   },
   abbrRoom:function(id){
     return id.substr(-5)
+  },
+  pgnIndex:function(pgn){
+    var data = []
+    ,index = 0
+    pgn.split('.').forEach(function(turn,i){
+      turn.split(' ').forEach(function(move){
+        if(move.length){
+          if(isNaN(move) && move.length > 1){
+            var mindex = ""
+            if((index+1)%2||index===0){
+              mindex = (Math.ceil(index/2) + 1) + ". "
+            }
+            data.push(mindex + '<a href="#' + index + '">' + move + '</a>')
+            index++
+          }
+        }
+      })
+    })
+    return data.join(' ')
   }
 },
 ralfnum = function (a){ return Math.random().toString(36).substring(2, a) + Math.random().toString(36).substring(2, a)},
