@@ -121,7 +121,6 @@ gamePos = (pos) => {
     }
   })
   index = pos
-  gameMove()
 },
 gamePause = () => {
   paused = !paused
