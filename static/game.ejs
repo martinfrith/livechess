@@ -47,9 +47,12 @@
       padding-right: 25%;
       margin-top: 0.15rem!important;
     }
-    .moreinfo {
+    .moreinfo,.keyboard-tips {
       display: none;
       margin-bottom: 3rem;
+    }
+    .notification h5 {
+      margin: 0;
     }
     .game-container {
       padding-top: 0;
@@ -89,7 +92,7 @@
     <span class="has-text-weight-semibold">
     <!-- &nbsp;🕗 <a href="#" id="quickview"> <input type="checkbox" /> Mas info</a-->
     <span>&nbsp;🕗 <span id="speed"></span></span>
-    <a href="#" class="showmore"><span>♛</span> +info</a>
+    <a href="#" class="showmore" toggle=".moreinfo"><span>♛</span> +info</a>
     <!-- &nbsp;🕗 <span class="quick" content="Usa las flechas + f,n,[espacio] del teclado.">Atajos de teclado</span-->
     </span>
     
@@ -156,11 +159,13 @@
             </tr>
           </table>
           <div class="notification is-info">
-            <h6 class="has-text-white">Accesos directos de teclado</h6>
-            <ul>
-              <li>[⬌] Navega movimientos de la partida</li>
-              <li>[⬍] Establece velocidad de los movimientos</li>
-              <li>[espacio] Pausa/Reanuda la partida.</li>
+            <a href="#" class="showmore">
+              <h5 class="has-text-white" toggle=".keyboard-tips">⌨ Atajos de teclado</h5>
+            </a>
+            <ul class="keyboard-tips">
+              <li>[⬌] Navega movimientos de la partida con las flechas horizontales</li>
+              <li>[⬍] Establece velocidad de los movimientos con flechas verticales</li>
+              <li>[espacio] Pausa/Reanuda la partida</li>
               <li>[F] Invierte el tablero</li>
               <li>[N] Visión nocturna</li>
             </ul>

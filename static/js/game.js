@@ -1,5 +1,6 @@
 var board,
 room = location.pathname.replace('/',''),
+selectedIndex = parseInt(location.hash.replace('#','')),
 boardEl = $('#board'),
 game = new Chess(),
 index = 0,
@@ -127,8 +128,9 @@ cfg = {
   onMoveEnd: onMoveEnd
 }
 /**/
-$(document).on('click','.showmore', () => {
-  $('.moreinfo').slideToggle()
+$(document).on('click','.showmore', (e) => {
+  console.log($(e.target))
+  $($(e.target).attr('toggle')).slideToggle()
 })
 $(document).on('click','.game-container', () => {
   gamePause()
@@ -164,4 +166,9 @@ $(document).keydown(function(e) {
   }
 })
 
-gameStart()
+if(!isNaN(selectedIndex)) {
+  gamePos(selectedIndex)
+  gamePause()
+} else {
+  gameStart()
+}
