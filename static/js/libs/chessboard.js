@@ -1712,9 +1712,10 @@ function initDom() {
 function init() {
   if (checkDeps() !== true ||
       expandConfig() !== true) return;
-  cacheImages();
+ 
   initDom();
   addEvents();
+  cacheImages();
 }
 
 // go time

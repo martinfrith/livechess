@@ -6,7 +6,6 @@
  
     #board {
       width: 50%; 
-      margin: 0 auto;
     }
     .highlight-white {
       -webkit-box-shadow: inset 0 0 5px 5px yellow;
@@ -42,12 +41,12 @@
     .boardhead {
       display: none;
       margin-bottom: 0!important;
-      padding-left: 1rem;
+      padding-left: 0.25rem;
     }
     .boardfoot {
       opacity: 0;
       margin-top: 0.15rem!important;
-      padding-right: 1rem;
+      padding-right: 0.25rem;
     }
     .moreinfo,.keyboard-tips {
       display: none;
@@ -58,7 +57,7 @@
       margin-bottom: 0;
     }
     .notification {
-      margin: 0 1rem;
+      padding: 1rem;
     }
     .notification h5 {
       margin: 0;
@@ -78,10 +77,13 @@
     }
     @media screen and (max-width: 480px), print {
       #board {
-        width: 90%!important;
+        width: 100%!important;
+        margin: 0 auto;
+      }
+      .notification {
+        margin: 0 1rem;
       }
     }
-
   </style>
 
 <%- contentFor('js') %>
@@ -130,7 +132,9 @@
           </h5>
         </div>
         <div class="column moreinfo">
-          <h5><span>♛</span> Datos de la partida</h5>
+          <div class="notification is-primary">
+            <h5><span>♛</span> Datos de la partida</h5>
+          </div>
           <table class="table is-striped">
             <tr>
               <td colspan=2>[[:~pgnIndex(pgn)]]</td>

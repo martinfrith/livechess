@@ -11,8 +11,8 @@ body {
 {
   display: block;
   position: absolute;
-  top: 2.25rem;
-  right: 2.25rem;
+  top: 1rem;
+  right: 1rem;
   
   z-index: 1;
   
@@ -337,12 +337,11 @@ blockquote {
 }
 
 #anchor {
-  padding: 1.5rem;
-  min-height: 95px;
+  padding: 0.5rem;
 }
 
 #anchor img {
-  max-height: 2.75rem;
+  max-height: 2.25rem;
   margin-bottom: -5px;
 }
 
