@@ -6,7 +6,7 @@
  
     #board {
       width: 50%; 
-      /*margin: 0 auto;*/
+      margin: 0 auto;
     }
     .highlight-white {
       -webkit-box-shadow: inset 0 0 5px 5px yellow;
@@ -29,7 +29,7 @@
       cursor: pointer;
     }
     .bar-progress {
-      height: 1.5rem;
+      height: 0.25rem;
       background-color: red;
       width: 0;
     }
@@ -42,17 +42,23 @@
     .boardhead {
       display: none;
       margin-bottom: 0!important;
+      padding-left: 1rem;
     }
     .boardfoot {
       opacity: 0;
       margin-top: 0.15rem!important;
+      padding-right: 1rem;
     }
     .moreinfo,.keyboard-tips {
       display: none;
       margin-bottom: 3.5rem;
     }
     .keyboard-tips {
+      margin-left: 1em;
       margin-bottom: 0;
+    }
+    .notification {
+      margin: 0 1rem;
     }
     .notification h5 {
       margin: 0;
@@ -63,7 +69,7 @@
     .moveindex {
       background-color: whitesmoke;
       padding: 0 .25rem;
-      line-height: 32px;
+      line-height: 0.5rem;
       border-radius: 3px;
     }
     .active {
