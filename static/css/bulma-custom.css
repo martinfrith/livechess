@@ -5,7 +5,6 @@ html, body {
 body {
   font-family: Catamaran, -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   font-weight: 500;
-  position: relative;
 }
 #menuToggle
 {
@@ -333,7 +332,6 @@ blockquote {
     will-change: transform;
 }
 
-
 .is-notification {
   padding-left: 1rem;  
 }
@@ -360,7 +358,3 @@ blockquote {
   padding: 1rem;
 }
 
-@media screen and (max-width: 769px), print {
-}
-@media screen and (max-width: 480px), print {
-}

@@ -3,8 +3,7 @@
   <title><%= game.white %> vs <%= game.black %>, <%= game.event %> </title>
   <link rel="stylesheet" href="/css/chessboard.css" />
   <style type="text/css">
- 
-    #board {
+     #board {
       width: 50%; 
     }
     .highlight-white {
@@ -58,6 +57,7 @@
     }
     .notification {
       padding: 1rem;
+      margin-bottom:0!important;
     }
     .notification h5 {
       margin: 0;
@@ -68,14 +68,14 @@
     .moveindex {
       background-color: whitesmoke;
       padding: 0 .25rem;
-      line-height: 0.5rem;
+      line-height: 1.95rem;
       border-radius: 3px;
     }
     .active {
       background-color: red;
       color: white;
     }
-    @media screen and (max-width: 480px), print {
+    @media screen and (max-width: 762px), print {
       #board {
         width: 100%!important;
         margin: 0 auto;
@@ -137,16 +137,20 @@
           </div>
           <table class="table is-striped">
             <tr>
-              <td colspan=2>[[:~pgnIndex(pgn)]]</td>
+              <td colspan=2>[[:~pgnIndex(pgn,result)]]</td>
             </tr>          
+          [[if event]]
             <tr>
               <td class="has-text-weight-bold">Evento</td>
               <td>[[:event]]</td>
             </tr>
+          [[/if]]
+          [[if round]]
             <tr>
               <td class="has-text-weight-bold">Ronda</td>
               <td>[[:round]]</td>
             </tr>
+          [[/if]]
             <tr>
               <td class="has-text-weight-bold">Blancas</td>
               <td>[[:white]][[if whiteelo && whiteelo.length]] ([[:whiteelo]])[[/if]]</td>
@@ -155,18 +159,24 @@
               <td class="has-text-weight-bold">Negras</td>
               <td>[[:black]][[if blackelo && blackelo.length]] ([[:blackelo]])[[/if]]</td>
             </tr>
+          [[if date]]
             <tr>
               <td class="has-text-weight-bold">Fecha</td>
               <td>[[:date]]</td>
             </tr>
+          [[/if]]
+          [[if site]]
             <tr>
               <td class="has-text-weight-bold">Lugar</td>
               <td>[[:site]]</td>
             </tr>
+          [[/if]]
+          [[if result]]
             <tr>
               <td class="has-text-weight-bold">Resultado</td>
               <td>[[:result]]</td>
             </tr>
+          [[/if]]
           </table>
           <div class="notification is-info">
             <ul class="keyboard-tips">

@@ -102,6 +102,11 @@ gameFlip = () => {
 },
 gameSeek = () => {
   window.setTimeout(() => {
+
+    selectedIndex = parseInt(location.hash.replace('#',''))
+    $('.moveindex').removeClass('active')
+    $('.moveindex[href="#' + selectedIndex + '"]').addClass('active')
+
     if(!isNaN(selectedIndex)) {
       gamePos(selectedIndex)
       $('.moreinfo').show()
@@ -140,6 +145,17 @@ gameSpeed = (s) => {
     speed-=s
   }
 },
+gameScroll = (e) => {
+  if($('body').scrollTop() > 10) {
+    if(!paused){
+      gamePause()
+    }
+  } else {
+    if(paused){
+      gamePause()
+    }
+  }
+},
 onMoveEnd = function() {
   boardEl.find('.square-' + squareToHighlight)
     .addClass('highlight-' + colorToHighlight);
@@ -151,47 +167,45 @@ cfg = {
   onMoveEnd: onMoveEnd
 }
 /**/
-$(document).on('click','.showmore', (e) => {
-  e.preventDefault()
-  $($(e.target).attr('toggle')).slideToggle()
-})
-$(document).on('click','.game-container', () => {
-  gamePause()
-})
-$(document).on('click','#board', () => {
-  gameFlip()
-})
-$(document).on('click','.bar', (e) => {
-    var x = e.pageX - e.target.offsetLeft
-    var w = $(document).width()
-    var pos = parseInt(x / w * possibleMoves.length)
-    gamePos(pos)
-})
-$(document).keydown(function(e) {
-  if(e.keyCode == 37){
-    if(index){
-      gamePos(index-1)
-    }
-  } else if(e.keyCode == 38){
-    gameSpeed(200)
-    //gamePos(possibleMoves.length -1)
-  } else if(e.keyCode == 39){
-    if(index <= possibleMoves.length){
-      gamePos(index+1)
-    }
-  } else if(e.keyCode == 40){
-    gameSpeed(-200)
-    //gamePos(0)
-  } else if(e.keyCode == 32){
+$(document).ready(function() {
+  $(document).on('click','.showmore', (e) => {
+    e.preventDefault()
+    $($(e.target).attr('toggle')).slideToggle()
+  })
+  $(document).on('click','.game-container', () => {
     gamePause()
-  } else if(e.keyCode == 70){
+  })
+  $(document).on('click','#board', () => {
     gameFlip()
-  }
-})
-gameStart()
-$(window).on('hashchange', () => {
-  selectedIndex = parseInt(location.hash.replace('#',''))
-  $('.moveindex').removeClass('active')
-  $('.moveindex[href="#' + selectedIndex + '"]').addClass('active')
-  gameSeek()
+  })
+  $(document).on('click','.bar', (e) => {
+      var x = e.pageX - e.target.offsetLeft
+      var w = $(document).width()
+      var pos = parseInt(x / w * possibleMoves.length)
+      gamePos(pos)
+  })
+  $(document).keydown(function(e) {
+    if(e.keyCode == 37){
+      if(index){
+        gamePos(index-1)
+      }
+    } else if(e.keyCode == 38){
+      gameSpeed(200)
+      //gamePos(possibleMoves.length -1)
+    } else if(e.keyCode == 39){
+      if(index <= possibleMoves.length){
+        gamePos(index+1)
+      }
+    } else if(e.keyCode == 40){
+      gameSpeed(-200)
+      //gamePos(0)
+    } else if(e.keyCode == 32){
+      gamePause()
+    } else if(e.keyCode == 70){
+      gameFlip()
+    }
+  })
+  $('body').on('scroll', gameScroll)
+  $(window).on('hashchange', gameSeek)
+  gameStart()
 })

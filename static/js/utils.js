@@ -24,7 +24,7 @@ parseHelpers = {
   abbrRoom:function(id){
     return id.substr(-5)
   },
-  pgnIndex:function(pgn){
+  pgnIndex:function(pgn,result){
     var data = []
     ,index = 0
     , selectedIndex = parseInt(location.hash.replace('#',''))
@@ -46,7 +46,7 @@ parseHelpers = {
         }
       })
     })
-    return data.join(' ')
+    return data.join(' ') + ' ' + result
   }
 },
 ralfnum = function (a){ return Math.random().toString(36).substring(2, a) + Math.random().toString(36).substring(2, a)},
