@@ -75,6 +75,11 @@
       background-color: red;
       color: white;
     }
+    @media screen and (min-width: 960px), print {
+      .moreinfo {
+        margin-top: 1.25rem;
+      }
+    }
     @media screen and (max-width: 762px), print {
       #board {
         width: 100%!important;
@@ -133,7 +138,7 @@
         </div>
         <div class="column moreinfo">
           <div class="notification is-primary">
-            <h5><span>♛</span> Datos de la partida</h5>
+            <h5 class="has-text-white">♛ Datos de la partida</h5>
           </div>
           <table class="table is-striped">
             <tr>
@@ -179,6 +184,9 @@
           [[/if]]
           </table>
           <div class="notification is-info">
+            <a href="#" class="showmore">
+              <h5 class="has-text-white" toggle=".keyboard-tips">⌨ Atajos de teclado</h5>
+            </a>
             <ul class="keyboard-tips">
               <li>[⬌] Navega movimientos de la partida con las flechas horizontales</li>
               <li>[⬍] Establece velocidad de los movimientos con flechas verticales</li>
@@ -186,9 +194,6 @@
               <li>[F] Invierte el tablero</li>
               <li>[N] Visión nocturna</li>
             </ul>
-            <a href="#" class="showmore">
-              <h5 class="has-text-white" toggle=".keyboard-tips">⌨ Atajos de teclado</h5>
-            </a>
           </div>
         </div>
       </div>
