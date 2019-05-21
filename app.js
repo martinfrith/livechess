@@ -126,9 +126,24 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     })
   })
 
+function getNumOfDocs (collectionName, host, port, dbName, callback) {
+    MongoClient.connect("mongodb://" + host + ":" + port + "/" + dbName, function (error, db){
+        if(error) return callback(error);
+
+        db.collection(collectionName).count({}, function(error, numOfDocs){
+            if(error) return callback(error);
+
+            db.close();
+            callback(null, numOfDocs);
+        });
+    }); 
+} 
+
   app.post('/search', function (req, res) { 
     if(!req.body.query) return res.json({'error':'not_enough_params'})
     var $or = []
+    , limit = parseInt(req.body.limit)||10
+    , offset = parseInt(req.body.offset)||0
     req.body.query.split(' ').forEach((w) => {
       $or.push({"event": {'$regex' : w, '$options' : 'i'}})
       $or.push({"site": {'$regex' : w, '$options' : 'i'}})
@@ -136,11 +151,15 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
       $or.push({"white": {'$regex' : w, '$options' : 'i'}})
       $or.push({"black": {'$regex' : w, '$options' : 'i'}})
     })
-    db.collection('games').find({        
-      "$or": $or      
-    }).sort(gamesort).toArray(function(err,docs){
-      return res.json(docs)
-    })   
+    db.collection('games').countDocuments({"$or": $or}, function(error, numOfDocs){
+      db.collection('games').find({"$or": $or})
+        .sort(gamesort)
+        .limit(limit)
+        .skip(offset)
+        .toArray(function(err,docs){
+          return res.json({games:docs,count:numOfDocs})
+        })   
+    })
   })
 
   //.sort( { name: 1 } )

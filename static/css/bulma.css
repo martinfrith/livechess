@@ -2918,7 +2918,6 @@ fieldset[disabled] .button {
 .content ul {
   list-style: disc outside;
   margin-left: 2em;
-  margin-top: 1em;
 }
 
 .content ul ul {
@@ -7443,6 +7442,14 @@ a.navbar-item:hover, a.navbar-item.is-active,
 
 .pagination-list {
   flex-wrap: wrap;
+}
+
+.pagination-list li {
+  list-style: none;
+}
+
+.pagination-list li + li {
+  margin-top: 0;
 }
 
 @media screen and (max-width: 768px) {

@@ -7,14 +7,21 @@
 	<script type="text/javascript">
 
 	$(document).ready(function(){
-		var query = '<%= query.q %>';
+		var query = '<%= query.q %>'
+	    , limit = parseInt('<%= query.limit %>')||10
+	    , offset = parseInt('<%= query.offset %>')||0		
+	    , pages = {}
 		$('input[name=query]').val(query)
 	    $.ajax({
 	      url:'/search',
 	      method:'POST',
-	      data: {query:query},
+	      data: {query:query,offset:offset},
 	      success:function(res){
-	        $('#results').html($.templates(res.length?"#games":"#empty").render({games:res,query:query},parseHelpers)).promise().done(function (){
+		    var numPages = Math.ceil(res.count/limit)
+		    for(var i=1;i< numPages+1;i++){
+		    	pages[i] = (i-1)*limit
+		    }
+	        $('#results').html($.templates(res.games.length?"#games":"#empty").render({games:res.games,count:res.count,query:query,offset:offset,pages:pages},parseHelpers)).promise().done(function (){
 	          $('.spinner-container').fadeOut('fast', function(){
 	            $('.spinner-content').fadeTo('fast',1)
 	          })
@@ -59,7 +66,7 @@
 	</script>
 
 	<script id="games" type="text/x-jsrender">
-	    <p class="is-notification has-text-success">[[:games.length]] partida[[if games.length > 1]]s[[/if]]</p>
+	    <p class="is-notification has-text-success">[[:offset]] - [[if count < offset+10]][[:count]][[else]][[:offset+10]][[/if]] ([[:count]] partida[[if games.length > 1]]s[[/if]])</p>
 	    <table class="table is-striped">
 	    	<thead>
 	    		<th>Mesa</th>
@@ -69,7 +76,6 @@
 	    		<th>Negras</th>
 	    		<th>Resultado</th>
 	    		<th>Fecha</th>
-	    		<th>Cargado</th>
 	    	</thead>
 	    	<tbody>
 	    	[[for games]]
@@ -81,9 +87,17 @@
 					<td><span class="">[[:black]]</span></td>
 					<td><span class="">[[:result]]</span></td>
 					<td><span class="">[[:date]]</span></td>
-					<td><span class="">[[:~timeSpan(_id)]]</span></td>
 				</tr>
 			[[/for]]
 	    	</tbody>
 	    </table>
+		<nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+		  <!--a class="pagination-previous">Previous</a>
+		  <a class="pagination-next">Next page</a-->
+		  <ul class="pagination-list">
+			[[props pages]]
+		    <li><a href="?q=[[:~root.query]]&offset=[[>prop]]" class="pagination-link[[if ~root.offset === prop]] is-current[[/if]]" aria-label="Ir a página [[:#index]]">[[>key]]</a></li>
+		    [[/props]]
+		  </ul>
+		</nav>
 	</script>
