@@ -126,19 +126,6 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     })
   })
 
-function getNumOfDocs (collectionName, host, port, dbName, callback) {
-    MongoClient.connect("mongodb://" + host + ":" + port + "/" + dbName, function (error, db){
-        if(error) return callback(error);
-
-        db.collection(collectionName).count({}, function(error, numOfDocs){
-            if(error) return callback(error);
-
-            db.close();
-            callback(null, numOfDocs);
-        });
-    }); 
-} 
-
   app.post('/search', function (req, res) { 
     if(!req.body.query) return res.json({'error':'not_enough_params'})
     var $or = []
