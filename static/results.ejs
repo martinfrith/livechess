@@ -21,7 +21,7 @@
 		    for(var i=1;i< numPages+1;i++){
 		    	pages[i] = (i-1)*limit
 		    }
-	        $('#results').html($.templates(res.games.length?"#games":"#empty").render({games:res.games,count:res.count,query:query,offset:offset,pages:pages},parseHelpers)).promise().done(function (){
+	        $('#results').html($.templates(res.count?"#games":"#empty").render({games:res.games,count:res.count,query:query,offset:offset,pages:pages},parseHelpers)).promise().done(function (){
 	          $('.spinner-container').fadeOut('fast', function(){
 	            $('.spinner-content').fadeTo('fast',1)
 	          })
@@ -76,6 +76,7 @@
 	    		<th>Negras</th>
 	    		<th>Resultado</th>
 	    		<th>Fecha</th>
+	    		<th>Vistas</th>
 	    	</thead>
 	    	<tbody>
 	    	[[for games]]
@@ -87,6 +88,7 @@
 					<td><span class="">[[:black]]</span></td>
 					<td><span class="">[[:result]]</span></td>
 					<td><span class="">[[:date]]</span></td>
+					<td><span class="">[[:views]]</span></td>
 				</tr>
 			[[/for]]
 	    	</tbody>
