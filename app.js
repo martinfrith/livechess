@@ -129,7 +129,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
   app.post('/search', function (req, res) { 
     if(!req.body.query) return res.json({'error':'not_enough_params'})
     var $or = []
-    , limit = parseInt(req.body.limit)||10
+    , limit = parseInt(req.body.limit)||25
     , offset = parseInt(req.body.offset)||0
     req.body.query.split(' ').forEach((w) => {
       $or.push({"event": {'$regex' : w, '$options' : 'i'}})
