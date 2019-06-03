@@ -82,9 +82,11 @@ gameStart = () => {
           $('.spinner-content').fadeTo('slow',1, () => {
             board = ChessBoard('board', cfg);
             boardEl = $('#board')
+            $(window).resize(board.resize);
             window.setTimeout(gameSeek, 500);
             $('#speed').text(speed/1000+'s')
             $('.moreinfo').delay(1000).fadeIn('fast', () => {
+              const offset = $('#board').offset()
               $('.boardhead, .boardfoot').fadeTo('fast',1)
             })
           })
@@ -171,6 +173,12 @@ $(document).ready(function() {
   $(document).on('click','.showmore', (e) => {
     e.preventDefault()
     $($(e.target).attr('toggle')).slideToggle()
+    setTimeout(function() {
+      var body = $("html, body");
+      body.stop().animate({scrollTop:$(document).height()}, 250, 'swing', function() { 
+      });
+    }, 10)
+
   })
   $(document).on('click','.game-container', () => {
     gamePause()
@@ -201,7 +209,7 @@ $(document).ready(function() {
       //gamePos(0)
     } else if(e.keyCode == 32){
       gamePause()
-    } else if(e.keyCode == 70){
+    } else if(e.shiftKey && e.keyCode == 70){
       gameFlip()
     }
   })

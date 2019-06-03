@@ -60,9 +60,21 @@ switchNightmode = function (){
     localStorage.setItem("nightmode", "no");
   }
 }, 
-playAudio = function(audio) {
+switchMusic = function (){
+  var musicmode = localStorage.getItem("musicmode")
+  if (!musicmode || musicmode === 'no'){
+    $('html').addClass('musicmode')
+    localStorage.setItem("musicmode", "yes");
+  } else {
+    $('html').removeClass('musicmode')
+    localStorage.setItem("musicmode", "no");
+  }
+}, 
+playAudio = function(audio,vol) {
+  if(vol===undefined) vol = 1
   if(audio===undefined) audio = "move";
   var audio = new Audio('/audio/' + audio + '.ogg');
+  audio.vol = vol
   audio.play();
 },
 notification = function(notification){
@@ -106,6 +118,8 @@ $(document).ready(function() {
   // Check for click events on the navbar burger icon
 
   const nightmode = localStorage.getItem("nightmode")
+  const musicmode = localStorage.getItem("musicmode")
+
   show_notification(localStorage.getItem('notification'))
 
   $(".navbar-burger").click(function() {
@@ -131,11 +145,19 @@ $(document).ready(function() {
       $('html').addClass('nightmode')
     }
   }
+
+  if(musicmode){
+    if(musicmode === 'yes'){
+      $('html').addClass('musicmode')
+    }
+  }
 });
 
 $(document).keydown(function(e) {
-  if(e.keyCode == 78){
+  if(e.shiftKey && e.keyCode == 78){
     switchNightmode()
+  } else if(e.shiftKey && e.keyCode == 77){
+    switchMusic()
   }
 });
 

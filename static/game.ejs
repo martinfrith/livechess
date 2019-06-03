@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="/css/chessboard.css" />
   <style type="text/css">
      #board {
-      width: 50%; 
+      width: 48%; 
     }
     .highlight-white {
       -webkit-box-shadow: inset 0 0 1px 6px yellow;
@@ -37,23 +37,43 @@
     .bar-progress.paused {
       background-color: grey;
     }
+    .boardarea {
+      position: relative;
+    }
     .boardhead {
       display: none;
-      margin-bottom: 0!important;
-      padding-left: 0.25rem;
+      position: absolute;
+      z-index: -1;
+      left: -0.5rem;
+      top: -1.3rem;
+    }
+    .boardhead h5 {
+      background-color: black;
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
+      color: white;
     }
     .boardfoot {
+      position: absolute;
+      z-index: -1;
+      bottom: -2.5rem;
+      right: 0;
       opacity: 0;
-      margin-top: 0.15rem!important;
-      padding-right: 0.25rem;
+    }
+    .boardfoot h5 {
+      background-color: white;
+      color: black;
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
     }
     .moreinfo,.keyboard-tips {
       display: none;
       margin-bottom: 3.5rem;
     }
     .keyboard-tips {
-      margin-left: 1em;
+      margin-top: 1rem;
       margin-bottom: 0;
+      color: white;
     }
     .notification {
       padding: 1rem;
@@ -120,21 +140,27 @@
     <div class="content padless">
       <div class="columns">
         <div class="column">
-          <h5 class="has-text-left boardhead">
-          [[if black && black.length]]
-            <span id="black">[[:black]][[if result && result.length]] ([[:~parseResult(result,'w')]])[[/if]]</span>
-          [[else]]
-            <span>[[:event]]</span>
-          [[/if]]
-          </h5>
-          <div id="board"></div>
-          <h5 class="has-text-right boardfoot">
-          [[if white && white.length]]
-            <span id="white">[[:white]][[if result && result.length]] ([[:~parseResult(result,'b')]])[[/if]]</span>
-          [[else]]
-            <span>[[:date]] [[:site]]</span>
-          [[/if]]
-          </h5>
+          <div class="boardarea">
+            <div class="boardhead">
+              <h5 class="has-text-left">
+              [[if black && black.length]]
+                <span id="black">[[:black]][[if result && result.length]] ([[:~parseResult(result,'w')]])[[/if]]</span>
+              [[else]]
+                <span>[[:event]]</span>
+              [[/if]]
+              </h5>
+            </div>
+            <div id="board"></div>
+            <div class="boardfoot">
+              <h5 class="has-text-right">
+              [[if white && white.length]]
+                <span id="white">[[:white]][[if result && result.length]] ([[:~parseResult(result,'b')]])[[/if]]</span>
+              [[else]]
+                <span>[[:date]] [[:site]]</span>
+              [[/if]]
+              </h5>
+            </div>
+          </div>
         </div>
         <div class="column moreinfo">
           <div class="notification is-primary">
@@ -187,13 +213,28 @@
             <a href="#" class="showmore">
               <h5 class="has-text-white" toggle=".keyboard-tips">⌨ Atajos de teclado</h5>
             </a>
-            <ul class="keyboard-tips">
-              <li>[⬌] Navega movimientos de la partida con las flechas horizontales</li>
-              <li>[⬍] Establece velocidad de los movimientos con flechas verticales</li>
-              <li>[espacio] Pausa/Reanuda la partida</li>
-              <li>[F] Invierte el tablero</li>
-              <li>[N] Visión nocturna</li>
-            </ul>
+            <table class="keyboard-tips">
+              <tr>
+                <td>[⬌]</td>
+                <td>Navega movimientos de la partida</td>
+              </tr>
+              <tr>
+                <td>[⬍]</td>
+                <td><p>Establece velocidad de la animación</p></td>
+              </tr>
+              <tr>
+                <td>[SPACE]</td>
+                <td><p>Pausa/Reanuda la partida</p></td>
+              </tr>
+              <tr>
+                <td>[SHIFT] + [F]</td>
+                <td><p>Invierte el tablero</p></td>
+              </tr>
+              <tr>
+                <td>[SHIFT] + [N]</td>
+                <td><p>Visión nocturna</p></td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ body {
   top: 1.45rem;
   right: 1.75rem;
   
-  z-index: 1;
+  z-index: 99;
   
   -webkit-user-select: none;
   user-select: none;
@@ -103,6 +103,7 @@ body {
 {
   position: absolute;
   width: 400px;
+  min-height: 107vh;
   margin: -100px 0 0 0;
   padding: 50px;
   padding-top: 53px;
@@ -344,14 +345,6 @@ blockquote {
   max-height: 2.25rem;
   margin: 0.5rem;
   margin-bottom: 0;
-}
-
-.boardhead {
-  margin-bottom: 0 !important;
-}
-
-.boardfoot {
-  margin-top: 0 !important;
 }
 
 .content:not(.padless) {

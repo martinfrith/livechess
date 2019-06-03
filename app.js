@@ -149,8 +149,6 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     })
   })
 
-  //.sort( { name: 1 } )
-
   app.post('/loadpgn', function (req, res) {
     if(!req.body.room) return res.json({'error':'no_room_provided'})
     db.collection('games').findOneAndUpdate(

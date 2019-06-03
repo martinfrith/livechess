@@ -3,6 +3,8 @@ $(document).on('click','#nightmode',function(){
 })
 
 $(document).keydown(function(e) {
+  console.log(e.keyCode)
+  
   if(e.keyCode == 37){
     $('#back').click()
   } else if(e.keyCode == 38){
@@ -11,10 +13,12 @@ $(document).keydown(function(e) {
     $('#next').click()
   } else if(e.keyCode == 40){
     $('#first').click()
-  } else if(e.keyCode == 70){
+  } else if(e.shiftKey && e.keyCode == 70){
     $('#flip').click()
-  } else if(e.keyCode == 78){
+  } else if(e.shiftKey && e.keyCode == 78){
     $('#nightmode').click()
+  } else if(e.shiftKey && e.keyCode == 79){
+    $('#music').click()
   }
 });
 
