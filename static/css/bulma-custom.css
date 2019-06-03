@@ -6,6 +6,9 @@ body {
   font-family: Catamaran, -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   font-weight: 500;
 }
+nav {
+  min-height: 4.5rem;
+}
 #menuToggle
 {
   display: block;
