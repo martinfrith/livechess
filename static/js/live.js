@@ -8,6 +8,7 @@ $(document).ready(function() {
     data = {},  
     game = new Chess(),
     loaded = false,
+    moveFrom = null,
     statusEl = $('#status'),
     fenEl = $('#fen'),
     pgnEl = $('#pgn')
@@ -43,7 +44,6 @@ $(document).ready(function() {
         promotion: 'q' // NOTE: always promote to a queen for example simplicity
       });
 
-      console.log('own move: ' + JSON.stringify(moveObj));
       // see if the move is legal
       var move = game.move(moveObj);
       // illegal move
@@ -56,8 +56,6 @@ $(document).ready(function() {
       moveObj.fen = game.fen();
       moveObj.pgn = game.pgn();
       moveObj.turn = game.turn();
-      moveObj.from = source;
-      moveObj.to = target;
       socket.emit('move', moveObj);
       socket.emit('data', {room:room,pgn:moveObj.pgn});
       updateStatus(moveObj);
@@ -110,9 +108,8 @@ $(document).ready(function() {
 
     // mark last move
     addHightlights(move)
-
+    $('.highlight-move').removeClass('highlight-move')
     loaded = true
-
   };
 
   //initiated socket client
@@ -133,7 +130,6 @@ $(document).ready(function() {
   })
 
   socket.on('move', function(moveObj){
-    console.log('peer move: ' + JSON.stringify(moveObj))
     var move = game.move(moveObj)
 
     // illegal move
@@ -237,6 +233,43 @@ $(document).ready(function() {
         flipEl.click(function(){
           board.flip()
         })    
+
+        $('.square-55d63').mousedown((e) => {
+          if(!$(e.target).attr('src') && !moveFrom){
+            return
+          }
+
+          var target = $(e.target).attr('src') ? $(e.target).parent() : $(e.target)
+          var id = target.attr('id').substring(0,2)
+
+          if(!moveFrom){
+            $(e.target).parent().addClass('highlight-move')
+            moveFrom = id
+          } else {
+            var moveObj = ({
+              from: moveFrom,
+              to: id,
+              promotion: 'q' // NOTE: always promote to a queen for example simplicity
+            });
+
+            var move = game.move(moveObj);
+            // illegal move
+            if (move === null) {
+              return 'snapback';
+            }
+
+            moveObj.secret_room = secret_room;
+            moveObj.room = room;
+            moveObj.fen = game.fen();
+            moveObj.pgn = game.pgn();
+            moveObj.turn = game.turn();
+            socket.emit('move', moveObj);
+            updateStatus(moveObj);
+            board.position(game.fen());
+            $('.highlight-move').removeClass('highlight-move')
+            moveFrom = null;
+          }
+        })
 
         $(window).on('hashchange', function(){
           if(location.hash.indexOf('info') > -1) {

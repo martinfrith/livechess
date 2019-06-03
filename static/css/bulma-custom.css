@@ -352,3 +352,44 @@ blockquote {
   padding: 1rem;
 }
 
+.boardarea {
+  position: relative;
+}
+.boardhead {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  left: -0.5rem;
+  top: -1.3rem;
+}
+.boardhead h5 {
+  background-color: black;
+  padding: 0.25rem 0.75rem;
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-bottomright: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  color: white;
+}
+.boardfoot {
+  position: absolute;
+  z-index: -1;
+  bottom: -2.5rem;
+  right: 0;
+  opacity: 0;
+}
+.boardfoot h5 {
+  background-color: white;
+  color: black;
+  padding: 0.25rem 0.75rem;
+  -webkit-border-top-left-radius: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+
