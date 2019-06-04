@@ -70,7 +70,7 @@ nav {
 #menuToggle input:checked ~ span
 {
   opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
+  transform: rotate(45deg) translate(0, -1px);
   background: #232323;
 }
 
@@ -90,7 +90,8 @@ nav {
 {
   opacity: 1;
   transform: rotate(-45deg) translate(0, -1px);
-  left: 1px;
+  top: -2px;
+  left: 2px;
 }
 
 /*
@@ -237,7 +238,7 @@ table {
 }
 
 body > .hero {
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 body > .notification {
@@ -301,6 +302,7 @@ blockquote {
   background-repeat: no-repeat;
   background-size: contain;
   padding: 1rem 1.5rem;
+  padding-top: 0;
   padding-bottom: 8rem;
 }
 .splash {
