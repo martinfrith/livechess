@@ -232,9 +232,10 @@ $(document).ready(function() {
 
         flipEl.click(function(){
           board.flip()
-        })    
 
-        $('.square-55d63').mousedown((e) => {
+        })
+
+        $(document).on('mousedown','.square-55d63',(e) => {
           if(!$(e.target).attr('src') && !moveFrom){
             return
           }

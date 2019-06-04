@@ -20,9 +20,13 @@
 }
 
 #board {
-	width: 40%;
+	width: 48%;
 }
 
+.live-game .columns, .column {
+	margin: 0!important;
+	padding: 0!important
+}
 .panel-indicator {
 	padding: 1rem;
 	position: fixed;
@@ -109,9 +113,7 @@ input.cmn-toggle-round:checked + label:after {
   margin-left: 25px;
 }
 
-
 @media screen and (max-width: 769px), print {
-
 	.field.is-grouped {
 		display: inline-block;
 	}

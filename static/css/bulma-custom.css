@@ -28,12 +28,9 @@ nav {
   position: absolute;
   top: -7px;
   left: -5px;
-  
   cursor: pointer;
-  
   opacity: 0; /* hide this */
   z-index: 2; /* and place it over the hamburger */
-  
   -webkit-touch-callout: none;
 }
 
@@ -43,7 +40,7 @@ nav {
 #menuToggle span
 {
   display: block;
-  width: 33px;
+  width: 28px;
   height: 4px;
   margin-bottom: 5px;
   position: relative;
@@ -104,7 +101,7 @@ nav {
 {
   position: absolute;
   width: 400px;
-  min-height: 107vh;
+  min-height: 110vh;
   margin: -100px 0 0 0;
   padding: 50px;
   padding-top: 53px;
