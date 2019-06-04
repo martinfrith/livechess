@@ -131,13 +131,12 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
     var $or = []
     , limit = parseInt(req.body.limit)||25
     , offset = parseInt(req.body.offset)||0
-    req.body.query.split(' ').forEach((w) => {
-      $or.push({"event": {'$regex' : w, '$options' : 'i'}})
-      $or.push({"site": {'$regex' : w, '$options' : 'i'}})
-      $or.push({"date": {'$regex' : w, '$options' : 'i'}})
-      $or.push({"white": {'$regex' : w, '$options' : 'i'}})
-      $or.push({"black": {'$regex' : w, '$options' : 'i'}})
-    })
+    $or.push({"event": {'$regex' : req.body.query, '$options' : 'i'}})
+    $or.push({"site": {'$regex' : req.body.query, '$options' : 'i'}})
+    $or.push({"date": {'$regex' : req.body.query, '$options' : 'i'}})
+    $or.push({"pgn": {'$regex' : req.body.query, '$options' : 'i'}})
+    $or.push({"white": {'$regex' : req.body.query, '$options' : 'i'}})
+    $or.push({"black": {'$regex' : req.body.query, '$options' : 'i'}})
     db.collection('games').countDocuments({"$or": $or}, function(error, numOfDocs){
       db.collection('games').find({"$or": $or})
         .sort(gamesort)
