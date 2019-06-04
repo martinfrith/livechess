@@ -401,4 +401,13 @@ blockquote {
   border-bottom-left-radius: 8px;
 }
 
+/* bulma hacks */
 
+@media screen and (min-width: 790px), print {
+  body > .hero .hero-title {
+    margin-top: 0;
+  }
+  .is-illustrated {
+    padding-bottom: 12rem;
+  }
+}
