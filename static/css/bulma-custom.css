@@ -101,7 +101,7 @@ nav {
 {
   position: absolute;
   width: 400px;
-  min-height: 110vh;
+  min-height: 107vh;
   margin: -100px 0 0 0;
   padding: 50px;
   padding-top: 53px;
@@ -295,8 +295,18 @@ blockquote {
   display: none;
 }
 
-.splash img {
-  max-height: 50vh;
+.is-illustrated {
+  background-image: url('/img/Sett.png');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 1rem 1.5rem;
+  padding-bottom: 8rem;
+}
+.splash {
+  display: inline-block;
+  width: 100%;
+  height: 30vh;
 }
 
 .quickview.is-active {
