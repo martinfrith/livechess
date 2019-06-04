@@ -2,6 +2,9 @@ html, body {
   height: 100%;
   overflow-x: hidden;
 }
+h1 {
+  font-family: 'Lobster', cursive;
+}
 body {
   font-family: Catamaran, -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   font-weight: 500;
@@ -117,14 +120,16 @@ nav {
 }
 
 #menu img {
-  max-width: 150px;
+  max-width: 225px;
   margin-top: 1rem;
+  margin-left: -1rem;
 }
 
 #menu li
 {
-  padding: 10px 0;
-  font-size: 22px;
+  font-family: 'Lobster', cursive;
+  padding: 5px 0;
+  font-size: 28px;
 }
 
 /*
@@ -352,9 +357,9 @@ blockquote {
 }
 
 #anchor img {
-  max-height: 2.25rem;
-  margin: 0.5rem;
-  margin-bottom: 0;
+  max-height: 3.5rem;
+  margin: 0;
+  margin-bottom: -1.5rem;
 }
 
 .content:not(.padless) {
