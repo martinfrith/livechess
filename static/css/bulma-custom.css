@@ -3,7 +3,7 @@ html, body {
   overflow-x: hidden;
 }
 h1 {
-  font-family: 'Lobster', cursive;
+  font-family: 'Lobster Two', cursive;
 }
 body {
   font-family: Catamaran, -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
@@ -92,9 +92,7 @@ nav {
 #menuToggle input:checked ~ span:nth-last-child(2)
 {
   opacity: 1;
-  transform: rotate(-45deg) translate(0, -1px);
-  top: -2px;
-  left: 2px;
+  transform: rotate(-45deg) translate(3px, -1px);
 }
 
 /*
@@ -110,7 +108,7 @@ nav {
   padding: 50px;
   padding-top: 53px;
   right: -100px;
-  background: #ededed;
+  background: whitesmoke;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
@@ -127,9 +125,11 @@ nav {
 
 #menu li
 {
-  font-family: 'Lobster', cursive;
+  font-family: 'Lobster Two', cursive;
   padding: 5px 0;
-  font-size: 28px;
+  font-size: 30px;
+  color: #23d160;
+  font-weight: bold;
 }
 
 /*
