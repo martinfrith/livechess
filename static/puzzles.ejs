@@ -45,14 +45,14 @@
 	    	<thead>
 	    		<th>Mesa</th>
 	    		<th>Puzzle</th>
-	    		<th>Cargado</th>
+	    		<th>Movimientos</th>
 	    	</thead>
 	    	<tbody>
 	    	[[for games]]
 				<tr>
 					<td><a class="" id="[[:room]]" href="/[[:room]]">[[:~abbrRoom(room)]]</a></td>
 					<td><span class="">[[:event]]</span></td>
-					<td><span class="">[[:~timeSpan(_id)]]</span></td>
+					<td><span class="">[[:~countMoves(pgn)]]</span></td>
 				</tr>
 			[[/for]]
 	    	</tbody>

@@ -22,7 +22,14 @@ parseHelpers = {
     }
   },
   abbrRoom:function(id){
-    return id.substr(-5)
+    if(id && id.length){
+      return id.substr(-5)
+    }
+  },
+  countMoves: function(pgn){
+    if(pgn && pgn.indexOf('.')){
+      return pgn.split('.').length - 1
+    }
   },
   pgnIndex:function(pgn,result){
     var data = []
