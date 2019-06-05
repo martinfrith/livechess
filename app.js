@@ -9,7 +9,7 @@ var mongodb = require('mongodb');
 var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
 var onlinewhen = moment().utc().subtract(10, 'minutes')
-var gamesort = {views:-1}
+var gamesort = {date:-1}
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
