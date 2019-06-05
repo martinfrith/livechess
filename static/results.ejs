@@ -60,14 +60,14 @@
 
 	<script id="empty" type="text/x-jsrender">
 	[[if query.length]]
-		<p class="is-notification has-text-danger">No hay partidas que coincidan con tu palabra clave.</p>
+		<p class="is-notification has-text-info">No hay partidas que coincidan con tu palabra clave.</p>
 	[[else]]
-		<p class="is-notification has-text-success">Busca por jugador, evento, fecha y/o lugar.</p>
+		<p class="is-notification has-text-info">Busca por jugador, evento, fecha y/o lugar.</p>
 	[[/if]]
 	</script>
 
 	<script id="games" type="text/x-jsrender">
-	    <p class="is-notification has-text-success">[[:offset+1]] - [[if count < offset+limit]][[:count]][[else]][[:offset+limit]][[/if]] ([[:count]] partida[[if count > 1]]s[[/if]])</p>
+	    <p class="is-notification has-text-info">[[:offset+1]] - [[if count < offset+limit]][[:count]][[else]][[:offset+limit]][[/if]] ([[:count]] partida[[if count > 1]]s[[/if]])</p>
 	    <table class="table is-striped">
 	    	<thead>
 	    		<th>Mesa</th>

@@ -348,10 +348,6 @@ blockquote {
     will-change: transform;
 }
 
-.is-notification {
-  padding-left: 1rem;  
-}
-
 #anchor {
   padding: 0.5rem;
 }
