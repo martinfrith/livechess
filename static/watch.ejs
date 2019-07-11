@@ -20,9 +20,6 @@
     height: 30px;
     width: 100px;
     margin: 10px 0;
-    position: fixed;
-    top: 4rem;
-    left: 1rem;
   }
 
   .led-box p {
@@ -87,12 +84,9 @@
   
   <div class="spinner-content container">
     <div class="game-container content"></div>
+    <div class="gameinfo"></div>
   </div>
 
-  <div class="led-box">
-    <div class="led-red"></div>
-    <p>EN VIVO</p>
-  </div>  
 
   <script id="match" type="text/x-jsrender">
     <div class="columns is-tablet">
@@ -104,7 +98,7 @@
               <span id="black">[[:black]]&nbsp;</span>
               <span class="has-text-info" id="blackelo">[[:blackelo]]</span>
             [[else]]
-              <span id="white">[[:event]]&nbsp;</span>
+              <!--span id="white">[[:event]]&nbsp;</span-->
             [[/if]]
             </h5>
           </div>
@@ -115,7 +109,7 @@
               <span id="white">[[:white]]&nbsp;</span>
               <span class="has-text-info" id="whiteelo">[[:whiteelo]]</span>
             [[else]]
-              <span id="white">[[:date]] [[:site]]&nbsp;</span>
+              <!--span id="white">[[:date]] [[:site]]&nbsp;</span-->
             [[/if]]
             </h5>
           </div>
@@ -125,11 +119,14 @@
   </script>
 
   <script id="gameinfo" type="text/x-jsrender">
+    <div>
+      <div class="columns led-box">
+        <div class="led-red"></div>
+        <p>EN VIVO</p>
+      </div>  
+
     [[if event]]
       <h3><span class="has-text-info">[[:event]]</span></h3>
-    [[/if]]
-    [[if date]]
-      <p>Fecha <span class="has-text-info">[[:date]]</span></p>
     [[/if]]
     [[if site]]
       <p>Lugar <span class="has-text-info">[[:site]]</span></p>
@@ -146,5 +143,6 @@
       <hr>
       <p>Estado <span class="has-text-info" id="status">[[:status]]</span></p>
       <p>PGN <span class="has-text-info" id="pgn">[[:pgn]]</span></p>
-      <p>FEN <span class="has-text-info" id="fen">[[:fen]]</span></p>
+      <!--p>FEN <span class="has-text-info" id="fen">[[:fen]]</span></p-->
+    </div>
   </script>
