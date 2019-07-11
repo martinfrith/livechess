@@ -201,6 +201,8 @@ $(document).ready(function() {
           markPGN()
         }
 
+        $('.boardhead, .boardfoot').fadeTo('fast',1)
+
         setTimeout(function(){
 
           var firstEl = $('#first'),

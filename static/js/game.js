@@ -86,7 +86,6 @@ gameStart = () => {
             window.setTimeout(gameSeek, 500);
             $('#speed').text(speed/1000+'s')
             $('.moreinfo').delay(1000).fadeIn('fast', () => {
-              const offset = $('#board').offset()
               $('.boardhead, .boardfoot').fadeTo('fast',1)
             })
           })
