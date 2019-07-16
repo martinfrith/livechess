@@ -1,4 +1,5 @@
-if($.inArray([window.location.protocol,'',window.location.host].join('/'),['http://localhost:3000','https://ajedrezenvivo.net']) == -1){
+const allowOrigins = ['http://localhost:3000','http://192.168.2.13:3000','https://ajedrezenvivo.net']
+if($.inArray([window.location.protocol,'',window.location.host].join('/'),allowOrigins) == -1){
   location.href='https://ajedrezenvivo.net'
 }
 

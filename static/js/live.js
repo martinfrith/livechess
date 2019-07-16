@@ -232,43 +232,46 @@ $(document).ready(function() {
 
         flipEl.click(function(){
           board.flip()
-
         })
 
-        $(document).on('mousedown','.square-55d63',(e) => {
-          if(!$(e.target).attr('src') && !moveFrom){
-            return
-          }
-
-          var target = $(e.target).attr('src') ? $(e.target).parent() : $(e.target)
-          var id = target.attr('id').substring(0,2)
+        $(document).on('mousedown touchstart','.square-55d63',(e) => {
+          const src = $(e.target).attr('src')
+          const target = $(e.target).attr('src') ? $(e.target).parent() : $(e.target)
+          const square = target.attr('id').substring(0,2)
 
           if(!moveFrom){
+            if(!src){ // blank square
+              return
+            }            
             $(e.target).parent().addClass('highlight-move')
-            moveFrom = id
+            moveFrom = square
           } else {
+
+            $('.highlight-move').removeClass('highlight-move')
+
             var moveObj = ({
               from: moveFrom,
-              to: id,
+              to: square,
               promotion: 'q' // NOTE: always promote to a queen for example simplicity
             });
 
-            var move = game.move(moveObj);
+
+            var move = game.move(moveObj)
+
             // illegal move
             if (move === null) {
-              return 'snapback';
+              return 'snapback'
             }
 
-            moveObj.secret_room = secret_room;
-            moveObj.room = room;
-            moveObj.fen = game.fen();
-            moveObj.pgn = game.pgn();
-            moveObj.turn = game.turn();
-            socket.emit('move', moveObj);
-            updateStatus(moveObj);
-            board.position(game.fen());
-            $('.highlight-move').removeClass('highlight-move')
-            moveFrom = null;
+            moveObj.secret_room = secret_room
+            moveObj.room = room
+            moveObj.fen = game.fen()
+            moveObj.pgn = game.pgn()
+            moveObj.turn = game.turn()
+            socket.emit('move', moveObj)
+            updateStatus(moveObj)
+            board.position(game.fen())
+            moveFrom = null
           }
         })
 

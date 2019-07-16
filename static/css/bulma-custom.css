@@ -3,7 +3,7 @@ html, body {
   overflow-x: hidden;
 }
 h1 {
-  font-family: 'Lobster Two', cursive;
+  font-family: 'Nunito', cursive;
 }
 body {
   font-family: Catamaran, -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
@@ -125,11 +125,11 @@ nav {
 
 #menu li
 {
-  font-family: 'Lobster Two', cursive;
-  padding: 5px 0;
-  font-size: 30px;
+  font-family: 'Nunito', cursive;
+  padding: 3px 0;
+  font-size: 22px;
   color: #209cee;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 /*
