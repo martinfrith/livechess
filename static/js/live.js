@@ -258,6 +258,8 @@ $(document).ready(function() {
 
             var move = game.move(moveObj)
 
+            moveFrom = null
+
             // illegal move
             if (move === null) {
               return 'snapback'
@@ -271,7 +273,6 @@ $(document).ready(function() {
             socket.emit('move', moveObj)
             updateStatus(moveObj)
             board.position(game.fen())
-            moveFrom = null
           }
         })
 

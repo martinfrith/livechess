@@ -10,6 +10,7 @@ var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
 var onlinewhen = moment().utc().subtract(10, 'minutes')
 var gamesort = {date:-1}
+const possibleResults = ['1-0','0-1','1/2-1/2']
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
@@ -180,7 +181,7 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
           }
         },{ upsert: false, new: true }).then(function(doc){
           if(doc.value){
-            if(doc.value.updatedAt && doc.value.broadcast && moment(doc.value.updatedAt).format('x') > onlinewhen.format('x')) {
+            if(doc.value.updatedAt && !possibleResults.indexOf(doc.value.result) && doc.value.broadcast && moment(doc.value.updatedAt).format('x') > onlinewhen.format('x')) {
               res.render('watch',{game:doc.value})
             } else {
               res.render('game',{game:doc.value})
