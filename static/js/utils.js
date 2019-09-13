@@ -1,7 +1,8 @@
 const allowOrigins = ['http://localhost:3000','http://192.168.2.13:3000','https://ajedrezenvivo.net']
-if($.inArray([window.location.protocol,'',window.location.host].join('/'),allowOrigins) == -1){
-  location.href='https://ajedrezenvivo.net'
-}
+// Heroku charges you for domains, because the lack of any budget we are currently using Heroku URLs for this project.
+//if($.inArray([window.location.protocol,'',window.location.host].join('/'),allowOrigins) == -1){
+  //location.href='https://ajedrezenvivo.net'
+//}
 
 const translations = {
   not_enough_params : 'No hay suficientes parámetros.',
