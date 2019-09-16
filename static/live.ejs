@@ -27,28 +27,35 @@
   </svg>
   
   <div class="spinner-content container">
-    <div class="panel-indicator">
-      <a href="#" id="flip" title="Invertir">
-        <span class="icon is-size-3 has-text-grey">
-          <span>🔄</span>
-        </span>
-      </a>  
-      <a href="#info" title="Info">
-        <span class="icon is-size-3 has-text-grey">
-          <span>ℹ️</span>
-        </span>
-      </a>
-      <a href="#action" title="Ajustes">
-        <span class="icon is-size-3 has-text-grey">
-          <span>⚙️</span>
-        </span>
-      </a>
-    </div>
       
     <div id="board"></div>
- 
+  
+    <div id="status"></div>
     <div class="panel"></div>
 
+  </div>
+
+  <div class="panel-indicator">
+    <a href="#" id="flip" title="Invertir">
+      <span class="icon is-size-3 has-text-grey">
+        <span>🔄</span>
+      </span>
+    </a>  
+    <a href="#info" title="Info">
+      <span class="icon is-size-3 has-text-grey">
+        <span>ℹ️</span>
+      </span>
+    </a>
+    <a href="#action" title="Ajustes">
+      <span class="icon is-size-3 has-text-grey">
+        <span>⚙️</span>
+      </span>
+    </a>
+    <a href="#" id="flip" class="gameundo" title="Deshacer">
+      <span class="icon is-size-3 has-text-grey">
+        <span>↩️</span>
+      </span>
+    </a>  
   </div>
 
   <script id="match" type="text/x-jsrender">
@@ -232,7 +239,7 @@
           </div>
           <div class="columns is-tablet">
             <div class="column">
-              <a class="button is-danger" id="undo">Atrás</a>
+              <a class="button is-danger" class="gameundo">Atrás</a>
               <a class="button[[if result == '1-0']] is-active[[/if]]" id="wwins">1-0</a>
               <a class="button[[if result == '0-1']] is-active[[/if]]" id="bwins">0-1</a>
               <a class="button[[if result == '1/2-1/2']] is-active[[/if]]" id="draw">1/2-1/2</a>

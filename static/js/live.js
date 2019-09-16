@@ -176,7 +176,7 @@ $(document).ready(function() {
         updateStatus(data);
         
         var loadpgnEl = $('#loadpgn'),
-        undoEl = $('#undo'),
+        undoEl = $('.gameundo'),
         flipEl = $('#flip'),
         wwinsEl = $('#wwins'),
         bwinsEl = $('#bwins'),
