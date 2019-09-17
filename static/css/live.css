@@ -19,8 +19,12 @@
 	background-color: #f8f8f8;
 }
 
+#status {
+	text-align: center;
+}
+
 #board {
-	width: 50%;
+	width: 45%;
 	margin: 0 auto;
 }
 

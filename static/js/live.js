@@ -2,12 +2,11 @@ $(document).ready(function() {
 
   var socket = io();  
   var board,
-    boardEl = $('#board'),
+    boardEl = null,
     room = location.pathname.replace('/live/','').split('/')[1],
     secret_room = location.pathname.replace('/live/','').split('/')[0],
     data = {},  
     game = new Chess(),
-    loaded = false,
     moveFrom = null,
     statusEl = $('#status'),
     fenEl = $('#fen'),
@@ -15,14 +14,16 @@ $(document).ready(function() {
 
   var removeHighlights = function() {
     boardEl.find('.square-55d63')
-      .removeClass('highlight-last');
+      .removeClass('highlight-move');
   }
 
   var addHightlights = function(move){
     removeHighlights();
     if(move){
-      boardEl.find('.square-' + move.from).addClass('highlight-last');
-      boardEl.find('.square-' + move.to).addClass('highlight-last');   
+      setTimeout(function(){
+        boardEl.find('.square-' + move.from).addClass('highlight-move');
+        boardEl.find('.square-' + move.to).addClass('highlight-move');   
+      },10)
     }
   }
 
@@ -99,17 +100,14 @@ $(document).ready(function() {
       }
     }
 
-    if(loaded){
-      playAudio()
-    }
+    playAudio()
     statusEl.html(status);
     //fenEl.html(game.fen());
     pgnEl.html(pgn);
+    addHightlights(move)
 
     // mark last move
-    addHightlights(move)
-    $('.highlight-move').removeClass('highlight-move')
-    loaded = true
+    //$('.highlight-move').removeClass('highlight-move')
   };
 
   //initiated socket client
@@ -170,6 +168,8 @@ $(document).ready(function() {
         if(data.pgn){
           game.load_pgn(data.pgn)
         }
+
+        boardEl = $('#board')
 
         board = ChessBoard('board', cfg);
         board.position(game.fen())
@@ -247,7 +247,7 @@ $(document).ready(function() {
             moveFrom = square
           } else {
 
-            $('.highlight-move').removeClass('highlight-move')
+            //$('.highlight-move').removeClass('highlight-move')
 
             var moveObj = ({
               from: moveFrom,
