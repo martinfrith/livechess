@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  $('#menuToggle').hide()
   var socket = io();  
   var board,
     boardEl = null,
