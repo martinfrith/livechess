@@ -122,7 +122,9 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
   })
 
   app.post('/gamecount', function (req, res) { 
+    console.log(req.body)
     db.collection('games').find(req.body).toArray(function(err,docs){
+      console.log(docs.length)
       return res.json(docs.length)
     })
   })

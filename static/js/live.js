@@ -101,7 +101,10 @@ $(document).ready(function() {
       }
     }
 
-    playAudio()
+    if(pgn.length){
+      playAudio()
+    }
+
     statusEl.html(status);
     //fenEl.html(game.fen());
     pgnEl.html(pgn);
@@ -129,15 +132,17 @@ $(document).ready(function() {
   })
 
   socket.on('move', function(moveObj){
-    var move = game.move(moveObj)
+    if(moveObj.room === room){
+      var move = game.move(moveObj)
 
-    // illegal move
-    if (move === null) {
-      return;
+      // illegal move
+      if (move === null) {
+        return;
+      }
+
+      updateStatus(move)
+      board.position(game.fen())
     }
-
-    updateStatus(move)
-    board.position(game.fen())
   });
 
   $.ajax({

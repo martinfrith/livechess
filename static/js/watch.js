@@ -125,7 +125,9 @@ $(document).ready(function() {
         status += ', ' + moveColor + ' están en jaque.';
       }
     }
-    playAudio()
+    if(pgn.length){
+      playAudio()
+    }
     statusEl.html(status);
     fenEl.html(game.fen());
     pgnEl.html(pgn);
@@ -142,13 +144,15 @@ $(document).ready(function() {
   })
 
   socket.on('move', function(moveObj){ //remote move by peer
-    console.log('peer move: ' + JSON.stringify(moveObj));
-    var move = game.move(moveObj)
-    if (move === null) {
-      return;
+    if(moveObj.room === room){
+      console.log('peer move: ' + JSON.stringify(moveObj));
+      var move = game.move(moveObj)
+      if (move === null) {
+        return;
+      }
+      //updateStatus(move);
+      board.position(game.fen());
     }
-    //updateStatus(move);
-    board.position(game.fen());
   });
 
   socket.on('data', function(dataObj){ //remote move by peer
