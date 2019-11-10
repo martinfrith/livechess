@@ -250,7 +250,7 @@ $(document).ready(function() {
           board.flip()
         })
 
-        $(document).on('mousedown','.square-55d63',(e) => {
+        $(document).on('mousedown touchstart','.square-55d63',(e) => {
           const src = $(e.target).attr('src')
           const target = $(e.target).attr('src') ? $(e.target).parent() : $(e.target)
           const square = target.attr('id').substring(0,2)
@@ -263,15 +263,15 @@ $(document).ready(function() {
             moveFrom = square
           } else {
 
-            //$('.highlight-move').removeClass('highlight-move')
+            if(square === moveFrom) return
 
             var moveObj = ({
               from: moveFrom,
               to: square,
               promotion: 'q' // NOTE: always promote to a queen for example simplicity
             });
-            moveFrom = null
 
+            moveFrom = null
 
             var move = game.move(moveObj)
 
