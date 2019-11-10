@@ -250,7 +250,7 @@ $(document).ready(function() {
           board.flip()
         })
 
-        $(document).on('mousedown touchstart','.square-55d63',(e) => {
+        $(document).on('mousedown','.square-55d63',(e) => {
           const src = $(e.target).attr('src')
           const target = $(e.target).attr('src') ? $(e.target).parent() : $(e.target)
           const square = target.attr('id').substring(0,2)
