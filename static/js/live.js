@@ -171,6 +171,10 @@ $(document).ready(function() {
           onSnapEnd: onSnapEnd
         };
 
+        if(window.innerWidth < 789){
+          cfg.draggable = false 
+        }
+
         if(data.pgn){
           game.load_pgn(data.pgn)
         }
@@ -179,8 +183,14 @@ $(document).ready(function() {
 
         board = ChessBoard('board', cfg);
         board.position(game.fen())
+
+        // resize event handling
+        $(window).resize(() => {
+            board.resize()
+        })
+
         updateStatus(data);
-        
+
         var loadpgnEl = $('#loadpgn'),
         undoEl = $('.gameundo'),
         flipEl = $('#flip'),
@@ -260,14 +270,15 @@ $(document).ready(function() {
               to: square,
               promotion: 'q' // NOTE: always promote to a queen for example simplicity
             });
+            moveFrom = null
 
 
             var move = game.move(moveObj)
 
-            moveFrom = null
-
             // illegal move
             if (move === null) {
+              console.log("remove!")
+              removeHighlights()
               return 'snapback'
             }
 
