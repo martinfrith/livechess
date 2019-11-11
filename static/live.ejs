@@ -85,16 +85,17 @@
               <div class="column field">
                 <div class="control">
                   <div>
-                    <span>Compartir en</span>
+                    <span>Invitar oponente</span>
                     <span class="is-info">
-                      <a href="https://wa.me/?text=[[:live_url]]" target="_blank">Whatsapp</a>
+                      <a href="https://wa.me/?text=[[:live_url]]" class="is-hidden-mobile">Whatsapp</a>
+                      <a href="whatsapp://send?text=[[:live_url]]" class="is-hidden-tablet">Whatsapp</a>
                     </span>
                   </div>
                   [[if broadcast]]
                   <div id="watch_url">
-                    <span>URL en vivo</span>
+                    <span>Invitar observador</span>
                     <span class="is-info">
-                      <a href="[[:watch_url]]" target="_blank">[[:watch_url]]</a>
+                      <a href="[[:watch_url]]" target="_blank">URL en vivo</a>
                     </span>
                   </div>
                   [[/if]]
