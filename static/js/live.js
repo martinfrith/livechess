@@ -15,12 +15,17 @@ $(document).ready(function() {
 
   var removeHighlights = function() {
     boardEl.find('.square-55d63')
-      .removeClass('highlight-move');
+      .removeClass('highlight-move')
+    boardEl.find('.square-55d63')
+      .removeClass('in-check');
   }
 
   var addHightlights = function(move){
     removeHighlights();
     if(move){
+      if (game.in_check() === true) {
+        $('img[data-piece="' + game.turn() + 'K"]').parent().addClass('in-check')
+      }
       setTimeout(function(){
         boardEl.find('.square-' + move.from).addClass('highlight-move');
         boardEl.find('.square-' + move.to).addClass('highlight-move');   
