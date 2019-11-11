@@ -599,7 +599,8 @@ function buildBoard(orientation) {
 
       html += '<div class="' + CSS.square + ' ' + CSS[squareColor] + ' ' +
         'square-' + square + '" ' +
-        'style="width: ' + SQUARE_SIZE + 'px; height: ' + SQUARE_SIZE + 'px" ' +
+        //'style="width: ' + SQUARE_SIZE + 'px; height: ' + SQUARE_SIZE + 'px" ' +
+        'style="width: 12.5%; height: ' + SQUARE_SIZE + 'px" ' +
         'id="' + SQUARE_ELS_IDS[square] + '" ' +
         'data-square="' + square + '">';
 
@@ -685,6 +686,7 @@ function buildPiece(piece, hidden, id) {
   'class="' + CSS.piece + '" ' +
   'data-piece="' + piece + '" ' +
   'style="width: ' + SQUARE_SIZE + 'px;' +
+  //'style="width: 100%;' +
   'height: ' + SQUARE_SIZE + 'px;';
   if (hidden === true) {
     html += 'display:none;';
@@ -1461,7 +1463,8 @@ widget.resize = function() {
   SQUARE_SIZE = calculateSquareSize();
 
   // set board width
-  boardEl.css('width', (SQUARE_SIZE * 8) + 'px');
+  //boardEl.css('width', (SQUARE_SIZE * 8) + 'px');
+  boardEl.css('width', '100%');
 
   // set drag piece size
   draggedPieceEl.css({
