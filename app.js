@@ -1,6 +1,7 @@
 const fs = require('fs')
 var express = require('express');
 var path = require('path');
+var sslRedirect = require('heroku-ssl-redirect');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -12,6 +13,8 @@ var onlinewhen = moment().utc().subtract(10, 'minutes')
 var gamesort = {date:-1}
 const possibleResults = ['1-0','0-1','1/2-1/2']
 
+// enable ssl redirect
+app.use(sslRedirect());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
 app.set('views', path.join(__dirname, 'static'))
