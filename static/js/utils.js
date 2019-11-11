@@ -81,8 +81,8 @@ switchMusic = function (){
 }, 
 playAudio = function(audio,vol) {
   if(vol===undefined) vol = 1
-  if(audio===undefined) audio = "move";
-  var audio = new Audio('/audio/' + audio + '.ogg');
+  if(audio===undefined) audio = "move.ogg";
+  var audio = new Audio('/audio/' + audio);
   audio.vol = vol
   audio.play();
 },

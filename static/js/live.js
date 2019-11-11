@@ -102,7 +102,21 @@ $(document).ready(function() {
     }
 
     if(pgn.length){
-      playAudio()
+      var sound = 'move.mp3'
+      if(move.flags === 'c'){
+        sound = 'capture.mp3'        
+      }
+      if(move.flags === 'k'){
+        sound = 'castle.mp3'
+      }
+      if(move.flags === 'q'){
+        sound = 'castle.mp3'
+      }
+      if (game.in_check() === true) {
+        sound = 'check.mp3'
+      }
+
+      playAudio(sound)
     }
 
     statusEl.html(status);
@@ -288,7 +302,7 @@ $(document).ready(function() {
             moveObj.pgn = game.pgn()
             moveObj.turn = game.turn()
             socket.emit('move', moveObj)
-            updateStatus(moveObj)
+            updateStatus(move)
             board.position(game.fen())
           }
         })
