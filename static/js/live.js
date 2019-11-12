@@ -36,6 +36,7 @@ $(document).ready(function() {
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var onDragStart = function(source, piece, position, orientation) {
+    console.log("ondragstart")
     if (game.game_over() === true ||
         (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
         (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
@@ -45,6 +46,7 @@ $(document).ready(function() {
 
   var onDrop = function(source, target) {
       //move object
+      console.log("ondrop")
       var moveObj = ({
         from: source,
         to: target,
@@ -64,8 +66,8 @@ $(document).ready(function() {
       moveObj.pgn = game.pgn();
       moveObj.turn = game.turn();
       socket.emit('move', moveObj);
-      socket.emit('data', {room:room,pgn:moveObj.pgn});
-      updateStatus(moveObj);
+      socket.emit('data', {room:room,pgn:game.pgn()});
+      updateStatus(move);
   };
 
   // update the board position after the piece snap 
@@ -152,6 +154,7 @@ $(document).ready(function() {
 
   socket.on('move', function(moveObj){
     if(moveObj.room === room){
+      console.log("move!")
       var move = game.move(moveObj)
 
       // illegal move
@@ -270,6 +273,7 @@ $(document).ready(function() {
         })
 
         $(document).on('mousedown touchstart','.square-55d63',(e) => {
+           console.log("mousedown")
           const src = $(e.target).attr('src')
           const target = $(e.target).attr('src') ? $(e.target).parent() : $(e.target)
           const square = target.attr('id').substring(0,2)
@@ -307,6 +311,7 @@ $(document).ready(function() {
             moveObj.pgn = game.pgn()
             moveObj.turn = game.turn()
             socket.emit('move', moveObj)
+            socket.emit('data', {room:room,pgn:game.pgn()});
             updateStatus(move)
             board.position(game.fen())
           }
