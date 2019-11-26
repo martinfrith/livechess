@@ -3,14 +3,14 @@
   <title><%= game.white %> vs <%= game.black %>, <%= game.event %> </title>
   <link rel="stylesheet" href="/css/chessboard.css" />
   <style type="text/css">
-    .highlight-white {
+    .highlight-move {
       filter: saturate(400%);
-    }
-    .highlight-black {
-      filter: saturate(400%); 
     }
     .in-check {
       background-color: red;
+    }
+    .b-head {
+      margin: 0!important;
     }
     .status {
       display: inline-block;
@@ -63,10 +63,6 @@
       color: white;
     }
     @media screen and (max-width: 762px), print {
-      #board {
-        width: 100%!important;
-        margin-left:2px;
-      }
       .notification {
         margin: 0 1rem;
       }
@@ -99,30 +95,24 @@
   </div>
 
   <script id="game" type="text/x-jsrender">
-    <div class="content padless">
+    <div class="content">
       <div class="columns">
-        <div class="column">
-          <div class="boardarea">
-            <div class="boardhead">
-              <h5 class="has-text-left">
-              [[if black && black.length]]
-                <span id="black">[[:black]][[if result && result.length]] ([[:~parseResult(result,'w')]])[[/if]]</span>
-              [[else]]
-                <span>[[:event]]</span>
-              [[/if]]
-              </h5>
-            </div>
-            <div id="board"></div>
-            <div class="boardfoot">
-              <h5 class="has-text-right">
-              [[if white && white.length]]
-                <span id="white">[[:white]][[if result && result.length]] ([[:~parseResult(result,'b')]])[[/if]]</span>
-              [[else]]
-                <span>[[:date]] [[:site]]</span>
-              [[/if]]
-              </h5>
-            </div>
-          </div>
+        <div class="column is-5">
+          <h5 class="has-text-left b-head">
+          [[if black && black.length]]
+            <span id="black">[[:black]][[if result && result.length]] ([[:~parseResult(result,'w')]])[[/if]]</span>
+          [[else]]
+            <span>[[:event]]</span>
+          [[/if]]
+          </h5>
+          <div id="board"></div>
+          <h5 class="has-text-right b-foot">
+          [[if white && white.length]]
+            <span id="white">[[:white]][[if result && result.length]] ([[:~parseResult(result,'b')]])[[/if]]</span>
+          [[else]]
+            <span>[[:date]] [[:site]]</span>
+          [[/if]]
+          </h5>
         </div>
         <div class="column moreinfo">
           <table class="table is-striped">

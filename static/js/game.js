@@ -6,14 +6,14 @@ game = new Chess(),
 index = 0,
 paused = false,
 speed = 2500,
-squareToHighlight,
-colorToHighlight,
 squareClass = 'square-55d63',
 possibleMoves = [],
 gameMove = () => {
   if(!paused){
     var move = possibleMoves[index];
     selectedIndex = parseInt(location.hash.replace('#',''))
+
+    boardEl.find('.square-55d63').removeClass('highlight-move');
 
     // exit if the game is over
     if (!move || game.game_over() === true ||
@@ -23,33 +23,25 @@ gameMove = () => {
     var square = move.replace(/[^\w\s]/gi,'')
     square = square.substr(-2)
 
-    if (index%2===0) {
-      boardEl.find('.' + squareClass).removeClass('highlight-white');
-      //boardEl.find('.square-' + possibleMoves[index-1]).addClass('highlight-white');
-      squareToHighlight = square;
-      colorToHighlight = 'white';
-    }
-    else {
-      boardEl.find('.square-55d63').removeClass('highlight-black');
-      //boardEl.find('.square-' + possibleMoves[index-1]).addClass('highlight-black');
-      squareToHighlight = square;
-      colorToHighlight = 'black';    
-    }
-
     $('.moveindex').removeClass('active')
     $('.moveindex[href="#' + index + '"]').addClass('active')
 
     var perc = (index + 1) / possibleMoves.length * 100;
     $('.bar-progress').animate({width:perc+'%'},speed,'linear')
     index++
-    game.move(move);
+    var moved = game.move(move);
     board.position(game.fen());  
+
+    if(moved) {
+      document.querySelector('.square-' + moved.from).classList.add('highlight-move')
+      document.querySelector('.square-' + moved.to).classList.add('highlight-move')      
+    }
 
     if(index === possibleMoves.length){
       gamePause()
+    } else {
+      window.setTimeout(gameMove, speed);
     }
-
-    window.setTimeout(gameMove, speed);
   }
 },
 gamePGN = (pgn) => {
@@ -83,6 +75,7 @@ gameStart = () => {
             board = ChessBoard('board', cfg);
             boardEl = $('#board')
             $(window).resize(board.resize);
+            board.resize()
             window.setTimeout(gameSeek, 500);
             $('#speed').text(speed/1000+'s')
             $('.moreinfo').delay(1000).fadeIn('fast', () => {
@@ -96,10 +89,10 @@ gameStart = () => {
 },
 gameFlip = () => {
   board.flip()
-  var head = $('.boardhead').html(),
-  foot = $('.boardfoot').html()
-  $('.boardhead').html(foot)
-  $('.boardfoot').html(head)
+  var head = $('.b-head').html()
+  var foot = $('.b-foot').html()
+  $('.b-head').html(foot)
+  $('.b-foot').html(head)
 },
 gameSeek = () => {
   window.setTimeout(() => {
@@ -119,7 +112,7 @@ gameSeek = () => {
   }, 500);
 },
 gamePos = (pos) => {
-  boardEl.find('.square-55d63').removeClass('highlight-black highlight-white');
+  boardEl.find('.square-55d63').removeClass('highlight-move');
   game.reset();
   possibleMoves.forEach((move,i) => {
     if(i < pos){
@@ -157,15 +150,11 @@ gameScroll = (e) => {
     }
   }
 },
-onMoveEnd = function() {
-  boardEl.find('.square-' + squareToHighlight)
-    .addClass('highlight-' + colorToHighlight);
-},
 cfg = {
   showErrors:true,
   position: 'start',
-  draggable: false,
-  onMoveEnd: onMoveEnd
+  draggable: false
+  //onMoveEnd: onMoveEnd
 }
 /**/
 $(document).ready(function() {
@@ -212,7 +201,7 @@ $(document).ready(function() {
       gameFlip()
     }
   })
-  $('body').on('scroll', gameScroll)
+  //$('body').on('scroll', gameScroll)
   $(window).on('hashchange', gameSeek)
   gameStart()
 })
