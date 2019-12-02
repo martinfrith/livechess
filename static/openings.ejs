@@ -1,6 +1,6 @@
 <%- contentFor('css') %>
 
-	<title>Puzzles</title>
+	<title>Aperturas</title>
 
 <%- contentFor('js') %>
 
@@ -9,7 +9,7 @@
 		    $.ajax({
 		      url:'/games',
 		      method:'POST',
-		      data: {filter:'puzzles'},
+		      data: {filter:'openings'},
 		      success:function(res){
 		        $('#results').html($.templates(res.length?"#games":"#empty").render({games:res},parseHelpers)).promise().done(function (){
 		          $('.spinner-container').fadeOut('fast', function(){
@@ -30,21 +30,21 @@
 	
 	<div class="container">
 		<div class="content">
-	        <h1>Puzzles</h1>
+	        <h1>Aperturas</h1>
 	        <div class="" id="results">
 	        </div>
 		</div>
 	</div>
 
 	<script id="empty" type="text/x-jsrender">
-		<p class="is-notification has-text-danger">No hay puzzles por el momento.</p>
+		<p class="is-notification has-text-danger">No hay aperturas por el momento.</p>
 	</script>
 
 	<script id="games" type="text/x-jsrender">
 	    <table class="table is-striped">
 	    	<thead>
 	    		<th>Mesa</th>
-	    		<th>Puzzle</th>
+	    		<th>Apertura</th>
 	    		<th>Movimientos</th>
 	    	</thead>
 	    	<tbody>

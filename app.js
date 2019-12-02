@@ -88,8 +88,13 @@ mongodb.MongoClient.connect(process.env.MONGO_URL, {useNewUrlParser: true }, fun
   app.post('/games', function (req, res) { 
     if(req.body.filter){
       req.body.filter.split('|').map(function(x){
-        if(x==='puzzles'){
-          req.body["result"] = ""
+        if(x==='openings'){
+          $or = []
+          $or.push({"event": {'$regex' : 'Defensa', '$options' : 'i'}})
+          $or.push({"event": {'$regex' : 'Apertura', '$options' : 'i'}})
+          $or.push({"event": {'$regex' : 'Ataque', '$options' : 'i'}})
+          $or.push({"event": {'$regex' : 'Gambito', '$options' : 'i'}})
+          req.body["$or"] = $or
         } else {
           req.body[x] = { "$regex": /^.{1,}$/ }
         }
